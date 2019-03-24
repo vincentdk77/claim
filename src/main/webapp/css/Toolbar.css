@@ -1,0 +1,183 @@
+@charset "utf-8";
+.toolbar {
+  background-color: #66A0CE;
+  width: 100%;
+  white-space: nowrap;
+  background: url(/newclaim/images/icon/toolbar1.gif) repeat-x;
+  /*barbg.jpg**/
+	position: relative;
+
+}
+
+.toolbar .button_table {
+  
+}
+.toolbar .toolbar_disabled {
+  filter: alpha(opacity = 60);
+  -moz-opacity: 0.6;
+  opacity: 0.6;
+}
+.toolbar .toolbar_disabled * {
+  
+}
+
+.toolbar td {
+  vertical-align: middle;
+}
+
+.toolbar .spacer {
+  height: 17px;
+  font-size: 1px;
+  border-left: solid 1px #9AC6FF;
+  border-right: solid 1px white;
+  display: block;
+  margin: 0 2px;
+  padding: 0;
+}
+
+.toolbar .textfield {
+  padding: 2px 3px 1px 3px;
+  background: #FFFFFF url(/newclaim/images/text-bg.gif) repeat-x 0 0;
+  border: 1px solid #B5B8C8;
+  width: 140px;
+}
+
+.toolbar .b_left {
+  width: 3px;
+}
+
+.toolbar .b_right {
+  width: 3px;
+}
+
+.toolbar .b_center {
+	
+}
+
+.toolbar .over .b_left {
+  background: url(/newclaim/images/tb_border.gif) no-repeat 0 0;
+  width: 3px;
+  
+}
+
+.toolbar .over .b_right {
+  background: url(/newclaim/images/tb_border.gif) no-repeat 0 -21px;
+  width: 3px;
+
+}
+
+.toolbar .over .b_center {
+  background: url(/newclaim/images/tb_border.gif) repeat-x 0 -42px;
+ 
+}
+
+.toolbar .b_center a {
+	display:block;
+	vertical-align:middle;
+	padding-top: 3px;
+	padding-bottom: 4px;
+	margin-left: 2px;
+	margin-right: 2px;
+	text-decoration:none;
+	white-space:nowrap;
+	height:14px;
+	*height:auto;
+	color:#333;
+	
+}
+
+.toolbar .down .b_left {
+  background: url(/newclaim/images/tb_border.gif) no-repeat 0 -63px;
+}
+
+.toolbar .down .b_right {
+  background: url(/newclaim/images/tb_border.gif) no-repeat 0 -84px;
+}
+
+.toolbar .down .b_center {
+  background: url(/newclaim/images/tb_border.gif) repeat-x 0 -105px;
+}
+
+.toolbar .filterTable {
+	position: absolute;
+	right:2px;
+	top:2px;
+}
+.toolbar .filterTable td,a {
+	cursor: pointer;
+}
+
+.toolbar .filter-spacer {
+  height: 21px;
+  font-size: 1px;
+  border-left: solid 1px #84A4CE;
+  border-right: solid 1px white;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.toolbar .border-center-active {
+	background: url(/newclaim/images/tb_border.gif) repeat-x 0px -105px !important;
+}
+
+.toolbar .border-left-active {
+  background: url(/newclaim/images/tb_border.gif) no-repeat 0 -63px !important;
+}
+
+.toolbar .border-right-active {
+  background: url(/newclaim/images/tb_border.gif) no-repeat 0 -84px !important;
+}
+
+
+/*新建*/
+.new {
+  background: transparent url(/newclaim/images/new.gif) no-repeat 0 2px;
+  padding-left:18px;
+}
+/*修改*/
+.edit {
+  background: transparent url(/newclaim/images/edit.gif) no-repeat 0 2px;
+  padding-left:20px;
+}
+/*保存*/
+.save {
+  background: transparent url(/newclaim/images/save.gif) no-repeat 0 2px;
+  padding-left:20px;
+}
+/*删除*/
+.delete {
+  background: transparent url(/newclaim/images/delete.gif) no-repeat 0 2px;
+  padding-left:20px;
+  
+}
+/*查找*/
+.search {
+  background:transparent url(/newclaim/images/search.gif) no-repeat 0 2px;
+  padding-left:20px;
+}
+/*appgo*/
+.appgo {
+  background:transparent url(/newclaim/images/application_go.png) no-repeat 0 2px;
+  padding-left:20px;
+}
+.forum {
+  background:transparent url(/newclaim/images/icon/forum.gif) no-repeat 0 2px;
+  padding-left:20px;
+}
+.list-items {
+  background:transparent url(/newclaim/images/icon/list-items.gif) no-repeat 0 2px;
+  padding-left:20px;
+}
+.file{
+  background:transparent url(/newclaim/images/icon/preview.png) no-repeat 0 2px;
+  padding-left:20px;
+}
+.details{
+  background:transparent url(/newclaim/images/icon/details.gif) no-repeat 0 2px;
+  padding-left:20px;
+}
+.folderwrench{
+  background:transparent url(/newclaim/images/icon/folder_wrench.gif) no-repeat 0 2px;
+  padding-left:20px;
+}

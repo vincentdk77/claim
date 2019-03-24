@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="GB2312"?>
+<ROOT>
+	<CI_COM_LIST>
+		<CI_COM>
+			<COMCODE>34</COMCODE>
+			<USER>GYICtest</USER>
+			<PASSWORD>123456</PASSWORD>
+			<USEFLAG>N</USEFLAG>
+			<RISKCODE>0507</RISKCODE>
+			<URL>http://172.20.241.1:7001/sinoiaciv60/commserver</URL>
+		</CI_COM>
+	</CI_COM_LIST>
+	<CI_COMMON>
+		<COMPUTE_FLAG>N</COMPUTE_FLAG>
+		<LOGPATH>/home/weblogic/intraTestApplications/build/log/carpflog/claim/</LOGPATH>
+		<XMLLOGPATH>/home/weblogic/intraTestApplications/build/log/carpflog/claim/</XMLLOGPATH>
+		<IMPLCLASS>com.sinosoft.claimciplatform.bl.action.custom.BLCIClaimPlatFormInterfaceActionImplGuoYuan</IMPLCLASS>
+	</CI_COMMON>
+</ROOT>

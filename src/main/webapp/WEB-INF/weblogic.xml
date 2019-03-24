@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wls:weblogic-web-app
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:wls="http://www.bea.com/ns/weblogic/90">
+	<wls:jsp-descriptor>
+		<wls:keepgenerated>true</wls:keepgenerated>
+		<wls:debug>true</wls:debug>
+	</wls:jsp-descriptor>
+	<session-descriptor>
+	   <cookie-name>CLAIMSESSIONID</cookie-name>
+	</session-descriptor>	
+	<wls:context-root>claim</wls:context-root>
+</wls:weblogic-web-app>

@@ -1,0 +1,876 @@
+<?xml version="1.0" encoding="GB2312" standalone="yes" ?>
+<sysconst>
+	<!-- 必须修改配置 modify="1" -->
+		<!-- 公共配置 -->
+	<ROOTCOMCODE description="保险公司总公司代码" modify="1">00000000</ROOTCOMCODE>
+  <ROOTCOMCNAME description="保险公司总公司中文名称" modify="1">国元农业保险股份有限公司</ROOTCOMCNAME>
+  <ROOTCOMENAME description="保险公司总公司英文名称" modify="1">SHANGHAI ANXIN AGRICULTURE INSURANCE CO.,LTD.</ROOTCOMENAME>
+  <ROOTCOMCSNAME description="保险公司总公司中文名称" modify="1">国元</ROOTCOMCSNAME>
+  <ROOTCOMESNAME description="保险公司总公司英文名称" modify="1">AAIC</ROOTCOMESNAME>
+  <LOCAL_COMCODE description="本地化代码" modify="1">DONGAN</LOCAL_COMCODE>
+  <LOCAL_COMCNAME description="本地化中文名称" modify="1">国元项目组</LOCAL_COMCNAME>
+  <LOCAL_COMENAME description="本地化英文名称" modify="1">Project team of Dongan</LOCAL_COMENAME>
+  	<!-- 双核系统配置 -->
+ 	<UFSOFT_DATAINTERFACE description="用友财务接口数据存储开关 0.关 1.开" modify="1">0</UFSOFT_DATAINTERFACE>
+  <UFSOFT_DATAINTERFACE_LP description="用友财务接口数据存储开关,理赔传数 0.赔款计算数复核通过时传数 1.结案后传数" modify="1">0</UFSOFT_DATAINTERFACE_LP>
+
+  <!-- 可修改配置 modify="2" -->
+  <!-- (东安需求)配置保单生效方式：自动生效、打印时生效、手工生效，目前同个险种不允许同时有两种以上的生效方式-->
+  <PROPOSALTOPOLICY_AUTO description="保单核保通过自动生效方式" modify="2">BBB,2201,1101,CAC,CAD,CAE,1102,CBC,0501,DAB,DAE,DAS,EAA,EGY,EGX,EAC,ECH,ECJ,ECV,EDA,EDJ,EDL,EDM,0701,0801,0802,0301,JAK,JAZ,0402,JHB,JPB,LAD,0103,0101,0104,0106,0102,0105,0107,0201,0202,0203,YAA,YAB,0901,0906,0903,0904,0905,YEE,YEF,YIE,1006,1702,1502,ZAG,1601,1602,ZAQ,ZAS,ZBY,ZBZ,1507,1501,ZCJ,1506,ZCY,1904,ZFG,ZFL,ZKB,ZKG,1809,1802,1801,ZZY,AVN,CWC,OAZ,CAZ,OAV,OAW,OAX,OAY</PROPOSALTOPOLICY_AUTO>
+  <PROPOSALTOPOLICY_PRINT description="保单打印生效方式" modify="2"></PROPOSALTOPOLICY_PRINT>
+  <PROPOSALTOPOLICY_HAND description="保单手动生效方式" modify="2"></PROPOSALTOPOLICY_HAND>
+
+  <!--add begin by wanghn,2005-01-13,shenzhen,ZB200501-04,自留控制险种，未录入自留信息不能保存,设置需要进行控制的险种-->
+  <RETENTIONCONTROL_RISK description="需要进行自留额控制的险种" modify="2">
+    0105,0104,YIE
+  </RETENTIONCONTROL_RISK>
+  <!--add end by wanghn,2005-01-13,shenzhen,ZB200501-04-->
+  <AUTO_REINS description="合同业务需要进行自动分保安排" modify="2">1</AUTO_REINS>
+  
+  <!--add begin by guolei ,2007-01-07,增加团单标识-->
+  <GROUP_FLAG description="团单标识" modify="2">0301,2704,2714,2723,2724,2725,2726,2740,3101,3102,3103,3104,3105,3106,3107,3108,3109,3110,3111,3112,3113,3114,3115,3201,3202,3203,3204,3205,3206,3207,3208,3209,3210,3211,3212,3213</GROUP_FLAG>
+  <!--add end by guolei,2007-01-07,shenzhen-->
+  <!-- add begin by wanghn,2005-02-25,shenzhEn,DACC20050218-03,巨灾标识及风险类别输入 -->
+  <RISKKINDCONTROL_RISK description="需要核保员控制风险类别的险种" modify="2">
+    0103,0101,0104,0102,0105,0801,0802,1502,1501,ZFG
+  </RISKKINDCONTROL_RISK>
+  <!-- add end by wanghn,2005-02-25,shenzhen,DACC20050218-03 -->
+
+  <!-- 不可修改配置 modify="0" -->
+
+
+  <!-- uw & prp may use together -->
+  <DBFAILURE>0</DBFAILURE>
+  <DBSUCCESS>0</DBSUCCESS>
+  <DBNOTFOUND>100</DBNOTFOUND>
+  <BLFAILURE>0</BLFAILURE>
+  <BLSUCCESS>1</BLSUCCESS>
+  <SUCCESS>0</SUCCESS>
+  <FAILURE>-1</FAILURE>
+  <NOTFOUND>100</NOTFOUND>
+  <CONTINUE>200</CONTINUE>
+  <NOTSQLCODE>888</NOTSQLCODE>
+  <SERVICEEXCEPTION>999</SERVICEEXCEPTION>
+  <SUBMITFLAG>1</SUBMITFLAG>
+  <DEFAULTPATH>0</DEFAULTPATH>
+  <HEBAOMODELNO>1</HEBAOMODELNO>
+  <HEPEIMODELNO>2</HEPEIMODELNO>
+  <MAX_RECORD>200</MAX_RECORD>
+  <MAX_RECORD_SUPER>400</MAX_RECORD_SUPER>
+  <POLICYSORT_BUDGET>8</POLICYSORT_BUDGET>
+  <SPLITLENGTH>70</SPLITLENGTH>
+  <BEGINOFPACKAGE></BEGINOFPACKAGE>
+  <END_OF_PACKAGE></END_OF_PACKAGE>
+  <END_OF_PACKAGE_HEAD>^</END_OF_PACKAGE_HEAD>
+  <PACKAGE_HEAD_DELIMITER>^</PACKAGE_HEAD_DELIMITER>
+  <PACKAGE_DATA_DELIMITER>^</PACKAGE_DATA_DELIMITER>
+  <SUBMIT_SINGLE>Y</SUBMIT_SINGLE>
+  <SUBMIT_MULTI>Y</SUBMIT_MULTI>
+  <BEGIN_OF_PACKAGE></BEGIN_OF_PACKAGE>
+  <QUERY_LIMIT_COUNT>1000</QUERY_LIMIT_COUNT>
+  <QUERY_LIMIT_COUNT1>5000</QUERY_LIMIT_COUNT1>
+  <SFF_LIMIT_COUNT>500</SFF_LIMIT_COUNT>
+
+  <FIELD_SEPARATOR>_FIELD_SEPARATOR_</FIELD_SEPARATOR>
+  <GROUP_SEPARATOR>_GROUP_SEPARATOR_</GROUP_SEPARATOR>
+  <BIZTYPE>BIZTYPE</BIZTYPE>
+  <BIZTYPE_QUAERE>QUAERE</BIZTYPE_QUAERE>
+  <BIZTYPE_POLICY>POLICY</BIZTYPE_POLICY>
+  <BIZTYPE_PROPOSAL>PROPOSAL</BIZTYPE_PROPOSAL>
+
+  <BIZTYPE_ENDORSE>ENDORSE</BIZTYPE_ENDORSE>
+  <EDITTYPE>EDITTYPE</EDITTYPE>
+  <EDITTYPE_NEW>NEW</EDITTYPE_NEW>
+  <EDITTYPE_UPDATE>UPDATE</EDITTYPE_UPDATE>
+  <EDITTYPE_RENEWAL>RENEWAL</EDITTYPE_RENEWAL>
+  <EDITTYPE_COPY>COPY</EDITTYPE_COPY>
+  <EDITTYPE_WITHDRAW>21</EDITTYPE_WITHDRAW>
+  <EDITTYPE_LOSS>03</EDITTYPE_LOSS>
+  <EDITTYPE_MASTER>MASTER</EDITTYPE_MASTER>
+  <EDITTYPE_COPY>COPY</EDITTYPE_COPY>
+  <EDITTYPE_WRITEOFF>19</EDITTYPE_WRITEOFF>
+  <EDITTYPE_PROFIT>53</EDITTYPE_PROFIT>
+  <EDITTYPE_LENDOR>14</EDITTYPE_LENDOR>
+  <EDITTYPE_RECOVER>37</EDITTYPE_RECOVER>
+  <EDITTYPE_LENDORRECOVER>13</EDITTYPE_LENDORRECOVER>
+  <EDITTYPE_PREMRISE>54</EDITTYPE_PREMRISE>
+  <EDITTYPE_RESUME>55</EDITTYPE_RESUME>
+  <EDITTYPE_COMMISSION>57</EDITTYPE_COMMISSION>
+  <EDITTYPE_MIDDLECOST>57</EDITTYPE_MIDDLECOST>
+  <ENDORSE_TYPE>ENDORSE_TYPE</ENDORSE_TYPE>
+  <ENDORSE_TYPE_ENDDATE>ENDORSE_ENDDATE</ENDORSE_TYPE_ENDDATE>
+  <ENDORSE_TYPE_COMMON>ENDORSE_COMMON</ENDORSE_TYPE_COMMON>
+  <ENDORSE_TYPE_BUDGET>36</ENDORSE_TYPE_BUDGET>
+  <SHOWTYPE>SHOWTYPE</SHOWTYPE>
+  <SHOWTYPE_SHOW>SHOW</SHOWTYPE_SHOW>
+  <SHOWTYPE_APPROVE>APPROVE</SHOWTYPE_APPROVE>
+  <SHOWTYPE_UNDERWRITE>UNDERWRITE</SHOWTYPE_UNDERWRITE>
+  <SHOWTYPE_DELETE>DELETE</SHOWTYPE_DELETE>
+
+  <!-- Balance Type -->
+  <BALTYPE>BALTYPE</BALTYPE>
+  <BALTYPE_NEW>NEW</BALTYPE_NEW>
+  <BALTYPE_UPDATE>UPDATE</BALTYPE_UPDATE>
+  <BALTYPE_END>END</BALTYPE_END>
+  <BALTYPE_SHOW>SHOW</BALTYPE_SHOW>
+
+  <!-- Assure Type -->
+  <ASSURETYPE>ASSURETYPE</ASSURETYPE>
+  <ASSURETYPE_SEND>SEND</ASSURETYPE_SEND>
+  <ASSURETYPE_RECEIVE>RECEIVE</ASSURETYPE_RECEIVE>
+  <ASSURETYPE_AGENT>AGENT</ASSURETYPE_AGENT>
+  <ASSURETYPE_ANTI>ANTI</ASSURETYPE_ANTI>
+
+  <!-- Proposal to Policy Type -->
+  <TOTYPE>TOTYPE</TOTYPE>
+  <TOTYPE_NORMAL>NORMAL</TOTYPE_NORMAL>
+  <TOTYPE_TEXT>TEXT</TOTYPE_TEXT>
+
+  <!-- jf Flag -->
+  <JF_Flag>√</JF_Flag>
+
+  <!-- Loss Type -->
+  <LOSSTYPE>LOSSTYPE</LOSSTYPE>
+  <LOSSTYPE_PERSON>PERSON</LOSSTYPE_PERSON>
+  <LOSSTYPE_PROP>PROP</LOSSTYPE_PROP>
+  <LOSSTYPE_REPAIRCOMPONENT>REPAIRCOMPONENT</LOSSTYPE_REPAIRCOMPONENT>
+
+  <!-- boolean const -->
+  <YES>Y</YES>
+  <NO>N</NO>
+
+  <!-- calcute premium const -->
+  <CALTYPE_TB>T</CALTYPE_TB>
+  <CALTYPE_CB>C</CALTYPE_CB>
+  <RECALCULATE>1</RECALCULATE>
+  <UNRECALCULATE>2</UNRECALCULATE>
+<!--NOAPPROVE_RISK无需核保险种 -->
+<!--<NOAPPROVE_RISK>ECH,EDL,0501,DAS,DAB,DAE</NOAPPROVE_RISK>-->
+<NOAPPROVE_RISK></NOAPPROVE_RISK>
+  <!-- visa & uw interface const -->
+  <VISATYPE_POLICY>AE</VISATYPE_POLICY>
+  <VISATYPE_VOUCHER>AJ</VISATYPE_VOUCHER>
+  <VISAMARKS>有号单证</VISAMARKS>
+  <VISANONEMARKS>无号单证</VISANONEMARKS>
+  <VISANONEPRESS>非印刷单证</VISANONEPRESS>
+  <PROPOSAL_TO_POLICY_URL>/prpall/common/tb/UIProposalToPolicySubmit.jsp</PROPOSAL_TO_POLICY_URL>
+  <POLICY_TO_REINS_URL>/prpall/common/cb/UIPolicyToReinsSubmit.jsp</POLICY_TO_REINS_URL>
+  <ENDORSE_TO_REINS_URL>/prpall/common/pg/UIEndorseToReinsSubmit.jsp</ENDORSE_TO_REINS_URL>
+
+  <!-- get bill number for a kind of table -->
+  <BATCH_TABLE>prpcbatch</BATCH_TABLE>
+  <POLICY_TABLE>prpcmain</POLICY_TABLE>
+  <ASSURE_TABLE>prplassure</ASSURE_TABLE>
+  <CLAIM_TABLE>prplclaim</CLAIM_TABLE>
+  <COMPENSATE_TABLE>prplcompensate</COMPENSATE_TABLE>
+  <PREPAY_TABLE>prplprepay</PREPAY_TABLE>
+  <CASENO_TABLE>prplcaseno</CASENO_TABLE>
+  <REGIST_TABLE>prplregist</REGIST_TABLE>
+  <MOTORCADE_TABLE>prpmotorcade</MOTORCADE_TABLE>
+  <ENDORSRE_TABLE>prpphead</ENDORSRE_TABLE>
+  <PROPOSAL_TABLE>prptmain</PROPOSAL_TABLE>
+
+  <VALIDSTATUS_YES>1</VALIDSTATUS_YES>
+  <VALIDSTATUS_NO>0</VALIDSTATUS_NO>
+
+  <!-- BusinessNo Type const -->
+  <PROPOSAL_HEAD>T</PROPOSAL_HEAD>
+  <POLICY_HEAD>P</POLICY_HEAD>
+  <ENDORSE_HEAD>E</ENDORSE_HEAD>
+  <REGIST_HEAD>R</REGIST_HEAD>
+  <CLAIM_HEAD>A</CLAIM_HEAD>
+  <PREPAY_HEAD>Y</PREPAY_HEAD>
+  <COMPENSATE_HEAD>C</COMPENSATE_HEAD>
+  <CONTRACT_HEAD>H</CONTRACT_HEAD>
+  <INVOICE_HEAD>S</INVOICE_HEAD>
+
+  <!-- Print Limit Const -->
+  <FORMAT_PRINT_LIMIT_ENDORSE_0501>38</FORMAT_PRINT_LIMIT_ENDORSE_0501>
+  <FORMAT_PRINT_LIMIT_POLICY_0501>14</FORMAT_PRINT_LIMIT_POLICY_0501>
+
+  <!-- 单证类型代码对应的页面路径 -->
+  <!-- 0501 -->
+  <AE0501A2004A>/0501/cb/UIPolicy0501FormatPrint.jsp</AE0501A2004A>
+  <AE0501A2004A02> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A02>
+  <AE0501A2004A03> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A03>
+  <AE0501A2004A04> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A04>
+  <AE0501A2004A05> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A05>
+  <AE0501A2004A06> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A06>
+  <AE0501A2004A07> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A07>
+  <AE0501A2004A12> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A12>
+  <AE0501A2004A14> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A14>
+  <AE0501A2004A10> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A10>
+  <AE0501A2004A15> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A15>
+  <AE0501A2004A11> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A11>
+  <AE0501A2004A17> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A17>
+  <AE0501A2004A16> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A16>
+  <AE0501A2004A18> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A18>
+  <AE0501A2004A19> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A19>
+  <AE0501A2004A20> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A20>
+  <AE0501A2004A21> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A21>
+  <AE0501A2004A23> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A23>
+  <!-- 郑州0501-->
+  <AE0501A2004A13> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A13>
+
+  <!-- 深圳0501-->
+  <AE0501A2004A01> /0501/cb/UIPolicy0501FormatPrint.jsp </AE0501A2004A01>
+
+    <!-- DAS -->
+   <AEDASA2004A>
+      /DAS/cb/UIPolicyDASFormatPrint.jsp
+   </AEDASA2004A>
+   <BZDASA2004A>
+      /DAS/cb/UIPolicyDASFormatPrint.jsp
+   </BZDASA2004A>
+
+  <!-- DAE -->
+  <AEDAEA2004A>
+    /DAE/cb/UIPolicyDAEFormatPrint.jsp
+  </AEDAEA2004A>
+  <AEDAEA2004A02>
+    /DAE/cb/UIPolicyDAEFormatPrint.jsp
+  </AEDAEA2004A02>
+  <AEDAEA2004A04>
+    /DAE/cb/UIPolicyDAEFormatPrint.jsp
+  </AEDAEA2004A04>
+  <AEDAEA2004A06>
+  /DAE/cb/UIPolicyDAEFormatPrint.jsp
+  </AEDAEA2004A06>
+
+
+  <!--一般机动车辆保险保险卡-->
+  <AJ001A2004A>/0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A>
+  <AJ001A2004A02> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A02>
+  <AJ001A2004A03> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A03>
+  <AJ001A2004A04> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A04>
+  <AJ001A2004A05> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A05>
+  <AJ001A2004A06> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A06>
+  <AJ001A2004A07> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A07>
+  <AJ001A2004A12> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A12>
+  <AJ001A2004A14> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A14>
+  <AJ001A2004A10> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A10>
+  <AJ001A2004A15> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A15>
+  <AJ001A2004A11> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A11>
+  <AJ001A2004A17> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A17>
+  <AJ001A2004A16> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A16>
+  <AJ001A2004A18> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A18>
+  <AJ001A2004A19> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A19>
+  <AJ001A2004A20> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A20>
+  <AJ001A2004A21> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A21>
+  <AJ001A2004A23> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A23>
+  <!-- 郑州0501-->
+  <AJ001A2004A13> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A13>
+
+   <!-- 深圳0501-->
+  <AJ001A2004A01> /0501/cb/UIPolicy0501CardPrint.jsp </AJ001A2004A01>
+
+  <AJDASA2004A>   /0501/cb/UIPolicy0501CardPrint.jsp </AJDASA2004A>
+
+   <!--批量保单路径-->
+   <AE0501A2004A_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A_BATCH>
+  <AE0501A2004A02_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A02_BATCH>
+  <AE0501A2004A03_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A03_BATCH>
+  <AE0501A2004A04_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A04_BATCH>
+  <AE0501A2004A05_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A05_BATCH>
+  <AE0501A2004A06_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A06_BATCH>
+  <AE0501A2004A07_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A07_BATCH>
+  <AE0501A2004A12_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A12_BATCH>
+  <AE0501A2004A14_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A14_BATCH>
+  <AE0501A2004A10_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A10_BATCH>
+  <AE0501A2004A01_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A01_BATCH>
+  <AE0501A2004A15_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A15_BATCH>
+  <AE0501A2004A11_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A11_BATCH>
+  <AE0501A2004A17_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A17_BATCH>
+  <AE0501A2004A16_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A16_BATCH>
+  <AE0501A2004A18_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A18_BATCH>
+  <AE0501A2004A19_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A19_BATCH>
+  <AE0501A2004A20_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A20_BATCH>
+  <AE0501A2004A21_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A21_BATCH>
+  <AE0501A2004A23_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A23_BATCH>
+  <AE0501A2004A13_BATCH> /0501/cb/UIPrpslPoli0501BatchPrint.jsp </AE0501A2004A13_BATCH>
+  <AEJAKA2004A_BATCH> /JAK/cb/UIPolicyJAKBatchPrint.jsp</AEJAKA2004A_BATCH>
+
+  <!--YEF险种保单打印（套打）-->
+  <AEYEFA2004A>
+  	/YEF/cb/UIPolicyYEFFormatPrint.jsp
+  </AEYEFA2004A>
+
+  <AEY00A2004A01>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A01>
+
+  <AEY00A2004A08>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A08>
+
+  <AEY00A2004A01>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A01>
+  <AEY00A2004A02>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A02>
+  <AEY00A2004A06>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A06>
+  <AEY00A2004A09>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A09>
+
+  <AEY00A2004A11>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A11>
+
+   <AEY00A2004A14>
+     /commonship/cb/UIPolicyYIPrintBefore.jsp
+   </AEY00A2004A14>
+
+   <AEY00A2004A15>
+     /commonship/cb/UIPolicyYIPrintBefore.jsp
+   </AEY00A2004A15>
+
+   <AEY00A2004A17>
+     /commonship/cb/UIPolicyYIPrintBefore.jsp
+   </AEY00A2004A17>
+
+  <!--一般机动车辆保险互碰卡-->
+  <AK0501A2004A>
+  	/0501/cb/UIPolicy0501SingleCarInterCardFormatPrint.jsp
+  </AK0501A2004A>
+
+   <!--ECJ险种保单打印（套打）-->
+  <AEECJA2004A>
+  	/ECJ/cb/UIPolicyECJFormatPrint.jsp
+  </AEECJA2004A>
+
+  <AEECJA2004A>
+  	/ECJ/cb/UIPolicyECJFormatPrint.jsp
+  </AEECJA2004A>
+
+  <!--0301险种保单打印（套打）-->
+  <AE0301A2004A>
+  	/0301/cb/UIPolicy0301FormatPrint.jsp
+  </AE0301A2004A>
+
+  <!--1507险种保单打印（套打）-->
+  <AE1507A2004A>
+  	/1507/cb/UIPolicy1507FormatPrint.jsp
+  </AE1507A2004A>
+
+   <!--ZCJ险种保单打印（套打）-->
+  <AEZCJA2004A>
+  	/ZCJ/cb/UIPolicyZCJFormatPrint.jsp
+  </AEZCJA2004A>
+
+  <!--ZCY险种保单打印（套打）-->
+  <AEZCYA2004A>
+  	/ZCY/cb/UIPolicyZCYFormatPrint.jsp
+  </AEZCYA2004A>
+
+  <!--1809险种保单打印（套打）-->
+  <AE1809A2004A>
+  	/1809/cb/UIPolicy1809FormatPrint.jsp
+  </AE1809A2004A>
+
+  <!--ZZY险种保单打印（套打）-->
+  <AEZZYA2004A>
+  	/ZZY/cb/UIPolicyZZYFormatPrint.jsp
+  </AEZZYA2004A>
+
+   <!--1506险种保单打印（套打）-->
+  <AE1506A2004A>
+  	/1506/cb/UIPolicy1506FormatPrint.jsp
+  </AE1506A2004A>
+
+   <!--JAZ险种保单打印（套打）-->
+  <AEJAZA2004A>
+  	/JAZ/cb/UIPolicyJAZFormatPrint.jsp
+  </AEJAZA2004A>
+  <AEJAZA2004A>
+  	/JAZ/cb/UIPolicyJAZFormatPrint.jsp
+  </AEJAZA2004A>
+
+  <!--0402险种保单打印（套打）-->
+  <AE0402A2004A>
+  	/0402/cb/UIPolicy0402FormatPrint.jsp
+  </AE0402A2004A>
+
+  <!--JAK险种保单打印（套打）-->
+  <AEJAKA2004A>
+  	/JAK/cb/UIPolicyJAKFormatPrint.jsp
+  </AEJAKA2004A>
+
+   <!--0903险种保单打印（套打）-->
+  <AE0903A2004A>
+  	/0903/cb/UIPolicy0903FormatPrint.jsp
+  </AE0903A2004A>
+
+   <!--0906险种保单打印（套打）-->
+  <AE0906A2004A>
+  	/0906/cb/UIPolicy0906FormatPrint.jsp
+  </AE0906A2004A>
+
+   <!--0904险种保单打印（套打）-->
+  <AE0904A2004A>
+  	/0904/cb/UIPolicy0904FormatPrint.jsp
+  </AE0904A2004A>
+
+   <!--0901险种保单打印（套打）-->
+  <AE0901A2004A>
+  	/0901/cb/UIPolicy0901FormatPrint.jsp
+  </AE0901A2004A>
+
+   <!--1006险种保单打印（套打）-->
+  <AE1006A2004A>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AE1006A2004A>
+
+   <!--YIE险种保单打印（套打）-->
+  <AEYIEA2004A>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEYIEA2004A>
+
+  <!--YI*险种保单打印（套打）-->
+  <AEY00A2004A03>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A03>
+
+  <AEY00A2004A04>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A04>
+
+  <AEY00A2004A05>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A05>
+
+  <AEY00A2004A10>
+  	/commonship/cb/UIPolicyYIPrintBefore.jsp
+  </AEY00A2004A10>
+
+   <!--ECH险种保单打印（套打）-->
+  <AEECHA2004A>
+  	/ECH/cb/UIPolicyECHFormatPrint.jsp
+  </AEECHA2004A>
+
+  <!--EDJ险种保单打印（套打）-->
+  <AEEDJA2004A>
+  	/EDJ/cb/UIPolicyEDJFormatPrint.jsp
+  </AEEDJA2004A>
+
+  <!--EDL险种保单打印（套打）-->
+  <AEEDLA2004A>
+  	/EDL/cb/UIPolicyEDLFormatPrint.jsp
+  </AEEDLA2004A>
+
+   <!--JHB险种保单打印（套打）-->
+  <AEJHBA2004A>
+  	/JHB/cb/UIPolicyJHBFormatPrint.jsp
+  </AEJHBA2004A>
+
+   <!--0201险种保单打印（套打）-->
+  <AE0201A2004A>
+  	/0201/cb/UIPolicy0201FormatPrint.jsp
+  </AE0201A2004A>
+
+   <!--ZFL险种保单打印（套打）-->
+  <AEZFLA2004A>
+  	/ZFL/cb/UIPolicyZFLFormatPrint.jsp
+  </AEZFLA2004A>
+
+  <!--ZAQ险种保单打印（套打）-->
+  <AEZAQA2004A>
+  	/ZAQ/cb/UIPolicyZAQFormatPrint.jsp
+  </AEZAQA2004A>
+
+  <!--0202险种保单打印（套打）-->
+  <AE0202A2004A>
+  	 /0202/cb/UIPolicy0202FormatPrint.jsp
+  </AE0202A2004A>
+
+  <!--1802险种保单打印（套打）-->
+  <AE1802A2004A>
+	 /1802/cb/UIPolicy1802FormatPrint.jsp
+  </AE1802A2004A>
+
+
+  <!--0501险种批单打印（套打）-->
+  <DC001A2004A> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A>
+  <DC001A2004A02> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A02>
+  <DC001A2004A03> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A03>
+  <DC001A2004A04> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A04>
+  <DC001A2004A05> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A05>
+  <DC001A2004A06> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A06>
+  <DC001A2004A07> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A07>
+  <DC001A2004A11> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A11>
+  <DC001A2004A12> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A12>
+  <DC001A2004A14> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A14>
+  <DC001A2004A10> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A10>
+  <DC001A2004A15> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A15>
+  <DC001A2004A17> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A17>
+  <DC001A2004A16> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A16>
+  <DC001A2004A18> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A18>
+  <DC001A2004A19> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A19>
+  <DC001A2004A20> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A20>
+  <DC001A2004A21> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A21>
+  <DC001A2004A23> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A23>
+  <!-- 郑州0501-->
+  <DC001A2004A13> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A13>
+
+  <!-- 深圳0501-->
+  <DC001A2004A01> /common/pg/UIEndorseFormatPrint.jsp </DC001A2004A01>
+
+  <!--0501险种批单批量打印（套打）-->
+  <DC0501A2004A_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC0501A2004A_BATCH>
+  <DC001A2004A01_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A01_BATCH>
+  <DC001A2004A02_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A02_BATCH>
+  <DC001A2004A03_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A03_BATCH>
+  <DC001A2004A04_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A04_BATCH>
+  <DC001A2004A05_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A05_BATCH>
+  <DC001A2004A06_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A06_BATCH>
+  <DC001A2004A07_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A07_BATCH>
+  <DC001A2004A11_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A11_BATCH>
+  <DC001A2004A12_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A12_BATCH>
+  <DC001A2004A14_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A14_BATCH>
+  <DC001A2004A10_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A10_BATCH>
+  <DC001A2004A15_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A15_BATCH>
+  <DC001A2004A17_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A17_BATCH>
+  <DC001A2004A16_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A16_BATCH>
+  <DC001A2004A18_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A18_BATCH>
+  <DC001A2004A19_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A19_BATCH>
+  <DC001A2004A20_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A20_BATCH>
+  <DC001A2004A21_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A21_BATCH>
+  <DC001A2004A23_BATCH> /common/pg/UIEndorseBatchFormatPrint.jsp </DC001A2004A23_BATCH>
+  <DCDASA2004A_BATCH>   /common/pg/UIEndorseBatchFormatPrint.jsp </DCDASA2004A_BATCH>
+
+  <!--DAS险种批单打印（套打）-->
+  <DCDASA2004A>
+  	/common/pg/UIEndorseFormatPrint.jsp
+  </DCDASA2004A>
+
+  <!--发票打印（套打）-->
+  <FP001A2004A>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A>
+  <!--FP001A2004A01 深圳-->
+ <FP001A2004A01>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A01>
+  <!--FP001A2004A10 上海-->
+ <FP001A2004A10>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A10>
+  <!--FP001A2004A03 宁波-->
+ <FP001A2004A03>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A03>
+  <!--FP001A2004A04 杭州-->
+ <FP001A2004A04>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A04>
+  <!--FP001A2004A05 成都-->
+ <FP001A2004A05>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A05>
+ <!--FP001A2004A06 南京:单独的发票格式-->
+ <FP001A2004A06>/common/sff/UIPayInvoiceNJFormatPrint.jsp</FP001A2004A06>
+ <!--FP001A2004A07  北京:单独的发票格式-->
+ <FP001A2004A07>/common/pub/UIBeijingVisaCheckOut.jsp</FP001A2004A07>
+
+ <FP001A2004A02>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A02>
+
+  <!--FP001A2004A12 西安-->
+ <FP001A2004A12>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A12>
+
+   <!--FP001A2004A14 广州-->
+ <FP001A2004A14>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A14>
+ <!--FP001A2004A15 福州-->
+ <FP001A2004A15>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A15>
+  <!--FP001A2004A09 武汉-->
+ <FP001A2004A09>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A09>
+ <!--FP001A2004A11 天津-->
+ <FP001A2004A11>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A11>
+ <!--FP001A2004A16 济南-->
+ <FP001A2004A16>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A16>
+ <FP001A2004A17>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A17>
+
+  <FP001A2004A20>/common/sff/UIPayInvoiceFormatPrint.jsp</FP001A2004A20>
+
+ <!--批量发票打印-->
+ <FP001A2004A_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A_BATCH>
+  <!--FP001A2004A01 深圳-->
+ <FP001A2004A01_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A01_BATCH>
+  <!--FP001A2004A10 上海-->
+ <FP001A2004A10_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A10_BATCH>
+  <!--FP001A2004A03 宁波-->
+ <FP001A2004A03_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A03_BATCH>
+  <!--FP001A2004A04 杭州-->
+ <FP001A2004A04_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A04_BATCH>
+  <!--FP001A2004A05 成都-->
+ <FP001A2004A05_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A05_BATCH>
+ <!--FP001A2004A06 南京:单独的发票格式-->
+ <FP001A2004A06_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A06_BATCH>
+ <!--FP001A2004A07  北京:单独的发票格式-->
+ <FP001A2004A07_BATCH>/common/sff/UIBJPayInvoiceBatchFormatPrint.jsp</FP001A2004A07_BATCH>
+
+ <FP001A2004A02_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A02_BATCH>
+
+  <!--FP001A2004A12 西安-->
+ <FP001A2004A12_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A12_BATCH>
+
+   <!--FP001A2004A14 广州-->
+ <FP001A2004A14_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A14_BATCH>
+ <!--FP001A2004A15 福州-->
+ <FP001A2004A15_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A15_BATCH>
+  <!--FP001A2004A09 武汉-->
+ <FP001A2004A09_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A09_BATCH>
+ <!--FP001A2004A11 天津-->
+ <FP001A2004A11_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A11_BATCH>
+ <!--FP001A2004A16 济南-->
+ <FP001A2004A16_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A16_BATCH>
+ <!--FP001A2004A17 青岛-->
+ <FP001A2004A17_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A17_BATCH>
+ <FP001A2004A20_BATCH>/common/sff/UIPayInvoiceBatchFormatPrint.jsp</FP001A2004A20_BATCH>
+  <!--SJ001A2004A02 上海-->
+  <SJ001A2004A02>/common/sff/UIRefFCInvoiceFormatPrint.jsp</SJ001A2004A02>
+
+  <!--SJ001A2004A05 成都-->
+  <SJ001A2004A05>/common/sff/UIRefFCInvoiceFormatPrint.jsp</SJ001A2004A05>
+
+  <!--福州-->
+  <SJ002A2004A15>/common/sff/UIRefFCInvoiceFormatPrint.jsp</SJ002A2004A15>
+
+  <!-- PrpExtra Manage const -->
+
+  <!-- CertiType -->
+  <CERTI_TYPE_TB>TB</CERTI_TYPE_TB>
+  <CERTI_TYPE_TB_HT>TB_HT</CERTI_TYPE_TB_HT>
+  <CERTI_TYPE_CB>CB</CERTI_TYPE_CB>
+  <CERTI_TYPE_CB_HT>CB_HT</CERTI_TYPE_CB_HT>
+  <CERTI_TYPE_PG>PG</CERTI_TYPE_PG>
+
+  <!-- 增加险别对应序号的常量，用于终端版到浏览器版程序中险别的转换；
+       序号代表界面上险别的顺序、PrpT/C/PitemKind.ItemKindNo   -->
+  <A>1</A>
+  <B>2</B>
+  <D1>3</D1>
+  <D1_2>4</D1_2>
+  <D2>5</D2>
+  <G>6</G>
+  <F>7</F>
+  <T>8</T>
+  <Z>9</Z>
+  <W>10</W>
+  <M>11</M>
+  <J>12</J>
+  <L>13</L>
+  <E>14</E>
+  <H>15</H>
+  <X>16</X>
+  <K1>17</K1>
+  <K2>18</K2>
+
+  <!-- Proposal Input Risk Const -->
+  <PROPOSAL_INPUT>0501,DAB,YAB,0905,0903,0901,0904,0906,1006,YIE,1101,CAC,CAD,CAE,1102,CBC,CBD,1103,CEA,YEA,YEB,YEC,YED,YEE,YEF,YEG,0801,0802,JAH,JAZ,0402,JLK,0101,0102,0103,0104,0105,0107,0106,1702,ZFG,1502,1501,1601,1602,ZCJ,1506,ZCY,ZFL,1809,1802,1801,ZZY,0201,0202,AVN,CWC,OAZ,CAZ,OAV,OAW,OAX,OAY</PROPOSAL_INPUT>
+
+  <!-- Policy Input Risk Const -->
+  <POLICY_INPUT>DAB,DAE,YAB,0905,0903,0901,0904,0906,1006,YIE,1101,CAC,CAD,CAE,1102,CBC,CBD,1103,CEA,YEA,YEB,YEC,YED,YEE,YEF,YEG,0801,0802,JAH,JAZ,0402,JLK,0101,0102,0103,0104,0105,0107,0106,1702,ZFG,1502,1501,1601,1602,ZCJ,1506,ZCY,ZFL,1809,1802,1801,ZZY,0201,0202,AVN,CWC,OAZ,CAZ,OAV,OAW,OAX,OAY</POLICY_INPUT>
+
+  <!-- Renewal Input Risk Const -->
+  <RENEWAL_INPUT>0501,DAB,1101,CAC,CAD,CAE,1102,CBC,CBD,1103,CEA,YEA,YEB,YEC,YED,YEF,YEG,0801,0802,JAH,JAZ,0402,JLK,0101,0102,0103,0104,0105,0107,0106,1702,ZFG,1502,1501,1601,1602,ZCJ,1506,ZCY,ZFL,1809,1802,1801,ZZY,0201,0202,AVN,CWC,OAZ,CAZ,OAV,OAW,OAX,OAY</RENEWAL_INPUT>
+
+  <!-- 没有终保日期批改的险种 -->
+  <ENDORSE_ENDDATE_INPUT>0903,0901,0904,0906,YEA,YEB,YEC,YED,YEE,YEF,YEG,1006,YIE,0905,YIO</ENDORSE_ENDDATE_INPUT>
+
+   <!-- 打印需要挂单证的险种 -->
+   <!-- modify by wuxiaodong 041119 reason 东安只有以下险种需要套打，挂单证 -->
+  <PRINT_VISA>1006,YIE,0501,DAS,YDA,YAZ,0905,YLS,YKA</PRINT_VISA>
+
+  <!-- 需要倒签单的险种 -->
+  <!--<BACK_RISK>0903,0901,0904,0906,1006,YIE,0501,DAS,1501,0103,QAB,0101,0105,0107,0104,0106,0102,0801,0802,0701,EAY,EAC,ECY,ECJ,EAA,EGY,EGX,2707,ZFG,ECU</BACK_RISK>-->
+  <BACK_RISK></BACK_RISK>
+  <!-- 长期险险种 -->
+  <SECULAR_RISK>JAK,ECU</SECULAR_RISK>
+
+  <!-- 报案超时时间-->
+  <DELAY_TIME>-365</DELAY_TIME>
+  <!--报案时间与报案录入时间的间隔-->
+  <REGIST_DATE_LIMIT>1</REGIST_DATE_LIMIT>
+
+  <!-- Policy Input DAB VsCode -->
+  <!--<PolicyInput_DAB>
+    AE100A2004A;AE103A2004A;AE106A2004A;AE109A2004A;AE112A2004A;AE115A2004A
+  </PolicyInput_DAB> -->
+
+  <!-- Policy Input JAH VsCode -->
+  <PolicyInput_JAH>
+  	AEJAHA2001A
+  </PolicyInput_JAH>
+
+  <!-- Policy Input JAZ VsCode -->
+  <PolicyInput_JAZ>
+  	AEJAZA2001A
+  </PolicyInput_JAZ>
+  <!-- Policy Input 0906 VsCode -->
+  <!--
+  <PolicyInput_0906>
+  	AE0906A2004A
+  </PolicyInput_0906>
+  -->
+  <!-- Policy Input 0906 VsCode,Approve VsCode-->
+  <PolicyInputVisa_0906>
+  	AE0906A2004A
+  </PolicyInputVisa_0906>
+  <!-- Policy input request input policyno riskcodes. use ',' split riskcode -->
+  <PolicyInput_InputPolicyNo>DAE</PolicyInput_InputPolicyNo>
+
+  <!-- UnderWriteFlag,Used by Proposal Cancel & Policy Cancel-->
+  <UNDERWRITE_FLAG>1</UNDERWRITE_FLAG>
+
+  <!-- plantimes only one risk-->
+  <ONEPLANTIMES>0901,0906,0903,0904</ONEPLANTIMES>
+
+  <!-- policy file directory -->
+  <DOC_HOME>D:\SUNNY\SUNNY\SourceCode\sunny\doc</DOC_HOME>
+
+  <!-- BBS Const -->
+  <BBSDB_JNDI>jndi_bbsdb_pool</BBSDB_JNDI>
+  <BBSTYPE>BBSTYPE</BBSTYPE>
+  <BBSSHOW>BBSSHOW</BBSSHOW>
+  <BBSEDIT>BBSEDIT</BBSEDIT>
+
+  <!-- construct insure -->
+  <KINDCODE_THIRDPART>002</KINDCODE_THIRDPART>
+  <ITEMCODE_SPECIALRISKS>9998</ITEMCODE_SPECIALRISKS>
+
+  <!-- Assure Input Risk Const -->
+  <ASSURE_INPUT>1101,CAC,1006,YIE</ASSURE_INPUT>
+
+  <!-- letter Input Risk Const -->
+  <LETTER_INPUT>0905,0901,0906,0903,0904,YIE,1006,YEE,YAB</LETTER_INPUT>
+
+  <!-- person Input Risk Const -->
+  <PERSON_INPUT>0501,DAB,1101,CAC,1102,CBC,1103,CEA,ZFG,1601,ECH,1702,1502,1506,ZFL,ZCY,ECH,EAA,EGY,EGX,EAB,EDA,EDD,1802,1809,ZAQ,0801,0802,EAC,EAD,2602,EAZ,ECJ,ECV,ECY,EAY,2707,EDB,EDC,EDM,1501,ZBY,1904,ZBZ</PERSON_INPUT>
+
+  <!-- endor Input Risk Const -->
+  <ENDORE_INPUT>0501,1101,CAC,CAD,CAE,1102,CBC,CBD,1103,CEA</ENDORE_INPUT>
+
+  <!-- UtiPower Return Value Const -->
+  <UTIPOWER_RETURN_VALUE> AND ( 1=1 OR 1=0 )</UTIPOWER_RETURN_VALUE>
+
+  <!-- None Format Risk Const -->
+  <NONEFORMAT_RISK>0801,0802,0103,0105,0107,0104,0106,1702,1502,1601,1602,1501,ZFG,BBB</NONEFORMAT_RISK>
+
+  <DDCCDATASOURCE>ddccDataSource</DDCCDATASOURCE>
+  <!-- add begin by wuxiaodong ,2005-05-22,shenzhen,由于单证的部署环境发生变化单证长度需要在业务系统里配置,此配置会根据不同的公司设置不同 -->
+  <VISALENTH>10</VISALENTH>
+  
+  <STATDATASOURCE>statDataSource</STATDATASOURCE>
+
+  <!-- add begin by wanghn,2004-12-15,shenzhen,ZB200411-06,合同业务自动分保安排 -->
+  <!-- 自动分保安排增加数据库连接标识，由于Sysframework框架问题，暂时借用单证系统数据库连接 -->
+  <REINS_JNDI>ddccDataSource</REINS_JNDI>
+  <!--insutil所需数据库连接-->
+  <INSUTIL_JNDI>ddccDataSource</INSUTIL_JNDI>
+  <!-- add end by wanghn,2004-12-15,shenzhen,ZB200411-06 -->
+
+  <AREACODE>3100</AREACODE>
+  <!-- 财产险 Risk Const -->
+  <PROPERTY_RISKS>LAD,0701,0801,0802,0301,JAH,JAZ,0402,JHB,0401,JLK,0101,0102,0103,0104,0105,0107,0106,1702,ZFG,1502,1501,ZAG,1601,1602,ZAQ,ZAS,ZCJ,1506,ZCY,ZFL,ZKB,ZKG,1809,1802,1801,ZZY,0201,0202,0203,BAZ,BBB,2201,JAK,ZBY,1904,ZBZ,AVN,CWC,OAZ,CAZ,OAV,OAW,OAX,OAY</PROPERTY_RISKS>
+  <!-- 意外险 Risk Const -->
+  <ACCIDENT_RISKS>EAA,EGY,EGX,EAY,EAB,EAC,EAD,2602,ECC,ECF,ECV,ECY,ECH,ECW,EDA,EDB,EDC,EDD,EDH,EDJ,EDL,EDM,2707,ECJ,ECE,EAZ,ECU</ACCIDENT_RISKS>
+
+  <!-- 具有附加险的险种 -->
+  <AFFIXATION_RISK>0101,0102,0301,1501,ZFG,ZCJ,ZFL,1802,1801,YIE,0905,1006,YKA,0901,AVN,1101,JHB</AFFIXATION_RISK>
+  <!-- 具有附加条款的险种 -->
+  <CLAUSE_RISK>0103,0104,0101,0102,0105,0801,0802,1602,1502</CLAUSE_RISK>
+  <!-- 长期责任准备金提取险种 Risk Const -->
+  <RESERVE_RISK>'0402','JHB','DAD','0401'</RESERVE_RISK>
+
+  <CLAIM_DATE_LIMIT>7</CLAIM_DATE_LIMIT>
+
+  <!--加入权限所能的常量-->
+  <TASKCODE_TB>tb</TASKCODE_TB>
+  <TASKCODE_CB>cb</TASKCODE_CB>
+  <TASKCODE_PG>pg</TASKCODE_PG>
+  <TASKCODE_LP>lp</TASKCODE_LP>
+  <TASKCODE_SF>sf</TASKCODE_SF>
+  <TASKCODE_HB>hb</TASKCODE_HB>
+  <TASKCODE_HP>hp</TASKCODE_HP>
+
+  <TASKCODE_CW>cw</TASKCODE_CW>
+  <TASKCODE_TJ>tj</TASKCODE_TJ>
+  <TASKCODE_DM>dm</TASKCODE_DM>
+  <TASKCODE_FF>ff</TASKCODE_FF>
+  <TASKCODE_PRT>prt</TASKCODE_PRT>
+  <TASKCODE_QRY>qry</TASKCODE_QRY>
+  <TASKCODE_SYS>sys</TASKCODE_SYS>
+  <TASKCODE_DLR>dlr</TASKCODE_DLR>
+  <TASKCODE_KHGL>khgl</TASKCODE_KHGL>
+
+  <TASKCODE_LPBA>lpba</TASKCODE_LPBA>
+  <TASKCODE_LPLA>lpla</TASKCODE_LPLA>
+  <TASKCODE_LPLAJP>lplajp</TASKCODE_LPLAJP>  <!-- add by wuxiaodong 041019 reason 增加拒赔功能控制 -->
+  <TASKCODE_LPCK>lpck</TASKCODE_LPCK>
+  <TASKCODE_LPPA>lppa</TASKCODE_LPPA>
+
+  <GROUPCODE_QRY>01</GROUPCODE_QRY>   <!--90-->
+  <GROUPCODE_SYS>01</GROUPCODE_SYS>  <!--91-->
+  <GROUPCODE_DM>01</GROUPCODE_DM>   <!--01-->
+  <GROUPCODE_VISA>01</GROUPCODE_VISA>  <!--93-->
+  <GROUPCODE_UW>01</GROUPCODE_UW>   <!--94-->
+  <CHECKCODE_READ>r</CHECKCODE_READ>
+  <CHECKCODE_WRITE>w</CHECKCODE_WRITE>
+  <CHECKCODE_EXE>x</CHECKCODE_EXE>
+  <CHECKCODE_CHECK>k</CHECKCODE_CHECK>
+  <CHECKCODE_UNDWT>h</CHECKCODE_UNDWT>
+
+  <DBTYPE>ORACLE</DBTYPE>
+  <VSLIMIT_COUNT>5000</VSLIMIT_COUNT>
+  <!--加入POWER_CONFIG_FLAG用于使用权限方式-->
+  <POWER_CONFIG_FLAG>0</POWER_CONFIG_FLAG>
+
+  <!-- 法定三者险常量定义 -->
+  <!-- 法定三者险开关 1:开 / 0:关 -->
+  <BSWITCH>0</BSWITCH>
+  <!-- 旧数据延续使用法定三者险开关 1:开 / 0:关 -->
+  <BUSEDSWITCH>0</BUSEDSWITCH>
+  <!--HOST-->
+  <CARB_HOST>192.168.154.188</CARB_HOST>
+  <!--URI-->
+  <CARB_URI>/circauto/servlet/com.ebao.circauto.businessinterface.InterfaceConnectServlet</CARB_URI>
+  <!--用户名-->
+  <CARB_USERCODE>dadi_user</CARB_USERCODE>
+  <!--密码-->
+  <CARB_PASSWORD>666666</CARB_PASSWORD>
+  <!-- 地区代码 -->
+  <CARB_AREACODE>3101,3102,3103,3104,3100</CARB_AREACODE>
+  <!-- 法定三者执行起始日期 -->
+  <FUNCDATE>2004-04-01</FUNCDATE>
+  <!-- 机构代码 -->
+  <CARB_COMCODE>9000</CARB_COMCODE>
+  <!-- 大宗业务的数据目录 -->
+  <CARB_DATADIR>D:\claimDbpic</CARB_DATADIR>
+
+  <!--与易保远程查勘定损平台接口配置 begin-->
+  <AUTOCLAIM_HOST>192.168.154.175/autoclaim/servlet/</AUTOCLAIM_HOST>
+  <REGIST_URI>com.ebao.autoclaim.datachange.ccic.DataChangeServlet</REGIST_URI>
+  <CHECKLOSS_URI>com.ebao.autoclaim.datachange.ccic.exportcase.CaseExportServlet</CHECKLOSS_URI>
+  <CLAIM_URI>com.ebao.autoclaim.datachange.ccic.acceptcase.AcceptCaseServlet</CLAIM_URI>
+  <LOSS_URI>com.ebao.autoclaim.datachange.ccic.losscase.CaseLossServlet</LOSS_URI>
+  <IMAGE_URI>com.ebao.pub.service.attach.DownloadServlet</IMAGE_URI>
+  <ENDCASE_URI>com.ebao.autoclaim.datachange.ccic.endcase.EndCaseServlet</ENDCASE_URI>
+  <!--查勘图片上传 modify update begin by sunfei,2004-12-20,shenzhen,需求编号车险2004129-11-->
+  <IMAGE_PATH>D:\claimDbpic</IMAGE_PATH>
+  <IMAGE_VIRTUAL_PATH>/prpall/UploadImages/</IMAGE_VIRTUAL_PATH>
+  <!-- modify update begin by sunfei,2004-12-20,shenzhen,需求编号车险2004129-11-->
+
+  <SCHEDULE_COM>1101000024,1101000022,1101000025,1101000026,1101000034,1101000177,1101000225,1101000226,1101000227,1101000228,1101000023</SCHEDULE_COM>
+  <!--与易保远程查勘定损平台接口配置 end-->
+  
+  <!-- 财务系统帐套类型 -->
+	<ACCBOOKTYPE description="帐套类型" modify="1">02</ACCBOOKTYPE>
+	<ACCBOOKCODE description="帐套代码">11</ACCBOOKCODE>
+  <ACCOUNT_ADMIN>0000000000</ACCOUNT_ADMIN>
+<!-- SangMingqian 20050518 业务科目录入放开(开关设置) -->
+  <VOUCHER_INPUT_BRANCH>00000000</VOUCHER_INPUT_BRANCH>
+  
+  <!-- 精友数据XML文件存入目录 -->
+  <CARMODEL_IMP>/home/ccicall/WebApp/ddccallweb</CARMODEL_IMP>
+
+  <!-- 判断是附加条款的险种-->
+  <FJTK_CODE>0103,0104,0105,0801,0802,1602,1502</FJTK_CODE>
+  
+<!-- add by zengyangzheng 20050824 begin for statreport-->
+    <statURL>jdbc:oracle:thin:@192.168.60.12:1521:ccicdb</statURL>
+    <statUSER>sunnystat</statUSER>
+    <statPWD>sunnystat</statPWD>
+<!-- add by zengyangzheng 20050824 end for statreport-->
+
+  </sysconst>

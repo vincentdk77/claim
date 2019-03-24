@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasource-defines>
+	<datasource-define>  
+	    <name>ddccDataSource</name>
+	    <jndiname>ddccDataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>visa datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+	<datasource-define>  
+	    <name>claimDataSource</name>
+	    <jndiname>ddccDataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>visa datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+	
+  <datasource-define>  
+	    <name>undwrtDataSource</name>
+	    <jndiname>undwrtDataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>visa datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+	
+	<datasource-define>  
+	    <name>platformDataSource</name>
+	    <jndiname>platformDataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>visa datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+	
+	<datasource-define>  
+	    <name>paymentDataSource</name>
+	    <jndiname>paymentDataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>payment datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+	<datasource-define>  
+	    <name>NXDADataSource</name>
+	    <jndiname>NXDADataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>visa datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+	<datasource-define>  
+	    <name>JKXDataSource</name>
+	    <jndiname>JKXDataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>visa datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+	
+	<!-- add by ykf -->
+	<datasource-define>  
+	    <name>ZaiBeiGyicDataSource</name>
+	    <jndiname>ZaiBeiGyicDataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>visa datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+	
+	<!-- 新农险电子档案库 -->
+	<datasource-define>  
+	    <name>NewNXDADataSource</name>
+	    <jndiname>NewNXDADataSource</jndiname>
+	    <db-to-server-encode-charset>GBK</db-to-server-encode-charset>
+	    <db-to-server-decode-charset>GBK</db-to-server-decode-charset>
+	    <need-convert-from-db-to-server>false</need-convert-from-db-to-server>
+	    
+	    <server-to-db-encode-charset>GBK</server-to-db-encode-charset>
+	    <server-to-db-decode-charset>GBK</server-to-db-decode-charset>
+	    <need-convert-from-server-to-db>true</need-convert-from-server-to-db>
+		<description>visa datasource define.if encode equals decode ,the need convert will auto set false </description>
+	</datasource-define>
+</datasource-defines>		

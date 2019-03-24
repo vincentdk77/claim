@@ -1,0 +1,233 @@
+package com.sinosoft.claim.webservice.dto;
+
+import java.io.Serializable;
+
+/**
+ * 货运保险案件详细信息 主信息（TransportRegistCaseDetailInfo）
+ * @author Administrator
+ *
+ */
+public class TransportRegistCaseDetailInfo implements Serializable{
+	private static final long serialVersionUID = 1L;
+	/** 险种名称         */                          
+	private String riskCode              ="";        
+	/** 保单号码         */                          
+	private String policyNo              ="";        
+	/** 出险时间：天     */                          
+	private String damageStartDate       ="";        
+	/** 出险原因代码     */                          
+	private String damageCode            ="";        
+	/** 出险原因         */                          
+	private String damageName            ="";        
+	/** 报案人           */                          
+	private String reportorName          ="";        
+	/** 报案时间         */                          
+	private String reportDate            ="";        
+	/** 报案小时         */                          
+	private String reportHour            ="";        
+	/** 报案方式         */                          
+	private String reportType            ="";        
+	/** 联系人           */                          
+	private String linkerName            ="";        
+	/** 联系电话         */                          
+	private String phoneNumber           ="";        
+	/** 出险地邮政编码   */                          
+	private String addressCode           ="";        
+	/** 出险地点         */                          
+	private String damageAddress         ="";        
+	/** 币别             */                          
+	private String estiCurrency          ="";        
+	/** 报损金额         */                          
+	private String estimateLoss          ="";        
+	/** 受损标的         */                          
+	private String LossName              ="";        
+	/** 备注             */                          
+	private String remark                ="";        
+	/** 联系人信息       */                          
+	private RelatePersonDto[] relatePersonDtoList;        
+	/** 接报案员代码     */                          
+	private String operatorCode          ="";        
+	/** 接报案员姓名     */                          
+	private String operatorName          ="";        
+	/** 理赔登记部门代码 */                          
+	private String makeCom               ="";        
+	/** 理赔登记部门     */                          
+	private String makeComName           ="";        
+	/** 出险摘要         */                          
+	private String textContext           ="";        
+	/** 巨灾一级代码     */                          
+	private String catastropheCode1      ="";        
+	/** 巨灾名称         */                          
+	private String catastropheName1      ="";        
+	/** 巨灾二级代码     */                          
+	private String catastropheCode2      ="";        
+	/** 巨灾名称         */                          
+	private String catastropheName2      ="";
+	public TransportRegistCaseDetailInfo() {
+		super();
+	}
+	public String getRiskCode() {
+		return riskCode;
+	}
+	public void setRiskCode(String riskCode) {
+		this.riskCode = riskCode;
+	}
+	public String getPolicyNo() {
+		return policyNo;
+	}
+	public void setPolicyNo(String policyNo) {
+		this.policyNo = policyNo;
+	}
+	public String getDamageStartDate() {
+		return damageStartDate;
+	}
+	public void setDamageStartDate(String damageStartDate) {
+		this.damageStartDate = damageStartDate;
+	}
+	public String getDamageCode() {
+		return damageCode;
+	}
+	public void setDamageCode(String damageCode) {
+		this.damageCode = damageCode;
+	}
+	public String getDamageName() {
+		return damageName;
+	}
+	public void setDamageName(String damageName) {
+		this.damageName = damageName;
+	}
+	public String getReportorName() {
+		return reportorName;
+	}
+	public void setReportorName(String reportorName) {
+		this.reportorName = reportorName;
+	}
+	public String getReportDate() {
+		return reportDate;
+	}
+	public void setReportDate(String reportDate) {
+		this.reportDate = reportDate;
+	}
+	public String getReportHour() {
+		return reportHour;
+	}
+	public void setReportHour(String reportHour) {
+		this.reportHour = reportHour;
+	}
+	public String getReportType() {
+		return reportType;
+	}
+	public void setReportType(String reportType) {
+		this.reportType = reportType;
+	}
+	public String getLinkerName() {
+		return linkerName;
+	}
+	public void setLinkerName(String linkerName) {
+		this.linkerName = linkerName;
+	}
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public String getAddressCode() {
+		return addressCode;
+	}
+	public void setAddressCode(String addressCode) {
+		this.addressCode = addressCode;
+	}
+	public String getDamageAddress() {
+		return damageAddress;
+	}
+	public void setDamageAddress(String damageAddress) {
+		this.damageAddress = damageAddress;
+	}
+	public String getEstiCurrency() {
+		return estiCurrency;
+	}
+	public void setEstiCurrency(String estiCurrency) {
+		this.estiCurrency = estiCurrency;
+	}
+	public String getEstimateLoss() {
+		return estimateLoss;
+	}
+	public void setEstimateLoss(String estimateLoss) {
+		this.estimateLoss = estimateLoss;
+	}
+	public String getLossName() {
+		return LossName;
+	}
+	public void setLossName(String lossName) {
+		LossName = lossName;
+	}
+	public String getRemark() {
+		return remark;
+	}
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+	public RelatePersonDto[] getRelatePersonDtoList() {
+		return relatePersonDtoList;
+	}
+	public void setRelatePersonDtoList(RelatePersonDto[] relatePersonDtoList) {
+		this.relatePersonDtoList = relatePersonDtoList;
+	}
+	public String getOperatorCode() {
+		return operatorCode;
+	}
+	public void setOperatorCode(String operatorCode) {
+		this.operatorCode = operatorCode;
+	}
+	public String getOperatorName() {
+		return operatorName;
+	}
+	public void setOperatorName(String operatorName) {
+		this.operatorName = operatorName;
+	}
+	public String getMakeCom() {
+		return makeCom;
+	}
+	public void setMakeCom(String makeCom) {
+		this.makeCom = makeCom;
+	}
+	public String getMakeComName() {
+		return makeComName;
+	}
+	public void setMakeComName(String makeComName) {
+		this.makeComName = makeComName;
+	}
+	public String getTextContext() {
+		return textContext;
+	}
+	public void setTextContext(String textContext) {
+		this.textContext = textContext;
+	}
+	public String getCatastropheCode1() {
+		return catastropheCode1;
+	}
+	public void setCatastropheCode1(String catastropheCode1) {
+		this.catastropheCode1 = catastropheCode1;
+	}
+	public String getCatastropheName1() {
+		return catastropheName1;
+	}
+	public void setCatastropheName1(String catastropheName1) {
+		this.catastropheName1 = catastropheName1;
+	}
+	public String getCatastropheCode2() {
+		return catastropheCode2;
+	}
+	public void setCatastropheCode2(String catastropheCode2) {
+		this.catastropheCode2 = catastropheCode2;
+	}
+	public String getCatastropheName2() {
+		return catastropheName2;
+	}
+	public void setCatastropheName2(String catastropheName2) {
+		this.catastropheName2 = catastropheName2;
+	}    
+	
+
+}

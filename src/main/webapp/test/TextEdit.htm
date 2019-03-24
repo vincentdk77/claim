@@ -1,0 +1,43 @@
+<HTML>
+<HEAD>
+<META NAME="GENERATOR" Content="Microsoft Visual Studio 6.0">
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta HTTP-EQUIV="Expires" CONTENT="0">
+<link rel="stylesheet" href="news.css">
+<title>文档编辑</title>
+<script language="javascript">
+<!--
+
+function TestForm()
+{
+    alert("输入内容=" + document.form1.doc_html.value);
+	return true;
+}
+
+//-->
+</script>
+
+</HEAD>
+<BODY bgcolor=#ffffff topmargin=0 marginheight=5 leftmargin=0 marginwidth=5>
+
+<P>&nbsp;</P>
+
+<form name="form1" action="step_2.htm" method="post" >
+<table border=0 ><tr><td>&nbsp;&nbsp;</td><td>
+     <table border=1  bordercolor=gray >
+     <tr><td align=center>
+        <OBJECT id=doc_html style="LEFT: 0px; TOP: 0px" data=Edit.htm width=544 
+	        height=320 type=text/x-scriptlet  VIEWASTEXT></OBJECT>
+
+
+	 </td></tr></table>
+     <input type="text" name="content" value="" >
+  
+</td></tr></table>
+<br><br>
+<input type="button" id=button1 name=button1 value="测试"  style="FONT-SIZE: 12px;" onclick="return TestForm();">	
+
+</form>
+
+</BODY>
+</HTML>

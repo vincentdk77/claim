@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="GB2312" standalone="yes" ?>
+
+<sysconst>
+	<!-- 是否用配件系统数据标示 -->
+	<ThirdFittings>1</ThirdFittings>	　
+	<FittingsSystem_name>配件系统认证名</FittingsSystem_name>
+	<FittingsSystem_password>配件系统认证密码</FittingsSystem_password>
+	<!--配件系统的Http地址-->
+        <!-- <FITTINGS_URL>http://9.0.1.10:9001/GYFitting/survey/receiveXml.do</FITTINGS_URL> -->
+        <!--标签中配置精友零配件定损应用的地址和端口 -->
+        <FITTINGS_URL>http://www.gyic-test.com:9001/pjbjbd/ClaimFittingInterfaceServlet</FITTINGS_URL>
+	<FITTINGS_LOCAL_URL>http://www.gyic-test.com:7001/claim/fittings</FITTINGS_LOCAL_URL>
+	<FITTINGS_FLASH_URL>http://www.gyic-test.com:7001/claim/DAA/certainLoss/reloadWindow.jsp</FITTINGS_FLASH_URL>	
+
+	<!--双核工作流的Http地址-->
+	<UW_URL>http://9.0.2.151:9004/undwrt/UWWFServer</UW_URL>
+ 	<UW_APPROVAL_URL>http://9.0.2.151:9004/undwrt/ApprovalServer</UW_APPROVAL_URL>
+	<!--双核工作流目前是否可使用 0:表示不能用，1:表示可以使用了-->
+	<UW_URLOPEN>1</UW_URLOPEN>
+
+	<!-- 双核系统的IP地址,用于双核系统单点登录理赔时的IP检测 -->
+	<UNDWRT_HOST>9.0.2.151:9004</UNDWRT_HOST>
+
+	<!--核心业务系统的url参数-->
+	<Core_URL>http://9.0.2.151:9001/prpall</Core_URL>
+        <Reins_URL>http://9.0.2.151:9099/reins</Reins_URL>
+	<ciplatform.URL>http://192.168.154.180/circauto/servlet/insurance/interface</ciplatform.URL>
+	<ciplatform.User>axicsh_test</ciplatform.User>
+	<ciplatform.Pwd>111111</ciplatform.Pwd>
+
+        <!-- 双核系统的URL地址-->
+        <GY_UNDWRT_URL>9.0.2.151</GY_UNDWRT_URL>
+        <!-- 双核系统的Host端口-->
+        <GY_UNDWRT_HOST>9004</GY_UNDWRT_HOST>
+	<!-- 20140711大病对账数据上传的URL地址-->
+	<CHECKACCOUNT_UPLOAD_URL>9.0.1.10</CHECKACCOUNT_UPLOAD_URL>
+	<!-- 20140711大病对账数据上传的Host端口-->
+	<CHECKACCOUNT_UPLOAD_PORT>21</CHECKACCOUNT_UPLOAD_PORT>
+	<!-- 20140711大病对账数据上传的用户名-->
+	<CHECKACCOUNT_UPLOAD_USERNAME>checkuser</CHECKACCOUNT_UPLOAD_USERNAME>
+	<!-- 20140711大病对账数据上传的密码-->
+	<CHECKACCOUNT_UPLOAD_PASSWORD>checkuser</CHECKACCOUNT_UPLOAD_PASSWORD>
+	<!-- 20140721与大病系统对账数据上传的路径-->
+	<CHECKACCOUNT_UPLOAD_ADDRESS>/image/gynxpic/BigIllness/</CHECKACCOUNT_UPLOAD_ADDRESS>
+        <!-- 影像资料上传20141027 add  -->
+        <ECM_URL>http://9.0.2.11:9200/SunECM/servlet/RouterServlet</ECM_URL>
+        <!-- 影像资料上传地址20180718  -->      
+        <ECM_URL_NEW>http://9.0.2.15:9103/SunECM/servlet/RouterServlet</ECM_URL_NEW>
+        <!-- 影像资料JS --> 
+        <ECM_JS_URL>http://9.0.2.15:9103/SunECM/ecm-view/public/js/EncodeUrl.min.js</ECM_JS_URL>
+        <!-- 影像资料密钥 -->
+        <ECM_KEY>TbJeaZIOzqzq4QCiSA1db46D</ECM_KEY>
+
+        <!-- 呼叫中心接口日志 -->
+	<CALLCENTERINTERFACELOGPATH>/home/weblogic/intraTestApplications/build/CallCenterInterfaceLogs</CALLCENTERINTERFACELOGPATH>
+        <!-- 过河兵接口日志-->
+        <GHBSENDLOGPATH>/home/weblogic/intraTestApplications/build/GHBSENDLogs</GHBSENDLOGPATH>
+        <!--过河兵接口地址-->
+        <GHBSYNSTATUS_URL>http://9.0.2.106:8091/EliteGeneralWS/EliteDBWSImpl.jws</GHBSYNSTATUS_URL>
+</sysconst>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="GB2312" standalone="yes" ?>
+
+<sysconst>
+	<BLHPBusinessDataServiceImplClass>com.sinosoft.claim.impl.undwrt.BLHPBusinessDataServiceImplDuBang</BLHPBusinessDataServiceImplClass>
+	<PayMentImplClass>com.sinosoft.claim.impl.undwrt.PayMentServiceImpl</PayMentImplClass>
+	<claimCallBackImplClass>com.sinosoft.claim.impl.undwrt.ClaimCallBackServiceImpl</claimCallBackImplClass>
+</sysconst>

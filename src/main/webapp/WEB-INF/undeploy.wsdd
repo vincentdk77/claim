@@ -1,0 +1,36 @@
+<undeployment xmlns="http://xml.apache.org/axis/wsdd/"> 
+	 <service name="MobileSurvey"/>
+	 <service name="AutoClaimService"/>
+	 <service name="AutoRegistService"/>
+	 <service name="AutoCompeService"/>
+	 <service name="PolicyQueryService"/>
+	 <service name="PayAllInfoQueryService"/>
+	 <service name="PayInfoQueryService"/>
+	 <service name="RegistEditPostService"/>
+	 <service name="UIScheduleDealEditPostWebservice"/>
+     <service name="NewMoleSurvey"/>
+     <service name="NewMobileSurvey"/>
+     <service name="ReCaseService"/>
+     <service name="AutoPayService"/>
+     <service name="RegistCancelService"/>
+     <service name="PolicyListQueryService"/>
+     <service name="ClaimHistoryService"/>
+     <service name="ClaimPolicyDetailInfoService"/>
+     <service name="AutoPayBigSeriousService"/>
+     <service name="JobManagerQueryService"/>
+     <service name="MessageCenter"/>
+     
+     <service name="WorkFlowQueryService"/>
+     <service name="UICommunicationService"/>
+     <service name="UIScheduleGetBackService"/>
+     <service name="SendPersonMessageService"/>
+     
+     <service name="ListInformationService"/>
+     <service name="RegistCaseInfoQueryService"/>
+     <service name="AutoPayDeleteService"/>
+     
+     <service name="ResidentAppRegistInformationService"/>
+     <service name="ResidentAppInformationService"/>
+     <service anme="FindAppHerdCaseInfoService"/>
+     <service name="FindAppHerdFarmerInfoService"/>
+</undeployment>

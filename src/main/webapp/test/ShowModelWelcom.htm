@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>Hello</title>
+
+<script language="javascript">
+
+var closeWin = "false";  //是否直接下按钮
+
+/**
+  * 关闭窗体
+  */
+function closeMe(){
+	dialogArguments.fm.kk.value=fm.kk.value;
+	alert("close window11");
+	//dialogArguments.win=null;
+}
+window.onunload=closeMe; 
+
+/**
+  * 设置返回值
+  */
+
+function sendReturnValue()
+{
+  dialogArguments.fm.kk.value=fm.kk.value;
+  dialogArguments.win=null;
+  return true;
+}
+
+function loadForm()
+{
+  fm.kk.value = dialogArguments.fm.kk.value;
+  alert(dialogArguments.fm.kk.value);
+}
+</script>
+</head>
+<body onunload="return closeMe();" onload="loadForm();">
+<form name="fm">
+<input type="text" name="kk" value="hehe">
+<input type="button" name="press" value="OK" onclick="return sendReturnValue();">
+</form>
+</body>
+</html> 

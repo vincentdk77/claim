@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="claim" version="2.4"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	<display-name>claim</display-name>
+	
+
+    <filter>
+       <filter-name>encodingFilter</filter-name>
+        <filter-class>com.sinosoft.utility.EncodingFilter</filter-class>
+       <init-param>
+           <param-name>encoding</param-name>
+           <param-value>GBK</param-value>
+       </init-param>
+    </filter>
+    <filter-mapping>
+       <filter-name>encodingFilter</filter-name>
+       <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<!-- serverlet begin -->  
+	<servlet>
+		<servlet-name>startup</servlet-name>
+		<servlet-class>
+			com.sinosoft.utility.web.WebAppStartUpServlet</servlet-class>
+		<init-param>
+			<!-- Now DB2 or Oracle is supported -->
+			<param-name>dbType</param-name>
+			<param-value>ORACLE</param-value>
+		</init-param>
+		  <init-param>
+            <param-name>init:com.sinosoft.bz.common.BZAppConfig</param-name>
+            <param-value>BZAppConfig.xml</param-value>
+        </init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>action</servlet-name>
+		<servlet-class>
+			com.sinosoft.sysframework.web.control.ExtendedStrutsActionServlet</servlet-class>
+		<init-param>
+			<param-name>config</param-name>
+			<param-value>/WEB-INF/struts-config.xml</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>detail</param-name>
+			<param-value>3</param-value>
+		</init-param>
+		<init-param>
+			<param-name>Log4j</param-name>
+			<param-value>WEB-INF/config/log4j.properties</param-value>
+		</init-param>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UICeriftyServerFacade</servlet-name>
+		<servlet-class>
+			com.sinosoft.claim.ui.control.facade.UICeriftyServerFacade</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UIFileUploadShowFileFacade</servlet-name>
+		<servlet-class>
+			com.sinosoft.claim.ui.control.facade.UIFileUploadShowFileFacade</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UICertifyLoadImgFacade</servlet-name>
+		<servlet-class>
+			com.sinosoft.claim.ui.control.facade.UICertifyLoadImgFacade</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>UICertifyViewImgFacade</servlet-name>
+		<servlet-class>
+			com.sinosoft.claim.ui.control.facade.UICertifyViewImgFacade</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UIWFUWServerFacade</servlet-name>
+		<servlet-class>
+			com.sinosoft.claim.ui.control.facade.UIWFUWServerFacade</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>UIClaimFittingsServerFacade</servlet-name>
+		<servlet-class>
+			com.sinosoft.claim.ui.control.facade.UIClaimFittingsServerFacade</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>SsoLoginDispatcherServlet</servlet-name>
+		<servlet-class>
+			com.sinosoft.claim.ui.control.facade.SsoLoginDispatcherServlet</servlet-class>
+	</servlet>
+		<!-- start寮犺強鍗�-->
+	 <servlet>
+		<servlet-name>EarnoCheckServlet</servlet-name>
+		<servlet-class>
+			com.gyic.claim.utils.EarnoCheckServlet</servlet-class>
+	</servlet>
+	<!-- end寮犺強鍗�-->
+	<servlet>
+       <servlet-name>UIErrorPage</servlet-name>
+       <jsp-file>/common/pub/UIErrorPage.jsp</jsp-file>
+</servlet>
+   	<servlet>
+		<servlet-name>UIApprovalServerFacade</servlet-name>
+		<servlet-class>
+			com.sinosoft.claim.ui.control.facade.UIApprovalServerFacade</servlet-class>
+	</servlet>
+	<!-- guodexuan 2017/12/7 ocr文件上传配置 -->
+  <servlet>
+    <servlet-name>FileSteamUpload</servlet-name>
+    <servlet-class>com.sinosoft.AgriXZrequest.bl.facade.FileSteamUpload</servlet-class>
+  </servlet>
+  
+  
+	<!-- serverlet end -->
+	
+	<!-- serverlet-mapping begin -->
+  <!-- 锟斤拷通锟斤拷锟街癸拷执锟斤拷.../initSystemConfig.do4锟斤拷锟铰筹拷始锟斤拷系统锟斤拷锟斤拷 -->
+  <!-- guodexuan 2017/12/7 ocr文件上传配置 -->
+  <servlet-mapping>
+    <servlet-name>FileSteamUpload</servlet-name>
+    <url-pattern>/servlet/FileSteamUpload</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>startup</servlet-name>
+    <url-pattern>initSystemConfig</url-pattern>
+  </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>action</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UIApprovalServerFacade</servlet-name>
+		<url-pattern>UIApprovalServer</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UIFileUploadShowFileFacade</servlet-name>
+		<url-pattern>uploadshow</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UICertifyLoadImgFacade</servlet-name>
+		<url-pattern>uiloadimg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UICertifyViewImgFacade</servlet-name>
+		<url-pattern>uiviewimg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>UICeriftyServerFacade</servlet-name>
+		<url-pattern>certify</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UIWFUWServerFacade</servlet-name>
+		<url-pattern>WFUWServer</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>UIClaimFittingsServerFacade</servlet-name>
+		<url-pattern>fittings</url-pattern>
+	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>SsoLoginDispatcherServlet</servlet-name>
+		<url-pattern>/SsoLoginDispatcherServlet</url-pattern>
+	</servlet-mapping>
+	  <servlet-mapping>
+    <servlet-name>UIErrorPage</servlet-name>
+    <url-pattern>UIErrorPage</url-pattern>
+  </servlet-mapping>
+		<!--start 寮犺強鍗�-->
+	  <servlet-mapping>
+    <servlet-name>EarnoCheckServlet</servlet-name>
+    <url-pattern>/EarnoCheckServlet</url-pattern>
+     </servlet-mapping>
+  <!--end 寮犺強鍗�-->
+	<!-- serverlet-mapping end -->
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<jsp-config>
+		<!-- taglib begin -->
+		<taglib>
+			<taglib-uri>/WEB-INF/app.tld</taglib-uri>
+			<taglib-location>/WEB-INF/claim-app.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/claim-app.tld</taglib-uri>
+			<taglib-location>/WEB-INF/claim-app.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/struts-bean.tld</taglib-uri>
+			<taglib-location>/WEB-INF/struts-bean.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/struts-html.tld</taglib-uri>
+			<taglib-location>/WEB-INF/struts-html.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>/WEB-INF/struts-logic.tld</taglib-uri>
+			<taglib-location>/WEB-INF/struts-logic.tld</taglib-location>
+		</taglib>
+		
+		<taglib>
+			<taglib-uri>struts/bean-el</taglib-uri>
+			<taglib-location>/WEB-INF/struts-bean-el.tld</taglib-location>
+		</taglib>
+		
+		<taglib>
+			<taglib-uri>struts/html-el</taglib-uri>
+			<taglib-location>/WEB-INF/struts-html-el.tld</taglib-location>
+		</taglib>
+		
+		<taglib>
+			<taglib-uri>struts/logic-el</taglib-uri>
+			<taglib-location>/WEB-INF/struts-logic-el.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>jstl/c</taglib-uri>
+			<taglib-location>/WEB-INF/c.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/c.tld</taglib-location>
+		</taglib>
+		<taglib>
+			<taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
+			<taglib-location>/WEB-INF/c.tld</taglib-location>
+		</taglib>
+		
+		<jsp-property-group>
+			<description>
+			</description>
+			<display-name>JSP</display-name>
+			<url-pattern>*.jsp</url-pattern>
+			<el-ignored>false</el-ignored>
+			<page-encoding>GBK</page-encoding>
+			<scripting-invalid>false</scripting-invalid>
+			<is-xml>false</is-xml>
+		</jsp-property-group>
+	</jsp-config>
+	
+	<display-name>Apache-Axis</display-name>
+    
+    <listener>
+        <listener-class>org.apache.axis.transport.http.AxisHTTPSessionListener</listener-class>
+    </listener>
+    
+  <servlet>
+    <servlet-name>AxisServlet</servlet-name>
+    
+    <servlet-class>
+        org.apache.axis.transport.http.AxisServlet
+    </servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>AdminServlet</servlet-name>
+    <servlet-class>
+        org.apache.axis.transport.http.AdminServlet
+    </servlet-class>
+    <load-on-startup>100</load-on-startup>
+  </servlet>
+
+  <servlet>
+    <servlet-name>SOAPMonitorService</servlet-name>
+    <servlet-class>
+        org.apache.axis.monitor.SOAPMonitorService
+    </servlet-class>
+    <init-param>
+      <param-name>SOAPMonitorPort</param-name>
+      <param-value>5001</param-value>
+    </init-param>
+    <load-on-startup>100</load-on-startup>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>/servlet/AxisServlet</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>*.jws</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>AxisServlet</servlet-name>
+    <url-pattern>/services/*</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SOAPMonitorService</servlet-name>
+    <url-pattern>/SOAPMonitor</url-pattern>
+  </servlet-mapping>
+
+ <!-- uncomment this if you want the admin servlet -->
+ <!--
+  <servlet-mapping>
+    <servlet-name>AdminServlet</servlet-name>
+    <url-pattern>/servlet/AdminServlet</url-pattern>
+  </servlet-mapping>
+ -->
+
+    <session-config>
+        <!-- Default to 5 minute session timeouts -->
+        <session-timeout>5</session-timeout>
+    </session-config>
+
+    <!-- currently the W3C havent settled on a media type for WSDL;
+    http://www.w3.org/TR/2003/WD-wsdl12-20030303/#ietf-draft
+    for now we go with the basic 'it's XML' response -->
+  <mime-mapping>
+    <extension>wsdl</extension>
+     <mime-type>text/xml</mime-type>
+  </mime-mapping>
+  
+  <mime-mapping>
+    <extension>xsd</extension>
+    <mime-type>text/xml</mime-type>
+  </mime-mapping>
+	 <!-- 山东意外险风险信息推送接口配置servlet  -->
+  <servlet>
+    <servlet-name>AcciSDInfoPushServlet</servlet-name>
+    <servlet-class>com.sinosoft.servlet.accisd.services.AcciSDInfoPushServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AcciSDInfoPushServlet</servlet-name>
+    <url-pattern>/servlet/AcciSDInfoPushServlet</url-pattern>
+  </servlet-mapping>
+</web-app>

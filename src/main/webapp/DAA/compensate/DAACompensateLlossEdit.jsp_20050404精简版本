@@ -1,0 +1,194 @@
+<%--
+****************************************************************************
+* DESC       ：添加标的赔款费用信息页面
+* AUTHOR     ：lixiang
+* CREATEDATE ： 2004-06-01
+* MODIFYLIST ：   Name       Date            Reason/Contents
+*          ------------------------------------------------------
+*               wuxiaodong  20050907       增加代码选择的onchange事件，同时支持名称与代码的相互选择
+****************************************************************************
+--%> 
+  
+   <!--建立显示的录入条，可以收缩显示的-->    
+      <span style="display:none"> 
+        <table class="common" style="display:none" id="CompensateLoss_Data" cellspacing="1" cellpadding="0">
+          <tbody> 
+            <tr>
+              <td class="inputsubsub"><input class="readonlyNo" readonly style="width:90%" name="lossDtoSerialNo"></td>             
+              <td class="inputsubsub">           		                         
+                <html:select name="prpLlossDto" property="licenseNo" style="width:90%">
+                  <html:options collection="licenseNoList" property="licenseNo" labelProperty="licenseNo" />
+                </html:select>                                 
+                <img src="/claim/images/bgMarkMustInput.jpg">                          
+              </td>                                 
+              <td class="inputsubsub">
+                <input name="prpLlossDtoLossName" maxlength=40  class="common" style="width:90%">
+              </td>                  
+
+              <td class="inputsubsub">
+                <input name="prpLlossDtoFeeTypeCode" class='codecode' style="width:30%"
+                  ondblclick= "code_CodeSelect(this,'FeeTypeCode1');"
+                  onchange="code_CodeChange(this, 'FeeTypeCode1');"
+                  onkeyup= "code_CodeSelect(this,'FeeTypeCode1');" 
+                  onblur= "code_CodeChange(this,'FeeTypeCode1',1);getValue(this);">
+                <input name="prpLlossDtoFeeTypeName" class='codename' style="width:60%"
+                  ondblclick= "code_CodeSelect(this, 'FeeTypeCode1','-1','name','none','post');"
+                  onchange="code_CodeChange(this, 'FeeTypeCode1','-1','name','none','post');"
+                  onkeyup= "code_CodeSelect(this, 'FeeTypeCode1','-1','name','none','post');"
+                  onblur= "getValue(this);">
+                <img src="/claim/images/bgMarkMustInput.jpg">
+              </td>    
+     
+              <td class="inputsubsub">
+                <input name="prpLlossDtoSumLoss" class="common" style="width:90%"  onchange="calRealpay(this);calLoss();"> 
+              </td>
+              <td class="inputsubsub">
+                <input name="prpLlossDtoSumRest" class="common" style="width:90%" onchange="calRealpay(this);calLoss();" onfocus="checkInputPower(this);">
+              </td>                  
+      
+              <td class="inputsubsub">
+                <input name="prpLlossDtoClaimRate"  class="common" style="width:90%" onchange="calRealpay(this);">%
+              </td>                
+              <td class="inputsubsub">
+                <input name="prpLlossDtoIndemnityDutyRate" class="common" style="width:90%" onchange="calRealpay(this);">%
+              </td>
+  
+              <td class="inputsubsub">
+                <input name="prpLlossDtoDeductible" type="hidden">
+                <input name="prpLlossDtoDeductibleRate" class='readonly' readonly style="width:90%" onchange="calRealpay(this);" onblur="return checkLossDeductibleRate(this);">%
+              </td>                            
+              <td class="inputsubsub">
+                <input name="prpLlossDtoSumRealPay" class='readonly' style="width:90%" readonly onchange="calFund();" value="赔偿金额">
+                <input type="hidden" name="prpLlossDtoFamilyNo">  
+                <input type="hidden" name="prpLlossDtoItemKindNo"> 
+                <input type='hidden' name='prpLlossDtoFamilyName'> 
+                <input type='hidden' name='prpLlossDtoItemCode'> 
+                <input type='hidden' name='prpLlossDtoItemAddress'> 
+                <input type="hidden" name="prpLlossDtoCurrency2" value="CNY">
+                <input type="hidden" name="prpLlossDtoCurrency2Name2" value="人民币">
+                <input type='hidden' name='prpLlossDtoBuyDate'  value="2004/12/12"> 
+                <input type='hidden' name='prpLlossDtoDepreRate'> 
+                <input type='hidden' name='prpLlossDtoCurrency' value="CNY"> 
+                <input type='hidden' name='prpLlossDtoCurrency1' value="CNY"> 
+                <input type='hidden' name='prpLlossDtoCurrency3' value="CNY"> 
+                <input type='hidden' name='prpLlossDtoCurrency4' value="CNY"> 
+                <input type='hidden' name='prpLlossDtoFlag'> 
+                <input type='hidden' name='prpLlossDtoUnit'> 
+                <input type="hidden" name="prpLlossDtoAmount">  
+                <input type="hidden" name="prpLlossDtoItemValue">                           
+                <input type="hidden" name="prpLlossDtoUnitPrice"> 
+                <input type="hidden" name="prpLlossDtoLossQuantity"> 
+              </td> 
+              <td class="inputsubsub" style='width:4%'> 
+              <div align="center">
+                <input type=button name="buttonCompensateLossDelete"  onclick="deleteRowTableL(this,'CompensateLoss',1,1)" value="-" readonly style="cursor: hand">
+              </div> 
+              </td>  
+            </tr>
+          </tbody>
+        </table> 
+      </span>
+       
+      <table class="common" align="center">
+      <!--表示显示多行的-->
+        <tr>
+          <td class="subformtitle" colspan="4">
+            <img style="cursor:hand;" src="/claim/images/butCollapseBlue.gif"
+                 name="lLossImg" onclick="showPage(this,spanlLoss)">赔付标的信息<br> 
+            <span style="display:none"> 
+              <table class="common" style="display:none" id="lLoss_Data" cellspacing="1" cellpadding="0">
+                <tbody>   
+                  <tr> 
+                    <td class="input" style="width:6%">               
+                      <input type="input" name=prpLlossDtoKindCode class="codecode" style="width:25px"  
+                        ondblclick="code_CodeSelect(this,'KindCode4','1,-1,2,7,9,10,15,16,8');"
+                        onchange="code_CodeChange(this, 'KindCode4');"
+                        onkeyup="code_CodeSelect(this,'KindCode4','1,-1,2,7,9,10,15,16,8');"     
+                        onblur="getDeductibleRate(this,'lLoss');changeLossSumRestShowStyle(this);changeLossClaimRate(this);getValue(this);code_CodeChange(this,'KindCode4','1,-1,2,7,9,10,15,16,8');">          
+                      <input type="input" name=prpLlossDtoKindName class="codename" style="width:5px"
+                        ondblclick="code_CodeSelect(this, 'KindCode4','-1,-2,1,6,8,9,14,15,7','always','none','post');"
+                        onchange="code_CodeChange(this, 'KindCode4','-1,-2,1,6,8,9,14,15,7','name','none','post');"
+                        onkeyup="code_CodeSelect(this, 'KindCode4','-1,-2,1,6,8,9,14,15,7','always','none','post');"
+                        onblur="getDeductibleRate(this,'lLoss');getValue(this);">  
+                      <input class="readonlyNo" readonly style="width:90%" name="prpLlossDtoSerialNo">        
+                   </td>
+                   <td class="subformtitle" style="width:90%"> 
+                      <span  id="spanCompensateLoss"> 
+                        <%-- 多行输入展现域 --%>
+                        <table id="CompensateLoss" name="CompensateLoss" cellpadding="0" cellspacing="1" border="0" class="title" style="width:100%">
+                          <thead> 
+                           <tr> 
+                              <td class="titlesubsub" style="width:5%">序号</td> 
+                              <td class="titlesubsub" style="width:10%">号牌号码</td> 
+                              <td class="titlesubsub" style="width:10%">损失财物名称</td> 
+                              <td class="titlesubsub" style="width:10%">损失明细</td>  
+                              <td class="titlesubsub" style="width:10%">核定损失</td>  
+                              <td class="titlesubsub" style="width:10%">残值</td>  
+                              <td class="titlesubsub" style="width:10%">赔偿比例</td>  
+                              <td class="titlesubsub" style="width:10%">责任比例</td>  
+                              <td class="titlesubsub" style="width:10%">免赔率</td>  
+                              <td class="titlesubsub" style="width:10%">赔偿金额</td>   
+                              <td class="titlesubsub" style="width:5%">&nbsp;</td>  
+                           </tr>  
+                          </thead>
+                          
+                          <tfoot>
+                            <tr>
+                              <td class="titlesubsub" colspan="10" style="width:96%"></td>
+                              <td class="titlesubsub" align="right" style="width:4%"> 
+                                <div align="center">
+                                  <input type="button" value="+" onclick="insertRowTableL('CompensateLoss','CompensateLoss_Data',this);" name="buttonCompensateLossInsert" readonly style="cursor: hand">
+                                </div>
+                              </td>
+                            </tr>
+                          </tfoot>                                 
+                           
+                          <tbody>                        
+                          </tbody>
+                        </table>  
+                      </span>  
+                   </td>
+                 
+              <td class="title" style="width:4%">
+                <div align="center">
+                  <input type=button name="buttonlLossDelete"  onclick="deleteRow(this,'lLoss')" value="-" style="cursor: hand">
+                </div>
+              </td>                       
+           </tr> 
+         </tbody>
+       </table>
+     </span>
+           
+     <span  id="spanlLoss" style="display:none">
+       <%-- 多行输入展现域 --%>
+       <table id="lLoss" class="common" align="center" cellspacing="1" cellpadding="0">
+         <thead>
+           <tr>
+             <td class="title" style="width:4%">险别</td>
+             <td class="title" style="width:96%" colspan=2 >内容</td> 
+           </tr> 
+         </thead> 
+         <tfoot>
+           <tr>
+             <td class="title" colspan=2 style="width:96%">(按"+"号键增加赔付标的信息，按"-"号键删除赔付标的信息)</td>
+             <td class="title" align="right" style="width:4%">
+               <div align="center">
+                 <input type="button" value="+" onclick="insertRow('lLoss')" name="buttonlLossInsert" style="cursor: hand">
+               </div>
+             </td>
+           </tr>
+         </tfoot> 
+         <tbody> 
+          
+         
+         </tbody>
+       </table>  
+        
+     </span>    
+   </td> 
+ </tr> 
+</table>
+
+
+
+

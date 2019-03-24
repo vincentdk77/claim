@@ -1,0 +1,2274 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+  <form-beans>
+    <form-bean name="fm" type="com.sinosoft.sysframework.web.view.AbstractForm"/>
+    <form-bean name="policyForm" type="com.sinosoft.claim.ui.view.formbean.PolicyForm" />
+    <form-bean name="registForm" type="com.sinosoft.claim.ui.view.formbean.RegistForm" />
+    <form-bean name="thirdPartyForm" type="com.sinosoft.claim.ui.view.formbean.ThirdPartyForm" />
+    <form-bean name="thirdPartyListForm" type="com.sinosoft.claim.ui.view.formbean.ThirdPartyListForm" />
+    <form-bean name="logonForm" type="com.sinosoft.claim.ui.view.formbean.LogonForm" />
+    <form-bean name="loadForm" type="com.gyic.claim.utils.LoadForm"/>
+    <!-- added by xia for 支付处理 -->
+    <form-bean name="payform" type="com.sinosoft.claim.ui.view.formbean.PrplPayForm" />
+    <form-bean name="fiscalpayForm" type="com.sinosoft.claim.ui.view.formbean.PrplFiscalPayForm" />
+    <!-- 工作转交bean -->
+	<form-bean name="workRoveForm" type="com.sinosoft.workrove.dto.formbean.WorkRoveForm" />
+  </form-beans>
+  <global-exceptions>
+    <exception key="exception" type="java.lang.Exception" path="/common/pub/ErrorPage.jsp" />
+  </global-exceptions>
+
+  <global-forwards>
+    <forward name="logon" path="/index.jsp" />
+    <forward name="blank" path="/common/pub/Blank.html" />
+    <forward name="userError" path="/common/pub/UserErrorPage.jsp" />
+    <forward name="error" path="/common/pub/ErrorPage.jsp" />
+    <forward name="success" path="/common/pub/MessagePage.jsp" />
+    <forward name="false" path="/index.jsp" />
+  </global-forwards>
+  <action-mappings>
+    <action name="logonForm" type="com.sinosoft.claim.ui.control.facade.UILogonFacade" validate="false" scope="request" path="/logonin">
+      <forward name="success" path="/common/pub/MainFrame.jsp" />
+    </action>
+
+<!--
+    ** Start Application Start Running Config **
+
+   1.regist
+     1.1 regist deal input query
+     1.2 regist deal input
+     1.3 regist deal common query
+     1.4 regist deal query list
+     1.5 regist deal FinishQuery Edit
+     1.6 regist deal SubmitQuery Edit
+   2.claim
+     2.1 claim deal query list
+     2.2 claim deal save
+     2.3 claim deal common query
+     2.4 claim deal query list
+     2.5 claim deal FinishQuery Edit
+     2.6 claim deal cancel
+   3.scheudle
+     3.1 schedule deal getnewregistfor schedule
+     3.2 schedule deal for user display
+     3.3 schedule deal save
+     3.4 schedule list display
+     3.5 schedule check info query
+     3.6 schedule getback query
+     3.7 schedule add certainloss edit
+     3.8 schedule add certainloss edit  save
+   6.prepay
+     6.1 prepay deal query list
+     6.2 prepay deal save
+     6.3 prepay deal common query
+     6.4 prepay deal query list
+     6.5 prepay deal FinishQuery Edit
+     6.6 prepay deal cancel
+   7.compensate
+     7.1 compensate deal query list
+     7.2 compensate deal save
+     7.3 compensate deal common query
+     7.4 compensate deal query list
+     7.5 compensate deal FinishQuery Edit
+     7.6 compensate deal cancel
+     7.8 compensate deal Edit and List
+     7.9 compensate fee  List
+   8.check
+     8.1 check deal query list
+     8.2 check deal save
+     8.3 check deal common query
+     8.4 check deal query list
+     8.5 check deal FinishQuery Edit
+     8.6 check deal cancel
+     8.7 check schedule list query
+     8.8 check schedule deal
+
+     8.11 check  delete
+
+   9.claimstatus
+     9.1 claimstatus query list
+     9.2 claimstatus stat list
+   10.endcase
+     10.1 endcase deal query list
+     10.2 endcase deal save
+     10.3 endcase deal common query
+     10.4 endcase deal query list
+     10.5 endcase deal FinishQuery Edit
+     10.6 endcase deal cancel
+   11.certify
+     11.1 certify deal query list
+     11.2 certify deal save
+     11.3 certify deal common query
+     11.4 certify deal query list
+     11.5 certify deal FinishQuery Edit
+     11.6 certify deal cancel
+   12.certainLoss
+     12.1 certainLoss deal query list
+     12.2 certainLoss deal save
+     12.3 certainLoss deal common query
+     12.4 certainLoss deal query list
+     12.5 certainLoss deal FinishQuery Edit
+     12.6 certainLoss deal cancel
+   13.verifyPrice
+     13.1 verifyPrice deal query list
+     13.2 verifyPrice deal save
+     13.3 verifyPrice deal common query
+     13.4 verifyPrice deal query list
+     13.5 verifyPrice deal FinishQuery Edit
+     13.6 verifyPrice deal cancel
+   14.verifyLoss
+     14.1 verifyLoss deal query list
+     14.2 verifyLoss deal save
+     14.3 verifyLoss deal common query
+     14.4 verifyLoss deal query list
+     14.5 verifyLoss deal FinishQuery Edit
+     14.6 verifyLoss deal cancel
+
+   18.8 claim print
+
+   20.scpecialCase
+     20.1 scpecailCase deal show
+
+    ** End Application Start Running Config **
+-->
+
+
+<!--CallCenter begin -->
+    
+     <!-- Agent Logon deal -->
+    <action name="logonForm" type="com.sinosoft.claim.ui.control.facade.UIAgentLogonFacade" validate="false" scope="request" path="/agentLogonin">
+      <forward name="success" path="/common/pub/agentMainFrame.jsp" />
+      <forward name="false" path="/agentIndex.jsp" />
+    </action>
+    
+    <!-- Regist deal cancel save -->
+    <action path="/registCancel" type="com.sinosoft.claim.ui.control.facade.UILRegistCancelPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/agentIndex.jsp" />
+    </action>
+    
+<!--CallCenter end -->
+
+<!--1.regist begin-->
+    <!--1.1 regist deal input query-->
+    <action path="/registBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILRegistBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/regist/DAARegistEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/regist/PropRegistEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/regist/AgriRegistEdit.jsp" />
+      <forward name="ADDCAA" path="/commonShip/regist/ShipRegistEdit.jsp" />
+      <forward name="ADDYAA" path="/commonCargo/regist/CargoRegistEdit.jsp" />
+      <forward name="ADDZAA" path="/commonLiab/regist/LiabRegistEdit.jsp" />
+      <forward name="ADDEAA" path="/commonAcci/regist/AcciRegistEdit.jsp" />
+      <forward name="CheckAgri" path="/commonAgri/regist/AgriPolicyNoForRegist.jsp" />
+      <forward name="DAARegistFlashPage" path="/DAA/regist/DAARegistFlashPage.jsp" />
+    </action>
+    
+    <action path="/0807registBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UIL0807RegistBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="Query" path="/0807/regist/InsuredList.jsp"/>
+      <forward name="queryBeforeAdd" path="/0807/regist/HospitalPersonQuery.jsp" />
+      <forward name="ADD" path="/0807/regist/0807RegistEdit.jsp"/>
+    </action>
+
+    <action path="/0807registSave" type="com.sinosoft.claim.ui.control.facade.UIL0807RegistEditPostFacade" validate="false" scope="request" >
+      <forward name="ADD" path="/0807/claim/0807ClaimEdit.jsp" />
+    </action>
+
+    <!--1.2 regist deal input-->
+    <action path="/registSave" type="com.sinosoft.claim.ui.control.facade.UILRegistEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--1.3 regist deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UIRegistQueryFacade" validate="false" scope="session" path="/RegistQuery">
+	    <forward name="result" path="/common/regist/RegistQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="condition" path="/common/policy/RegistQueryList.jsp" />
+	    <forward name="success" path="/common/regist/RegistQueryList.jsp" />
+	    <forward name="deleteSuccess"  path="/common/regist/RegistDeleteQueryList.jsp"/>
+	    <forward name="registCancel"  path="/DAA/regist/DAARegistCancelInput.jsp"/> 	    
+    </action>
+
+    <!--1.4 regist deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UIRegistQueryListFacade" validate="false" scope="request" path="/RegistQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--1.5 regist deal FinishQuery Edit-->
+    <action path="/registFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIRegistFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/registFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILRegistBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/regist/DAARegistEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/regist/PropRegistEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/regist/AgriRegistEdit.jsp" />
+      <forward name="EDITCAA" path="/commonShip/regist/ShipRegistEdit.jsp" />
+      <forward name="EDITYAA" path="/commonCargo/regist/CargoRegistEdit.jsp" />
+      <forward name="EDITZAA" path="/commonLiab/regist/LiabRegistEdit.jsp" />
+      <forward name="EDITEAA" path="/commonAcci/regist/AcciRegistEdit.jsp" />
+    </action>
+
+    <!-- Regist deal cancel save -->
+    <action path="/registCancel" type="com.sinosoft.claim.ui.control.facade.UILRegistCancelPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--1.5 regist deal DoingQuery Edit-->
+    <action path="/registDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIRegistDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/registDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILRegistBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/regist/DAARegistEdit.jsp" />
+    </action>
+
+    <!--1.6 regist deal SubmitQuery Edit-->
+    <action path="/registSubmitQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIRegistSubmitQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/regist/RegistSubmitQueryList.jsp" />
+    </action>
+
+    <action path="/registSubmitQueryList" type="com.sinosoft.claim.ui.control.facade.UILRegistBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/regist/DAARegistEdit.jsp" />
+    </action>
+
+    <action path="/registDelete" type="com.sinosoft.claim.ui.control.facade.UILRegistDeletePostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <action path="/registBeforeQuery" type="com.sinosoft.claim.ui.control.facade.UIRegistQueryFacade" validate="false" scope="session">
+	    <forward name="target1" path="/common/regist/RegistBeforeQueryList.jsp" />
+	    <forward name="target0807" path="/0807/regist/RegistBeforeQueryList.jsp"/>
+	    <forward name="PRINT" path="/DAA/print/DAARelatePrint.jsp" />
+    </action>
+    <!--regist end-->
+    
+    <action path="/0807claimSave" type="com.sinosoft.claim.ui.control.facade.UIL0807ClaimEditPostFacade" validate="false" scope="request" >
+      <forward name="ADD" path="/0807/compensate/0807CompensateEdit.jsp" />
+    </action>
+
+    <action path="/0807compensateEdit" type="com.sinosoft.claim.ui.control.facade.UIL0807CompensateEditQueryFacade" validate="false" scope="request" >
+      <forward name="ADD" path="/0807/compensate/0807CompensateEdit.jsp" />
+    </action>
+
+<!--2.claim start-->
+    <!--2.1 claim deal query list -->
+    <action path="/claimBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILClaimBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/claim/DAAClaimEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/claim/PropClaimEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/claim/AgriClaimEdit.jsp" />
+      <forward name="ADDDAAFALSE" path="/common/pub/MessagePage.jsp" />
+      <forward name="ADDCAA" path="/commonShip/claim/ShipClaimEdit.jsp" />
+      <forward name="ADDYAA" path="/commonCargo/claim/CargoClaimEdit.jsp" />
+      <forward name="ADDZAA" path="/commonLiab/claim/LiabClaimEdit.jsp" />
+      <forward name="ADDEAA" path="/commonAcci/claim/AcciClaimEdit.jsp" />
+    </action>
+
+    <!--2.2 claim deal save -->
+    <action path="/claimSave" type="com.sinosoft.claim.ui.control.facade.UILClaimEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--2.3 claim deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UIClaimQueryFacade" validate="false" scope="request" path="/ClaimQuery">
+	    <forward name="result" path="/common/claim/ClaimQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="condition" path="/common/policy/ClaimQueryList.jsp" />
+	    <forward name="success" path="/common/claim/ClaimQueryList.jsp" />
+	    <forward name="claimTimeOut" path="/common/claim/ClaimQueryList.jsp" />
+	    <forward name="timeOut" path="/common/regist/RegistQueryList.jsp" />
+	    <forward name="WaitToDo" path="/common/claim/ClaimToDoList.jsp" />
+	    <forward name="SpecialCase" path="/common/specialCase/SpecialCaseBeforeQueryList.jsp" />
+    </action>
+
+    <!--2.4 claim deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UIClaimQueryListFacade" validate="false" scope="request" path="/ClaimQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--2.5 claim deal FinishQuery Edit-->
+    <action path="/claimFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIClaimFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+    <action path="/claimFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILClaimBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="SHOWDAA" path="/DAA/claim/DAAClaimShow.jsp" />
+      <forward name="EDITDAA" path="/DAA/claim/DAAClaimEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/claim/PropClaimEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/claim/AgriClaimEdit.jsp" />
+      <forward name="EDITCAA" path="/commonShip/claim/ShipClaimEdit.jsp" />
+      <forward name="EDITYAA" path="/commonCargo/claim/CargoClaimEdit.jsp" />
+      <forward name="EDITZAA" path="/commonLiab/claim/LiabClaimEdit.jsp" />
+      <forward name="EDITEAA" path="/commonAcci/claim/AcciClaimEdit.jsp" />
+      <forward name="ADDLOSS" path="/DAA/claim/DAAClaimAddLoss.jsp" />
+    </action>
+
+    <!--2.6 claim deal DoingQuery Edit-->
+    <action path="/claimDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIClaimDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <!--2.7 claim deal DoingQuery List-->
+    <action path="/claimDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILClaimBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/claim/DAAClaimEdit.jsp" />
+    </action>
+    <!--2.8 claim cancel input -->
+
+    <action path="/claimBeforeCancel" type="com.sinosoft.claim.ui.control.facade.UILClaimBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="CANCELDAA"       path="/DAA/claim/DAAClaimCancel.jsp" />
+      <forward name="nopass"          path="/common/pub/MessagePage.jsp" />
+      <forward name="NOTGRANDCLAIM"   path="/commonAcci/claim/AcciNotGrandClaim.jsp"/>
+    </action>
+    
+    <action path="/claimCancelCheckCertify" type="com.sinosoft.claim.ui.control.facade.UILClaimCancelCheckCertifyFacade" validate="false" scope="request" >
+    </action>
+
+
+    <!--2.9 claim deal cancel save -->
+    <action path="/claimCancel" type="com.sinosoft.claim.ui.control.facade.UILClaimCancelPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--2.10 claim deal delete  query -->
+    <action path="/ClaimDeleteQuery" type="com.sinosoft.claim.ui.control.facade.UIClaimQueryFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claim/ClaimDeleteQueryList.jsp" />
+    </action>
+
+    <!--2.11 claim deal delete save -->
+    <action path="/claimDeleteSave" type="com.sinosoft.claim.ui.control.facade.UILClaimDeletePostFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claim/ClaimDeleteQueryList.jsp" />
+    </action>
+
+    <!--2.12 claimloss deal save -->
+    <action path="/ClaimLoss" type="com.sinosoft.claim.ui.control.facade.UIClaimLossEditFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp"/>
+    </action>
+
+    <!--claim end  -->
+   <!--3.schedule start  -->
+   <!--3.1 schedule deal getnewregistfor schedule-->
+    <action path="/scheduleRegistNew" type="com.sinosoft.claim.ui.control.facade.UIScheduleNewGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/schedule/ScheduleNewList.jsp" />
+    </action>
+ 
+    <!--3.2 schedule deal for user display-->
+    <action path="/scheduleDealRegist" type="com.sinosoft.claim.ui.control.facade.UIScheduleDealFacade" validate="false" scope="request" >
+      <forward name="success" path="/DAA/schedule/DAAScheduleEdit.jsp" />
+      <forward name="AgriSuccess" path="/commonAgri/schedule/AgriScheduleEdit.jsp" />
+      <forward name="PropSuccess" path="/commonProp/schedule/PropScheduleEdit.jsp" />
+      <!-- 意健险调度添加 add by xiatian -->
+      <forward name="AcciSuccess" path="/commonAcci/schedule/AcciScheduleEdit.jsp" />
+    </action>
+ 
+    <!--3.3 schedule deal save-->
+    <action path="/scheduleSave" type="com.sinosoft.claim.ui.control.facade.UIScheduleDealEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+    
+    <!--3.4 schedule list display-->
+    <action path="/scheduleFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UIScheduleDealFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/schedule/DAAScheduleEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/schedule/AgriScheduleEdit.jsp" />
+      <forward name="SHOWDAA" path="/DAA/schedule/DAAScheduleEdit.jsp" />
+      <forward name="SHOWAgri" path="/commonAgri/schedule/AgriScheduleEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/schedule/PropScheduleEdit.jsp" />
+      <forward name="SHOWProp" path="/commonProp/schedule/PropScheduleEdit.jsp" />
+      <!-- 意健险调度添加 add by xiatian -->
+      <forward name="EDITAcci" path="/commonAcci/schedule/AcciScheduleEdit.jsp" />
+      <forward name="SHOWAcci" path="/commonAcci/schedule/AcciScheduleEdit.jsp" />
+    </action>
+    <!-- schedule getback and to display-->
+     <action path="/schedulegetBackEdit" type="com.sinosoft.claim.ui.control.facade.UIScheduleGetBackBeforeFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/schedule/DAAScheduleEdit.jsp" />
+    </action>
+    <!--3.5 schedule check info/getback/cancel/common query-->
+    <action path="/scheduleCheckQuery" type="com.sinosoft.claim.ui.control.facade.UIScheduleDealFacade" validate="false" scope="request" >
+      <forward name="LISTDAA" path="/DAA/schedule/DAAScheduleCheckList.jsp" />
+      <forward name="GETBACKLISTDAA" path="/DAA/schedule/DAAScheduleGetBackList.jsp" />
+      <forward name="CANCELLISTDAA" path="/DAA/schedule/DAAScheduleCancelList.jsp" />
+      <forward name="COMMONLISTDAAsched" path="/DAA/schedule/DAAScheduleQueryList.jsp" />
+      <forward name="COMMONLISTDAAschel" path="/DAA/schedule/DAAScheduleQueryItemList.jsp" />
+      <forward name="ADDLISTDAA" path="/common/schedule/ScheduleAddCertainLossTaskBeforeQueryList.jsp" />
+    </action> 
+    
+    <!--3.6 schedule getback query-->
+    <action path="/scheduleGetBackQuery" type="com.sinosoft.claim.ui.control.facade.UIScheduleGetBackQueryFacade" validate="false" scope="request" >
+       <forward name="GETBACKLISTDAA" path="/DAA/schedule/DAAScheduleGetBackList.jsp" />
+       <forward name="CANCELLISTDAA" path="/DAA/schedule/DAAScheduleCancelList.jsp" />
+    </action>
+     <!--3.7 schedule repairfactory-->
+    <action path="/repairFactorySave" type="com.sinosoft.claim.ui.control.facade.UIScheduleDealRepairFactoryFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>        
+   
+     <!-- 3.8 schedule add certainloss edity-->
+      <action path="/scheduleAddCertainLossTask" type="com.sinosoft.claim.ui.control.facade.UIThirdPartyBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDSHOW" path="/common/schedule/ScheduleAddCertainLossTaskEdit.jsp" /> 
+     </action>  
+      <!-- 3.9 schedule add certainloss edit save -->
+      <action path="/scheduleAddCertainLossSave" type="com.sinosoft.claim.ui.control.facade.UIThirdPartyEditPostFacade" validate="false" scope="request" >
+      <forward name="error" path="/index.jsp" />
+     </action>  
+    
+    <action path="/scheduleJobManagerQuery"
+		type="com.sinosoft.claim.ui.control.facade.UIScheduleJobManagerQueryFacade"
+		validate="false" scope="request">
+		<forward name="success" path="/common/schedule/ScheduleJobManagerQueryList.jsp"></forward>
+	</action>
+    <!--schedule end  -->
+    <!--6.prepay start-->
+
+    <!--6.1 prepay deal query list -->
+    <action path="/prepayBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILPrepayBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/prepay/DAAPrepayEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/prepay/PropPrepayEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/prepay/PropPrepayEdit.jsp" />
+      <forward name="ADDZAA" path="/commonProp/prepay/PropPrepayEdit.jsp" />
+      <forward name="ADDEAA" path="/commonProp/prepay/PropPrepayEdit.jsp" />
+      <forward name="ADDYAA" path="/commonCargo/prepay/CargoPrepayEdit.jsp" />
+    </action>
+
+    <!--6.2 prepay deal save -->
+    <action path="/prepaySave" type="com.sinosoft.claim.ui.control.facade.UILPrepayEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--6.3 prepay deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UIPrepayQueryFacade" validate="false" scope="request" path="/prepayQuery">
+	    <forward name="result" path="/common/prepay/PrepayQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="condition" path="/common/policy/PrepayQueryList.jsp" />
+	    <forward name="success" path="/common/prepay/PrepayQueryList.jsp" />
+    </action>
+
+    <!--6.4 prepay deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UIPrepayQueryListFacade" validate="false" scope="request" path="/prepayQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--6.5 prepay deal FinishQuery Edit-->
+    <action path="/prepayFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIPrepayFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/prepayFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILPrepayBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/prepay/DAAPrepayEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/prepay/PropPrepayEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/prepay/PropPrepayEdit.jsp" />
+      <forward name="EDITYAA" path="/commonCargo/prepay/CargoPrepayEdit.jsp" />
+      <forward name="EDITZAA" path="/commonProp/prepay/PropPrepayEdit.jsp" />
+      <forward name="EDITEAA" path="/commonProp/prepay/PropPrepayEdit.jsp" />
+      <forward name="ApproveDAA" path="/DAA/prepay/DAAPrepayApprove.jsp" />
+      <forward name="ApproveProp" path="/commonProp/prepay/PropPrepayApprove.jsp" />
+    </action>
+
+    <!--6.5 prepay deal DoingQuery Edit-->
+    <action path="/prepayDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIPrepayDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/prepayDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILPrepayBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/prepay/DAAPrepayEdit.jsp" />
+    </action>
+
+    <action path="/prepayApproveQuery" type="com.sinosoft.claim.ui.control.facade.UIPrepayApproveQueryFacade" validate="false" scope="request">
+	    <forward name="success" path="/common/prepay/PrepayApproveQueryList.jsp" />
+    </action>
+
+    <action path="/prepayApprove" type="com.sinosoft.claim.ui.control.facade.UILPrepayApprovePostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+    <!--prepay end  -->
+
+    <!--7.compensate start-->
+    <!--7.1 compensate deal query list -->
+    <action path="/compensateBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILCompensateBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDBZ" path="/DAA/compensate/compel/DAACompelCompensateEdit.jsp" />
+      <forward name="ADDDAA" path="/DAA/compensate/DAACompensateEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/compensate/PropCompensateEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/compensate/AgriCompensateEdit.jsp" />
+      <forward name="ADDCAA" path="/commonShip/compensate/ShipCompensateEdit.jsp" />
+      <forward name="ADDYAA" path="/commonCargo/compensate/CargoCompensateEdit.jsp" />
+      <forward name="ADDZAA" path="/commonLiab/compensate/LiabCompensateEdit.jsp" />
+      <forward name="ADDEAA" path="/commonAcci/compensate/AcciCompensateEdit.jsp" />
+      <forward name="RECHOSE" path="/DAA/compensate/DAACompensateDeductibleRate.jsp" />
+    </action>
+
+    <action path="/compensateChargeFeeBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILCompensateBeforeEditGetChargeInfoFacade" validate="false" scope="request" >
+    </action>
+
+    <action path="/0807compensateSave" type="com.sinosoft.claim.ui.control.facade.UIL0807CompensateEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action> 
+
+    <!--7.2 compensate deal save -->
+    <action path="/compensateSave" type="com.sinosoft.claim.ui.control.facade.UILCompensateEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--7.3 compensate deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UICompensateQueryFacade" validate="false" scope="request" path="/compensateQuery">
+	    <forward name="result" path="/common/compensate/CompensateQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="condition" path="/common/policy/CompensateQueryList.jsp" />
+            <forward name="success" path="/common/compensate/CompensateQueryList.jsp" />
+            <forward name="PRINT" path="/DAA/endcase/DAARelatePrint.jsp" />
+            <forward name="delete" path="/common/pub/PubMessage.jsp" />     
+    </action>
+    <action type="com.sinosoft.claim.ui.control.facade.UICompensatePassQueryFacade" validate="false" scope="request" path="/compensatePassQuery">
+      <forward name="success" path="/common/compensate/CompensatePassQuery.jsp" />
+    </action>
+
+    <!--7.4 compensate deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UICompensateQueryListFacade" validate="false" scope="request" path="/compensateQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--7.5 compensate deal FinishQuery Edit-->
+    <action path="/compensateFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UICompensateFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+     
+     <!-- 轨迹信息 -->
+    <action path="/CommonViewTrace" scope="request" type="com.sinosoft.claim.ui.control.facade.UICommonHePeiViewTraceFacade" validate="false">
+      <forward name="success" path="/common/compensate/CommonTraceInfo.jsp"/>
+      <forward name="failure" path="/common/Message.jsp"/>
+    </action>
+
+    <action path="/compensateFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILCompensateBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITBZ" path="/DAA/compensate/compel/DAACompelCompensateEdit.jsp" />
+      <forward name="EDITDAA" path="/DAA/compensate/DAACompensateEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/compensate/PropCompensateEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/compensate/AgriCompensateEdit.jsp" />
+      <forward name="EDITCAA" path="/commonShip/compensate/ShipCompensateEdit.jsp" />
+      <forward name="EDITYAA" path="/commonCargo/compensate/CargoCompensateEdit.jsp" />
+      <forward name="EDITZAA" path="/commonLiab/compensate/LiabCompensateEdit.jsp" />
+      <forward name="EDITEAA" path="/commonAcci/compensate/AcciCompensateEdit.jsp" />
+      <forward name="SHOWDAA" path="/DAA/compensate/DAACompensateShow.jsp" />
+      <forward name="SHOWProp" path="/commonProp/compensate/PropCompensateShow.jsp" />
+      <forward name="SHOWAgri" path="/commonAgri/compensate/PropCompensateShow.jsp" />
+      <forward name="SHOWCAA" path="/commonShip/compensate/ShipCompensateShow.jsp" />
+       <forward name="SHOWYAA" path="/commonCargo/compensate/CargoCompensateShow.jsp" />
+      <forward name="SHOWZAA" path="/commonLiab/compensate/LiabCompensateShow.jsp" />
+      <forward name="SHOWEAA" path="/commonAcci/compensate/AcciCompensateShow.jsp" />
+      <forward name="ApproveDAA" path="/DAA/compensate/DAACompensateApprove.jsp" />
+      <forward name="ApproveProp" path="/commonProp/compensate/PropCompensateApprove.jsp" />
+      <forward name="ApproveAgri" path="/commonAgri/compensate/PropCompensateApprove.jsp" />
+      <forward name="ApproveCAA" path="/commonShip/compensate/ShipCompensateApprove.jsp" />
+       <forward name="ApproveYAA" path="/commonCargo/compensate/CargoCompensateApprove.jsp" />
+      <forward name="ApproveZAA" path="/commonLiab/compensate/LiabCompensateApprove.jsp" />
+      <forward name="ApproveEAA" path="/commonAcci/compensate/AcciCompensateApprove.jsp" />
+    </action>
+
+    <!--7.6 compensate deal DoingQuery Edit-->
+    <action path="/compensateDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UICompensateDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/compensateDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILCompensateBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/compensate/DAACompensateEdit.jsp" />
+    </action>
+
+    <action path="/compensateApproveQuery" type="com.sinosoft.claim.ui.control.facade.UICompensateApproveQueryFacade" validate="false" scope="request">
+      <forward name="success" path="/common/compensate/CompensateApproveQueryList.jsp" />
+    </action>
+
+    <action path="/compensateApprove" type="com.sinosoft.claim.ui.control.facade.UILCompensateApprovePostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+    
+    <action path="/compensateDelete" type="com.sinosoft.claim.ui.control.facade.UILCompensateDeletePostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action> 
+
+    <action path="/compensateGenerate" type="com.sinosoft.claim.ui.control.facade.UILCompensateGeneratePostFacade" validate="false" scope="request" >
+      <forward name="generate" path="/DAA/compensate/DAACompensateGenerate.jsp" />
+    </action>
+    <action path="/compensateAgriGenerate" type="com.sinosoft.claim.ui.control.facade.UILCompensateAgriGeneratePostFacade" validate="false" scope="request" >
+      <forward name="generate" path="/commonAgri/compensate/AgriCompensateGenerate.jsp" />
+    </action>
+    <!--modify by wangli update start 20050417 -->
+     <!--7.8 compensate deal Edit and List -->
+     <action path="/compensateBeforeEditList" type="com.sinosoft.claim.ui.control.facade.UICompensateBeforeEditList" validate="false" scope="request" >
+      <forward name="success" path="/common/compensate/sunny/CompensateBeforeEdit.jsp" />
+     </action>
+
+     <!--7.9 compensate fee  List-->
+     <action path="/uiCompensateFee" type="com.sinosoft.claim.ui.control.facade.UICompensateFeeFacade" validate="false" scope="request" >
+     <forward name="success" path="/common/compensate/CompensateFee.jsp" />
+     </action>
+
+     <!--7.10 compensate backBefore query-->
+     <action path="/compensateBackBeforeQuery" type="com.sinosoft.claim.ui.control.facade.UILCompensateBackBeforeEditFacade" validate="false" scope="request" >
+     <forward name="success" path="/DAA/compensate/DAACompensateBackEdit.jsp" />
+     </action>
+     
+      <!--7.11 compensate backBefore save-->
+      <action path="/compensateBackSave" type="com.sinosoft.claim.ui.control.facade.UILCompensateBackEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+     <!--modify by wangli update end 20050531 -->
+
+    <!--compensate end  -->
+    
+   <!--newDangerUnit start-->
+   <action path="/DangerUnit" type="com.sinosoft.claim.ui.control.facade.UILClaimDangerUnitFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claim/flashDangerUnit.jsp" />
+      <forward name="error" path="/common/pub/UIErrorPage.jsp" />
+    </action>
+    <action path="/CompensateDangerUnit" type="com.sinosoft.claim.ui.control.facade.UILCompensateDangerUnitFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claim/flashDangerUnit.jsp" />
+      <forward name="error" path="/common/pub/UIErrorPage.jsp" />
+    </action>
+    <!--newDangerUnit end-->
+    <!--newLoss start-->
+    <action path="/CompensateNewLoss" type="com.sinosoft.claim.ui.control.facade.UILCompensateLlossFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/compensate/flashCompensateLloss.jsp" />
+      <forward name="error" path="/common/pub/UIErrorPage.jsp" />
+    </action>
+     <!--newLoss end-->
+
+
+    <!--8.check start-->
+    <!--8.1 check deal query list -->
+    <action path="/checkBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILCheckBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/check/DAACheckEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/check/PropCheckEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/check/AgriCheckEdit.jsp" />
+      <forward name="ADDCAA" path="/commonShip/check/ShipCheckEdit.jsp" />
+      <forward name="ADDYAA" path="/commonCargo/check/CargoCheckEdit.jsp" />
+      <forward name="ADDZAA" path="/commonLiab/check/LiabCheckEdit.jsp" />
+      <!-- 意健险借用财产险的查勘界面 modified by xiatian -->
+      <forward name="ADDEAA" path="/commonProp/check/PropCheckEdit.jsp" />
+    </action>
+
+    <!--8.2 check deal save -->
+    <action path="/checkSave" type="com.sinosoft.claim.ui.control.facade.UILCheckEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--8.3 check deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UICheckQueryFacade" validate="false" scope="request" path="/checkQuery">
+	    <forward name="result" path="/common/check/CheckQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="condition" path="/common/policy/CheckQueryList.jsp" />
+	    <forward name="success" path="/common/check/CheckQueryList.jsp" />
+	    <forward name="certifyUpload" path="/common/check/CheckCertifyQueryList.jsp" />
+	    <forward name="deleteSuccess" path="/common/check/CheckDeleteQueryList.jsp" />
+	    <forward name="acciCheckList" path="/common/check/AcciCheckList.jsp"/>
+	    <forward name="delete" path="/common/pub/PubMessage.jsp" />
+    </action>
+
+    <!--8.4 check deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UICheckQueryListFacade" validate="false" scope="request" path="/checkQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--8.5 check deal FinishQuery Edit-->
+    <action path="/checkFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UICheckFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/checkFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILCheckBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/check/DAACheckEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/check/PropCheckEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/check/AgriCheckEdit.jsp" />
+      <forward name="EDITCAA" path="/commonShip/check/ShipCheckEdit.jsp" />
+      <forward name="EDITYAA" path="/commonCargo/check/CargoCheckEdit.jsp" />
+      <forward name="EDITZAA" path="/commonLiab/check/LiabCheckEdit.jsp" />
+      <!-- modified by xiatian 修改意健险查勘和调查的显示页面 -->
+      <forward name="EDITEAA" path="/commonProp/check/PropCheckEdit.jsp" />
+      <!-- add by xiatian 老调查搜索走showeaa -->
+      <forward name="SHOWEAA" path="/commonAcci/check/AcciCheckEdit.jsp" />
+    </action>
+
+    <!--8.6 check deal DoingQuery Edit-->
+    <action path="/checkDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UICheckDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/checkDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILCheckBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/check/DAACheckEdit.jsp" />
+    </action>
+
+
+    <!--8.7 check schedule list query-->
+
+    <action path="/checkScheduleList" type="com.sinosoft.claim.ui.control.facade.UICheckScheduleFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/common/check/CheckScheduleList.jsp" />
+    </action>
+
+    <!--8.8 check schedule deal display-->
+    <action path="/checkScheduleDeal" type="com.sinosoft.claim.ui.control.facade.UICheckScheduleFacade" validate="false" scope="request" >
+      <forward name="success" path="/DAA/check/DAACheckScheduleEdit.jsp" />
+    </action>
+
+    <!--8.9 check  shchedule deal save-->
+
+    <action path="/checkScheduleSave" type="com.sinosoft.claim.ui.control.facade.UICheckScheduleEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--8.10 check  certify upload -->
+    <action path="/checkCertify" type="com.sinosoft.claim.ui.control.facade.UILCheckCertifyPostFacade" validate="false" scope="request" >
+      <forward name="target1" path="/DAA/check/CheckCertifyMain.jsp" />
+    </action>
+
+    <!--8.11 check  delete -->
+    <action path="/checkDelete" type="com.sinosoft.claim.ui.control.facade.UILCheckDeletePostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+
+    <!--check end  -->
+
+    <!--9.claimstatus start-->
+    <!--9.1 claimstatus query list -->
+    <action path="/claimStatusQuery" type="com.sinosoft.claim.ui.control.facade.UIClaimStatusQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <!--9.2 claimstatus stat list -->
+    <action path="/claimStatusStat" type="com.sinosoft.claim.ui.control.facade.UIClaimStatusStatGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusStatList.jsp" />
+    </action>
+
+    <!--10.endcase start-->
+    <!--10.1 endcase deal query list -->
+    <action path="/endcaseBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILEndcaseBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/endcase/DAAEndcaseEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/endcase/PropEndcaseEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/endcase/PropEndcaseEdit.jsp" />
+      <forward name="ADDCAA" path="/commonShip/endcase/ShipEndcaseEdit.jsp" />
+       <forward name="ADDYAA" path="/commonCargo/endcase/CargoEndcaseEdit.jsp" />
+      <forward name="ADDZAA" path="/commonLiab/endcase/LiabEndcaseEdit.jsp" />
+      <forward name="ADDEAA" path="/commonAcci/endcase/AcciEndcaseEdit.jsp" />
+    </action>
+
+    <!--10.2 endcase deal save -->
+    <action path="/endcaseSave" type="com.sinosoft.claim.ui.control.facade.UILEndcaseEditPostFacade" validate="false" scope="request" >
+      <forward name="step1" path="/DAA/endcase/DAAEndcaseEditSave.jsp" />
+      <forward name="step2" path="/DAA/endcase/DAACaseNoSave.jsp" />
+    </action>
+
+    <!--10.3 endcase deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UIEndcaseQueryFacade" validate="false" scope="request" path="/endcaseQuery">
+	    <forward name="result" path="/common/endcase/EndcaseQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="condition" path="/common/policy/EndcaseQueryList.jsp" />
+	    <forward name="success" path="/common/endcase/EndcaseQueryList.jsp" />
+    </action>
+
+    <!--10.4 endcase deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UIEndcaseQueryListFacade" validate="false" scope="request" path="/endcaseQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--10.5 endcase deal FinishQuery Edit-->
+    <action path="/endcaseFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIEndcaseFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/endcaseFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILEndcaseBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/endcase/DAAEndcaseEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/endcase/PropEndcaseEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/endcase/PropEndcaseEdit.jsp" />
+      <forward name="EDITCAA" path="/commonShip/endcase/ShipEndcaseEdit.jsp" />
+      <forward name="EDITYAA" path="/commonCargo/endcase/CargoEndcaseEdit.jsp" />
+      <forward name="EDITZAA" path="/commonLiab/endcase/LiabEndcaseEdit.jsp" />
+      <forward name="EDITEAA" path="/commonAcci/endcase/AcciEndcaseEdit.jsp" />
+    </action>
+
+    <!--10.5 endcase deal DoingQuery Edit-->
+    <action path="/endcaseDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIEndcaseDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/endcaseDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILEndcaseBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/endcase/DAAEndcaseEdit.jsp" />
+    </action>
+    <!--endcase end  -->
+
+    <!--11.certify start-->
+    <!--11.1 certify deal query list -->
+    <action path="/certifyBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILCertifyBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/certify/DAACertifyEdit.jsp" />
+      <forward name="ADDProp" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="ADDAgri" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="ADDZAA" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="ADDCAA" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="ADDYAA" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="ADDEAA" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="ADDOtherCertifyDirect" path="/common/certify/CertifyDirectEdit.jsp" />
+      <forward name="ADDCertifyDirect" path="/DAA/certify/DAACertifyDirectEdit.jsp" />
+      <forward name="SELECTCAR" path="/common/certify/CertifyCarSelect.jsp" />
+      <forward name="SELECTFLAG" path="/common/certify/CertifyBeforeSelectFlag.jsp" />
+      <forward name="backOne" path="/common/pub/BackOneStep.jsp"/>
+      <forward name="backTwo" path="/common/pub/BackTwoStep.jsp"/>
+      <forward name="CertifyDirectPrint" path="/DAA/certify/DAACertifyRequiredList.jsp" />
+      <forward name="CertifyDirectPrintAdd" path="/DAA/certify/DAACertifyAddRequiredList.jsp" />
+      <!--add by kangzhen-->
+      <forward name="OtherCertifyDirectPrint" path="/common/certify/CertifyRequiredList.jsp"/>
+    </action>
+
+    <!--11.2 certify deal save -->
+    <action path="/certifySave" type="com.sinosoft.claim.ui.control.facade.UILCertifyEditPostFacade" validate="false" scope="request" >
+      <forward name="step1" path="/DAA/certify/DAACertifyEditSave.jsp" />
+      <forward name="step2" path="/DAA/certify/DAACaseNoSave.jsp" />
+    </action>
+
+    <!--11.3 certify deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UICertifyQueryFacade" validate="false" scope="request" path="/certifyQuery">
+	    <forward name="result" path="/common/certify/CertifyQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="condition" path="/common/policy/CertifyQueryList.jsp" />
+	    <forward name="success" path="/common/certify/CertifyQueryList.jsp" />
+	    <forward name="WaitToDo" path="/common/certify/CertifyToDoList.jsp" />
+    </action>
+
+    <!--11.4 certify deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UICertifyQueryListFacade" validate="false" scope="request" path="/certifyQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--11.5 certify deal FinishQuery Edit-->
+    <action path="/certifyFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UICertifyFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/certifyFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILCertifyBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/certify/DAACertifyEdit.jsp" />
+      <forward name="EDITProp" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="EDITAgri" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="EDITZAA" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="EDITCAA" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="EDITYAA" path="/common/certify/CertifyEdit.jsp" />
+      <forward name="EDITEAA" path="/common/certify/CertifyEdit.jsp" />
+    </action>
+
+    <!--11.5 certify deal DoingQuery Edit-->
+    <action path="/certifyDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UICertifyDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/certifyDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILCertifyBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/certify/DAACertifyEdit.jsp" />
+    </action>
+    <!--certify end  -->
+
+    <!--12.certainLoss start-->
+    <!--12.1 certainLoss deal query list -->
+    <action path="/certainLossBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILCertainLossBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/certainLoss/DAACertainLossEdit.jsp" />
+      <forward name="EDIT1DAA" path="/DAA/certainLoss/DAARepairComponentEdit.jsp" />
+      <forward name="EDIT2DAA" path="/DAA/certainLoss/DAAPersonEdit.jsp" />
+      <forward name="EDIT0DAA" path="/DAA/certainLoss/DAAPersonEdit.jsp" />
+      <forward name="EDIT3DAA" path="/DAA/certainLoss/DAAPropEdit.jsp" />
+      <forward name="EDIT-1DAA" path="/DAA/certainLoss/DAAPropEdit.jsp" />
+      <forward name="EDIT4DAA" path="/DAA/certainLoss/DAAAllLossEdit.jsp" />
+      <forward name="EDIT-2DAA" path="/DAA/certainLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADDDAA" path="/DAA/certainLoss/DAACertainLossEdit.jsp" />
+      <forward name="ADD1DAA" path="/DAA/certainLoss/DAARepairComponentEdit.jsp" />
+      <forward name="ADD2DAA" path="/DAA/certainLoss/DAAPersonEdit.jsp" />
+      <forward name="ADD0DAA" path="/DAA/certainLoss/DAAPersonEdit.jsp" />
+      <forward name="ADD3DAA" path="/DAA/certainLoss/DAAPropEdit.jsp" />
+      <forward name="ADD-1DAA" path="/DAA/certainLoss/DAAPropEdit.jsp" />
+      <forward name="ADD4DAA" path="/DAA/certainLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADD-2DAA" path="/DAA/certainLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/certainLoss/PropCertainLossEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/certainLoss/AgriPropEdit.jsp" />
+      <forward name="ADD-1Agri" path="/commonAgri/certainLoss/AgriPropEdit.jsp" />
+      <forward name="EDIT-1Agri" path="/commonAgri/certainLoss/AgriPropEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/certainLoss/PropCertainLossEdit.jsp" />
+      <forward name="ADDCAA" path="/commonShip/certainLoss/ShipCertainLossEdit.jsp" />
+      <forward name="ADD0YAA" path="/commonCargo/certainLoss/CargoCertainLossEdit.jsp" />
+      <forward name="ADD0CAA" path="/commonShip/certainLoss/ShipCertainLossEdit.jsp" />
+      <forward name="EDITCAA" path="/commonShip/certainLoss/ShipCertainLossEdit.jsp" />
+      <forward name="EDIT0YAA" path="/commonCargo/certainLoss/CargoCertainLossEdit.jsp" />
+      <forward name="ADDZAA" path="/commonLiab/certainLoss/LiabCertainLossEdit.jsp" />
+      <forward name="ADD0ZAA" path="/commonLiab/certainLoss/LiabCertainLossEdit.jsp" />
+      <forward name="EDITZAA" path="/commonLiab/certainLoss/LiabCertainLossEdit.jsp" />
+       <forward name="EDIT-1ZAA" path="/commonLiab/certainLoss/LiabCertainLossEdit.jsp" />
+      <forward name="ADD-1ZAA" path="/commonLiab/certainLoss/LiabCertainLossEdit.jsp" />
+      <forward name="ADD-1YAA" path="/commonCargo/certainLoss/CargoCertainLossEdit.jsp" />
+      <forward name="EDIT-1YAA" path="/commonCargo/certainLoss/CargoCertainLossEdit.jsp" />
+      <forward name="ADDEAA" path="/commonAcci/certainLoss/AcciCertainLossEdit.jsp" />
+      <forward name="ADD0EAA" path="/commonAcci/certainLoss/AcciCertainLossEdit.jsp" />
+      <forward name="EDITEAA" path="/commonAcci/certainLoss/AcciCertainLossEdit.jsp" />
+      <forward name="SelectLossType" path="/common/certainLoss/CertainLossTypeSelect.jsp" />
+    </action>
+
+    <!--12.2 certainLoss deal save -->
+    <action path="/certainLossSave" type="com.sinosoft.claim.ui.control.facade.UILCertainLossEditPostFacade" validate="false" scope="request" >
+      <forward name="step1" path="/DAA/certainLoss/DAACertainLossEditSave.jsp" />
+      <forward name="step2" path="/DAA/certainLoss/DAACaseNoSave.jsp" />
+    </action>
+
+    <!--12.3 certainLoss deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UICertainLossQueryFacade" validate="false" scope="request" path="/certainLossQuery">
+	    <forward name="result" path="/common/certainLoss/CertainLossQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="success" path="/common/certainLoss/CertainLossQueryList.jsp" />
+	    <forward name="certifyUpload" path="/common/certainLoss/CertainLossCertifyQueryList.jsp" />
+    </action>
+
+    <!--12.4 certainLoss deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UICertainLossQueryListFacade" validate="false" scope="request" path="/certainLossQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--12.5 certainLoss deal FinishQuery Edit-->
+    <action path="/certainLossFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UICertainLossFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/certainLossFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILCertainLossBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/certainLoss/DAACertainLossEdit.jsp" />
+      <forward name="EDIT1DAA" path="/DAA/certainLoss/DAARepairComponentEdit.jsp" />
+      <forward name="EDIT2DAA" path="/DAA/certainLoss/DAAPersonEdit.jsp" />
+      <forward name="EDIT0DAA" path="/DAA/certainLoss/DAAPersonEdit.jsp" />
+      <forward name="EDIT3DAA" path="/DAA/certainLoss/DAAPropEdit.jsp" />
+      <forward name="EDIT-1DAA" path="/DAA/certainLoss/DAAPropEdit.jsp" />
+      <forward name="EDIT4DAA" path="/DAA/certainLoss/DAAAllLossEdit.jsp" />
+      <forward name="EDIT-2DAA" path="/DAA/certainLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADD1DAA" path="/DAA/certainLoss/DAARepairComponentEdit.jsp" />
+      <forward name="ADD2DAA" path="/DAA/certainLoss/DAAPersonEdit.jsp" />
+      <forward name="ADD0DAA" path="/DAA/certainLoss/DAAPersonEdit.jsp" />
+      <forward name="ADD3DAA" path="/DAA/certainLoss/DAAPropEdit.jsp" />
+      <forward name="ADD-1DAA" path="/DAA/certainLoss/DAAPropEdit.jsp" />
+      <forward name="ADD4DAA" path="/DAA/certainLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADD-2DAA" path="/DAA/certainLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/certainLoss/PropCertainLossEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/certainLoss/PropCertainLossEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/certainLoss/PropCertainLossEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/certainLoss/AgriPropEdit.jsp" />
+      <forward name="ADDCAA"  path="/commonShip/certainLoss/ShipCertainLossEdit.jsp" />
+      <forward name="ADDYAA"  path="/commonCargo/certainLoss/CargoCertainLossEdit.jsp" />
+      <forward name="EDITCAA" path="/commonShip/certainLoss/ShipCertainLossEdit.jsp" />
+      <forward name="EDITYAA" path="/commonCargo/certainLoss/CargoCertainLossEdit.jsp" />
+      <forward name="EDIT-1YAA" path="/commonCargo/certainLoss/CargoCertainLossEdit.jsp" />
+      <forward name="ADDZAA"  path="/commonLiab/certainLoss/LiabCertainLossEdit.jsp" />
+      <forward name="EDIT-1ZAA" path="/commonLiab/certainLoss/LiabCertainLossEdit.jsp" />
+      <forward name="EDITZAA" path="/commonLiab/certainLoss/LiabCertainLossEdit.jsp" />
+      <forward name="ADDEAA"  path="/commonAcci/certainLoss/AcciCertainLossEdit.jsp" />
+      <forward name="EDITEAA" path="/commonAcci/certainLoss/AcciCertainLossEdit.jsp" />
+      <forward name="SelectLossType" path="/common/certainLoss/CertainLossTypeSelect.jsp" />
+    </action>
+
+    <!--12.5 certainLoss deal DoingQuery Edit-->
+    <action path="/certainLossDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UICertainLossDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/certainLossDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILCertainLossBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/certainLoss/DAACertainLossEdit.jsp" />
+      <forward name="SelectLossType" path="/common/certainLoss/CertainLossTypeSelect.jsp" />
+    </action>
+    <!--12.6 certainLoss  certify upload -->
+    <action path="/certainLossCertify" type="com.sinosoft.claim.ui.control.facade.UILCertainLossCertifyPostFacade" validate="false" scope="request" >
+      <forward name="target1" path="/DAA/certainLoss/CertainLossCertifyMain.jsp" />
+    </action>
+    <!--certainLoss end  -->
+
+    <!--13.verifyPrice start-->
+    <!--13.1 verifyPrice deal query list -->
+    <action path="/verifyPriceBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILVerifyPriceBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/verifyPrice/DAAVerifyPriceEdit.jsp" />
+      <forward name="EDITDAA" path="/DAA/verifyPrice/DAAVerifyPriceEdit.jsp" />
+      <forward name="EDIT1DAA" path="/DAA/verifyPrice/DAARepairComponentEdit.jsp" />
+      <forward name="EDIT4DAA" path="/DAA/verifyPrice/DAAAllLossEdit.jsp" />
+      <forward name="EDIT-2DAA" path="/DAA/verifyPrice/DAAAllLossEdit.jsp" />
+      <forward name="ADD1DAA" path="/DAA/verifyPrice/DAARepairComponentEdit.jsp" />
+      <forward name="ADD4DAA" path="/DAA/verifyPrice/DAAAllLossEdit.jsp" />
+      <forward name="ADD-2DAA" path="/DAA/verifyPrice/DAAAllLossEdit.jsp" />   
+    </action>
+
+    <!--13.2 verifyPrice deal save -->
+    <action path="/verifyPriceSave" type="com.sinosoft.claim.ui.control.facade.UILVerifyPriceEditPostFacade" validate="false" scope="request" >
+      <forward name="step1" path="/DAA/verifyPrice/DAAVerifyPriceEditSave.jsp" />      
+    </action>
+
+    <!--13.3 verifyPrice deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UIVerifyPriceQueryFacade" validate="false" scope="request" path="/verifyPriceQuery">
+	    <forward name="result" path="/common/verifyPrice/VerifyPriceQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />	    
+	    <forward name="success" path="/common/verifyPrice/VerifyPriceQueryList.jsp" />
+    </action>
+
+    <!--13.4 verifyPrice deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UIVerifyPriceQueryListFacade" validate="false" scope="request" path="/verifyPriceQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--13.5 verifyPrice deal FinishQuery Edit-->
+    <action path="/verifyPriceFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIVerifyPriceFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/verifyPriceFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILVerifyPriceBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/verifyPrice/DAAVerifyPriceEdit.jsp" />
+      <forward name="EDITDAA" path="/DAA/verifyPrice/DAAVerifyPriceEdit.jsp" />
+      <forward name="EDIT1DAA" path="/DAA/verifyPrice/DAAVerifyPriceRepairComponentEdit.jsp" />
+      <forward name="EDIT4DAA" path="/DAA/verifyPrice/DAAAllLossEdit.jsp" />
+      <forward name="EDIT-2DAA" path="/DAA/verifyPrice/DAAAllLossEdit.jsp" />
+      <forward name="ADD1DAA" path="/DAA/verifyPrice/DAAVerifyPriceRepairComponentEdit.jsp" />
+      <forward name="ADD4DAA" path="/DAA/verifyPrice/DAAAllLossEdit.jsp" />
+      <forward name="ADD-2DAA" path="/DAA/verifyPrice/DAAAllLossEdit.jsp" />  
+      <forward name="ADDProp" path="/DAA/verifyPrice/DAAVerifyPriceEdit.jsp" />   
+      <forward name="EDITProp" path="/DAA/verifyPrice/DAAVerifyPriceEdit.jsp" />     
+    </action>
+
+    <!--13.6 verifyPrice deal DoingQuery Edit-->
+    <action path="/verifyPriceDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIVerifyPriceDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/verifyPriceDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILVerifyPriceBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/verifyPrice/DAAVerifyPriceEdit.jsp" />
+    </action>
+    <!--verifyPrice end  -->
+
+    <!--14.verifyLoss start-->
+    <!--14.1 verifyLoss deal query list -->
+    <action path="/verifyLossBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILVerifyLossBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/verifyLoss/DAAVerifyLossEdit.jsp" />
+      <forward name="EDITDAA" path="/DAA/verifyLoss/DAAVerifyLossEdit.jsp" />
+      <forward name="EDIT1DAA" path="/DAA/verifyLoss/DAARepairComponentEdit.jsp" />
+      <forward name="EDIT2DAA" path="/DAA/verifyLoss/DAAPersonEdit.jsp" />
+      <forward name="EDIT0DAA" path="/DAA/verifyLoss/DAAPersonEdit.jsp" />
+      <forward name="EDIT3DAA" path="/DAA/verifyLoss/DAAPropEdit.jsp" />
+      <forward name="EDIT-1DAA" path="/DAA/verifyLoss/DAAPropEdit.jsp" />
+      <forward name="EDIT4DAA" path="/DAA/verifyLoss/DAAAllLossEdit.jsp" />
+      <forward name="EDIT-2DAA" path="/DAA/verifyLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADD1DAA" path="/DAA/verifyLoss/DAARepairComponentEdit.jsp" />
+      <forward name="ADD2DAA" path="/DAA/verifyLoss/DAAPersonEdit.jsp" />
+      <forward name="ADD0DAA" path="/DAA/verifyLoss/DAAPersonEdit.jsp" />
+      <forward name="ADD3DAA" path="/DAA/verifyLoss/DAAPropEdit.jsp" />
+      <forward name="ADD-1DAA" path="/DAA/verifyLoss/DAAPropEdit.jsp" />
+      <forward name="ADD4DAA" path="/DAA/verifyLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADD-2DAA" path="/DAA/verifyLoss/DAAAllLossEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/verifyLoss/PropVerifyLossEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/verifyLoss/PropVerifyLossEdit.jsp" />
+      <forward name="BackCDAA" path="/DAA/verifyLoss/DAABackComponentEdit.jsp" />
+
+    </action>
+
+    <!--14.2 verifyLoss deal save -->
+    <action path="/verifyLossSave" type="com.sinosoft.claim.ui.control.facade.UILVerifyLossEditPostFacade" validate="false" scope="request" >
+      <forward name="step1" path="/DAA/verifyLoss/DAAVerifyLossEditSave.jsp" />
+      <forward name="step2" path="/DAA/verifyLoss/DAACaseNoSave.jsp" />
+    </action>
+
+    <!--14.3 verifyLoss deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UIVerifyLossQueryFacade" validate="false" scope="request" path="/verifyLossQuery">
+	    <forward name="result" path="/common/verifyLoss/VerifyLossQueryList.jsp" />
+	    <forward name="result1" path="/common/pub/Blank.html" />
+	    <forward name="condition" path="/common/policy/VerifyLossQueryList.jsp" />
+	    <forward name="success" path="/common/verifyLoss/VerifyLossQueryList.jsp" />
+    </action>
+
+    <!--14.4 verifyLoss deal query list -->
+    <action name="registForm" type="com.sinosoft.claim.ui.control.facade.UIVerifyLossQueryListFacade" validate="false" scope="request" path="/verifyLossQueryList">
+	    <forward name="result" path="/common/pub/Blank.html" />
+    </action>
+
+    <!--14.5 verifyLoss deal FinishQuery Edit-->
+    <action path="/verifyLossFinishQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIVerifyLossFinishQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/verifyLossFinishQueryList" type="com.sinosoft.claim.ui.control.facade.UILVerifyLossBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/verifyLoss/DAAVerifyLossEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/verifyLoss/AgriPropEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/verifyLoss/AgriPropEdit.jsp" />
+      <forward name="EDITDAA" path="/DAA/verifyLoss/DAAVerifyLossEdit.jsp" />
+      <forward name="EDIT1DAA" path="/DAA/verifyLoss/DAARepairComponentEdit.jsp" />
+      <forward name="EDIT2DAA" path="/DAA/verifyLoss/DAAPersonEdit.jsp" />
+      <forward name="EDIT0DAA" path="/DAA/verifyLoss/DAAPersonEdit.jsp" />
+      <forward name="EDIT3DAA" path="/DAA/verifyLoss/DAAPropEdit.jsp" />
+      <forward name="EDIT-1DAA" path="/DAA/verifyLoss/DAAPropEdit.jsp" />
+      <forward name="EDIT4DAA" path="/DAA/verifyLoss/DAAAllLossEdit.jsp" />
+      <forward name="EDIT-2DAA" path="/DAA/verifyLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADD1DAA" path="/DAA/verifyLoss/DAARepairComponentEdit.jsp" />
+      <forward name="ADD2DAA" path="/DAA/verifyLoss/DAAPersonEdit.jsp" />
+      <forward name="ADD0DAA" path="/DAA/verifyLoss/DAAPersonEdit.jsp" />
+      <forward name="ADD3DAA" path="/DAA/verifyLoss/DAAPropEdit.jsp" />
+      <forward name="ADD-1DAA" path="/DAA/verifyLoss/DAAPropEdit.jsp" />
+      <forward name="ADD4DAA" path="/DAA/verifyLoss/DAAAllLossEdit.jsp" />
+      <forward name="ADD-2DAA" path="/DAA/verifyLoss/DAAAllLossEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/verifyLoss/PropVerifyLossEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/verifyLoss/PropVerifyLossEdit.jsp" />
+      <forward name="BackCDAA" path="/DAA/verifyLoss/DAABackComponentEdit.jsp" />
+
+    </action>
+
+    <!--14.5 verifyLoss deal DoingQuery Edit-->
+    <action path="/verifyLossDoingQueryEdit" type="com.sinosoft.claim.ui.control.facade.UIVerifyLossDoingQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/claimstatus/ClaimStatusQueryList.jsp" />
+    </action>
+
+    <action path="/verifyLossDoingQueryList" type="com.sinosoft.claim.ui.control.facade.UILVerifyLossBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/verifyLoss/DAAVerifyLossEdit.jsp" />
+    </action>
+    <!--verifyLoss end  -->
+
+    <!--
+    <action path="/saveFile" type="com.sinosoft.claim.ui.control.facade.UILCertifySaveFileFacade" validate="false" scope="request" >
+      <forward name="EDITDAA" path="/DAA/verifyLoss/DAAVerifyLossEdit.jsp" />
+    </action>
+    -->
+
+    <!--message start  -->
+    <!--15.1 message deal Save Edit-->
+    <action path="/messageSave" type="com.sinosoft.claim.ui.control.facade.UILMessageFacade" validate="false" scope="request" >
+      <forward name="success" path="/messageQueryInfo.do"/>
+      <forward name="false" path="/common/pub/UIErrorPage.jsp"/>
+    </action>
+
+    <!--15.2 message deal Query Edit-->
+    <action path="/messageQueryList" type="com.sinosoft.claim.ui.control.facade.UILMessageGetFacade" validate="false" scope="request" >
+      <forward name="result" path="/common/message/MessageSave.jsp"/>
+      <forward name="oldResult" path="/common/message/MessageQueryList.jsp"/>
+    </action>
+
+    <!--15.3 message deal get information-->
+    <action path="/messageQueryInfo" type="com.sinosoft.claim.ui.control.facade.UIRelateFacade" validate="false" scope="request" >
+      <forward name="success" path="/messageQueryList.do"/>
+      <forward name="false" path="/index.jsp"/>
+    </action>
+   <!--message end  -->
+
+   <!--workflow start  -->
+   <!--16.1 workflow  model query-->
+    <action path="/swfModelQuery" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelQueryListFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/model/WorkFlowModelQueryList.jsp"/>
+    </action>
+   <!--16.2 workflow add model -->
+    <action path="/swfModelBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/model/WorkFlowModelEdit.jsp"/>
+    </action>
+    <!--16.3 workflow model save -->
+    <action path="/swfModelSave" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp"/>
+    </action>
+
+    <!--16.4 workflow waiting for deal with  -->
+    <action path="/wfLogQuery" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowLogQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/task/WfLogStatusList.jsp"/>  
+      <forward name="success2" path="/workflow/task/WfLogStatusList2.jsp"/>  
+      <forward name="specialQuery" path="/common/specialCase/SpecialCaseQueryList.jsp"/>      
+    </action>
+
+    <!--16.5 workflow deal with back step -->
+    <action path="/wfLogBackStep" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowLogBackStepFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/task/WfLogStatusList.jsp"/>
+    </action>
+    <!--16.6 workflow  condition step1 query-->
+    <action path="/swfModelCondStep1Query" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelQueryListFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/model/WorkFlowModelCondStep1QueryList.jsp"/>
+    </action>
+    <!--16.7 workflow condition step2 condition -->
+    <action path="/swfModelCondStep2Query" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/model/WorkFlowModelCondStep2QueryList.jsp"/>
+    </action>
+    <!--16.8 workflow modify condition -->
+    <action path="/swfConditionBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelCondEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/model/WorkFlowModelConditionEdit.jsp"/>
+      <forward name="backOne" path="/common/pub/BackOneStep.jsp"/>
+      <forward name="backTwo" path="/common/pub/BackTwoStep.jsp"/>
+    </action>
+    <!--16.9 workflow condition save -->
+    <action path="/swfConditionSave" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelCondEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp"/>
+    </action>
+    <!--16.10 workflow assign modelUse -->
+    <action path="/swfModelUseBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelUseEditGetFacade" validate="false" scope="request" >
+      <forward name="batchAssign" path="/workflow/model/WorkFlowModelAssignEdit.jsp"/>
+      <forward name="modelUseEdit" path="/workflow/model/WorkFlowModelUseEdit.jsp"/>
+    </action>
+    <!--16.11 workflow save modelUse -->
+    <action path="/swfModelUseSave" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowModelUseEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp"/>
+    </action>
+    <!--16.17 workflow query flow -->
+    <action path="/swfFlowBeforeQuery" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowFlowBeforeQueryFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/flow/WorkFlowFlowQueryList.jsp"/>
+    </action>
+
+    <!--16.18 workflow submit flow -->
+    <action path="/wfFlowSubmitStep" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowSubmitStepFacade" validate="false" scope="request" >
+      <forward name="success"          path="/workflow/task/WfLogStatusList.jsp"/>
+      <forward name="false"            path="/index.jsp"/>
+      <forward name="DAARegisBackEdit" path="/registFinishQueryList.do"/>
+      <forward name="DAACertaAdd"      path="/certainLossBeforeEdit.do"/>
+      <forward name="DAACertaBackEdit" path="/certainLossFinishQueryList.do"/>
+      <forward name="DAACertiAdd"      path="/certifyBeforeEdit.do"/>
+      <forward name="DAACertiBackEdit" path="/certifyFinishQueryList.do"/>
+      <forward name="DAACheckAdd"      path="/checkBeforeEdit.do"/>
+      <forward name="DAACheckBackEdit" path="/checkFinishQueryList.do"/>
+      <forward name="DAAClaimAdd"      path="/claimBeforeEdit.do"/>
+      <forward name="DAAClaimBackEdit" path="/claimFinishQueryList.do"/>
+      <forward name="DAACompeAdd"      path="/compensateBeforeEdit.do"/>
+      <forward name="DAACompeBackEdit" path="/certainLossFinishQueryList.do"/>
+      <forward name="DAAEndcaAdd"      path="/endcaseBeforeEdit.do"/>
+      <forward name="DAAEndcaBackEdit" path="/endcaseFinishQueryList.do"/>
+      <forward name="DAAVerifAdd"      path="/verifyLossBeforeEdit.do"/>
+      <forward name="DAAVerifBackEdit" path="/verifyLossFinishQueryList.do"/>
+      <forward name="DAAPrepaAdd"      path="/prepayBeforeEdit.do"/>
+      <forward name="DAAPrepaBackEdit" path="/prepayFinishQueryList.do"/>
+
+    </action>
+   <!--16.17 workflow query flow -->
+    <action path="/swfFlowQuery" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowFlowQueryFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/flow/WorkFlowFlowQueryRegistList.jsp"/>
+    </action>
+    
+    <!-- 案件号互查 -->
+    <action path="/caseNoQuery" type="com.sinosoft.claim.ui.control.facade.UICaseNoQueryFacade" validate="false" scope="request" >
+      <forward name="success" path="/workflow/caseNo/caseNoQueryRegistList.jsp"/>
+    </action>
+
+   <!--workflow end  -->
+
+   <!--17 relateBusinssNo start-->
+   <!--17.1 relate deal get information-->
+   <action path="/RelateBusinessNo" type="com.sinosoft.claim.ui.control.facade.UIRelateBusinessNoFacade" validate="false" scope="request" >
+     <forward name="success" path="/common/pub/RelateBusinessNo.jsp"/>
+   </action>
+   <!--relateBusinssNo end-->
+
+   <!--18 stat query start-->
+   <!--18.1 workFlowNode stat-->
+   <action path="/WorkFlowNodeStat" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowNodeStatGetFacade" validate="false" scope="request" >
+     <forward name="success" path="/workflow/stat/WorkFlowNodeStatList.jsp"/>
+   </action>
+
+   <!--18.2 workFlowNodeUser stat-->
+   <action path="/WorkFlowNodeUserStat" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowNodeUserStatGetFacade" validate="false" scope="request" >
+     <forward name="success" path="/workflow/stat/WorkFlowNodeUserStatList.jsp"/>
+   </action>
+
+   <!--18.3 NoEndCaseSum query-->
+
+    <action path="/NoEndCaseSumQuery" type="com.sinosoft.claim.ui.control.facade.UINoEndCaseSumQueryGetFacade" validate="false" scope="request" >
+     <forward name="success" path="/common/query/NoEndCaseSumQueryList.jsp"/>
+   </action>
+
+
+   <!--18.4 NoEndCaseSum detail list-->
+
+    <action path="/NoEndCaseSumDetailList" type="com.sinosoft.claim.ui.control.facade.UINoEndCaseSumDetailListGetFacade" validate="false" scope="request" >
+     <forward name="success" path="/common/query/NoEndCaseSumQueryDetailList.jsp"/>
+   </action>
+
+
+   <!--18.5 NEndCaseSum query-->
+
+    <action path="/EndCaseSumQuery" type="com.sinosoft.claim.ui.control.facade.UIEndCaseSumQueryGetFacade" validate="false" scope="request" >
+     <forward name="success" path="/common/query/EndCaseSumQueryList.jsp"/>
+   </action>
+
+
+   <!--18.6 EndCaseSum detail list-->
+
+    <action path="/EndCaseSumDetailList" type="com.sinosoft.claim.ui.control.facade.UIEndCaseSumDetailListGetFacade" validate="false" scope="request" >
+     <forward name="success" path="/common/query/EndCaseSumQueryDetailList.jsp"/>
+   </action>
+
+
+    <!--18.7 workFlowNodeTimeOut stat-->
+   <action path="/WorkFlowNodeTimeOutStat" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowNodeTimeOutGetFacade" validate="false" scope="request" >
+     <forward name="success" path="/workflow/stat/WorkFlowNodeTimeOutList.jsp"/>
+   </action>
+
+    <!--18.8 claim print -->
+   <action path="/ClaimPrint" type="com.sinosoft.claim.ui.control.facade.UIClaimPrintFacade" validate="false" scope="request" >
+     <forward name="timeListing" path="/0807/print/timeListingNoneFormatPrint.jsp"/>
+     <forward name="CompensateHosp" path="/0807/print/HospCompensateNoneFormatPrint.jsp"/>
+     <forward name="AddPremium" path="/commonAgri/print/AgriAddPremiumPrint.jsp"/>
+     <!--add by kangzhen 070129 start-->
+     <forward name="ReduceAmountEndorse" path="/common/print/ReduceAmountEndorsePrint.jsp"/>
+     <!--add by kangzhen 070129 end-->
+     <!--add by kangzhen 070117 start-->
+     <forward name="AgriCompensate" path="/commonAgri/print/AgriCompensateNoneFormatPrintGyNb.jsp"/>
+     <!--add by kangzhen 070117 end-->
+     <!--add by miaowenjun 2007-1-30 14:45 start-->
+     <forward name="AgriRegist" path="/commonAgri/print/AgriRegistNoneFormatPrint.jsp"/>
+     <!--add by miaowenjun 2007-1-30 14:45 end-->
+     <forward name="Regist" path="/DAA/print/DAARegistNoneFormatPrint.jsp"/>
+     <forward name="Pilfer" path="/DAA/print/DAAPilferNoneFormatPrint.jsp"/>
+     <forward name="Cancelnotice" path="/DAA/print/DAACancelnoticeNoneFormatPrint.jsp"/>
+     <forward name="Canceltrans" path="/DAA/print/DAACanceltransNoneFormatPrint.jsp"/>
+     <forward name="LossSimple" path="/DAA/print/DAALossSimpleNoneFormatPrint.jsp"/>
+     <forward name="Loss" path="/DAA/print/DAAClaimPrintList.jsp"/>
+     <forward name="LossPrint" path="/DAA/print/DAALossNoneFormatPrint.jsp"/>
+    
+      <forward name="ComponentList" path="/DAA/print/DAAClaimPrintList.jsp"/>
+      <forward name="CetainLossList" path="/DAA/print/DAAClaimPrintList.jsp"/>
+      <forward name="CetainLossListPrint" path="/DAA/print/DAACetainlossReportNoneFormatPrint.jsp"/>
+      <forward name="CetainLossListDetail" path="/DAA/print/DAACetainlossReportDetailNoneFormatPrint.jsp"/>
+     <forward name="ComponentListPrint" path="/DAA/print/DAAComponentListNoneFormatPrint.jsp"/>
+      <forward name="ComponentAdd" path="/DAA/print/DAAClaimPrintList.jsp"/>
+     <forward name="ComponentAddPrint" path="/DAA/print/DAAComponentAddNoneFormatPrint.jsp"/>
+     
+     <forward name="RepairListPrint" path="/DAA/print/DAARepairListNoneFormatPrint.jsp"/>
+     <forward name="RepairList" path="/DAA/print/DAAClaimPrintList.jsp"/>
+     <forward name="RepairAdd" path="/DAA/print/DAAClaimPrintList.jsp"/>    
+     <forward name="RepairAddPrint" path="/DAA/print/DAARepairAddNoneFormatPrint.jsp"/>
+     
+     <forward name="PropList" path="/DAA/print/DAAPropListNoneFormatPrint.jsp"/>
+     <forward name="Compensate" path="/DAA/print/DAACompensateNoneFormatPrint.jsp"/>
+     <forward name="CompensateAdd" path="/DAA/print/DAACompensateAddNoneFormatPrint.jsp"/>
+     <forward name="PayStatList" path="/DAA/print/DAAPayStatListNoneFormatPrint.jsp"/>
+     <forward name="Drawnotice" path="/DAA/print/DAADrawnoticeNoneFormatPrint.jsp"/>
+     <forward name="Prepay" path="/DAA/print/DAAPrepayNoneFormatPrint.jsp"/>
+     <forward name="Pressnotice" path="/DAA/print/DAAPressnoticeNoneFormatPrint.jsp"/>
+     <forward name="PressnoticeEnd" path="/DAA/print/DAAPressnoticeEndNoneFormatPrint.jsp"/>
+     <forward name="Endcase" path="/DAA/print/DAAEndcaseNoneFormatPrint.jsp"/>
+     <forward name="EndcaseAdd" path="/DAA/print/DAAEndcaseAddNoneFormatPrint.jsp"/>
+     <forward name="HistoryFile" path="/DAA/print/OrigalPolicyEndorseNoneFormatPrintBefore.jsp"/>
+     <forward name="HistoryPolicy" path="/DAA/print/PolicyDAASingleCarNoneFormatPrint.jsp"/>
+     <forward name="HistoryEndorse" path="/DAA/print/OrigalPolicyEndorseNoneFormatPrint.jsp"/>
+     <forward name="FileOnRisk" path="/DAA/print/DamagePolicyNoneFormatPrint.jsp"/>
+     <forward name="BackcRecord" path="/DAA/print/DAABackcInformNoneFomatPrint.jsp"/>
+     <forward name="BackcInform" path="/DAA/print/DAABackcRecordNoneFormatPrint.jsp"/>
+     <forward name="Check" path="/DAA/print/DAACheckReportNoneFormatPrint.jsp"/>
+     <forward name="PersonLoss" path="/DAA/print/DAAPersonLossNoneFormatPrint.jsp"/>
+     <!-- add begin by zhuly 20051109-->
+     <forward name="DAAPilfer" path="/DAA/print/DAAPilferCheckReportNoneFormatPrint.jsp"/>
+     <forward name="DAAClaimDocument" path="/DAA/print/DAAClaimDocumentHandinNoneFormatPrint.jsp"/>
+     <!-- add end   by zhuly 20051109--> 
+
+     <!-- modify by wangli start 20050330 -->
+     <forward name="CheckCertainLoss" path="/DAA/print/DAACheckCertainLossNoneFormatPrint.jsp"/>
+      <!--modify by wangli add end 20050330 -->
+      <!--modify by zhaozhuo add start 20050414 -->
+     <forward name="BackcRecord" path="/DAA/print/DAABackcRecordNoneFormatPrint.jsp"/>
+     <forward name="BackcInform" path="/DAA/print/DAABackcInformNoneFormatPrint.jsp"/>
+      <!--modify by zhaozhuo add end 20050414 -->
+      <!--add by caopeng start at 20051203-->
+     <forward name="IndemnityReceipt" path="/DAA/print/DAAIndemnityReceiptNoneFormatPrint.jsp"/>
+     <!--add by caopeng end at 20051203-->
+     <!--add by caopeng start at 20051206-->
+     <forward name="ClaimNotice" path="/DAA/print/DAAClaimNoticeNoneFormatPrint.jsp"/>
+     <forward name="InvesNotes" path="/DAA/print/DAAInvesNotesNoneFormatPrint.jsp"/>
+     <forward name="RobInvesNotes" path="/DAA/print/DAARobInvesNotesNoneFormatPrint.jsp"/>
+     <forward name="ClaimApply" path="/DAA/print/DAAClaimApplyNoneFormatPrint.jsp"/>
+     <forward name="PersonDamageInvesReport" path="/DAA/print/DAAPersonDamageInvesReportNoneFormatPrint.jsp"/>
+     <forward name="PersonDamageInvesNotes" path="/DAA/print/DAAPersonDamageInvesNotesNoneFormatPrint.jsp"/>
+     <forward name="RightsTransferBook" path="/DAA/print/DAARightsTransferBookNoneFormatPrint.jsp" /> 
+     <forward name="RefuseCancelReport" path="/DAA/print/DAARefuseCancelReportNoneFormatPrint.jsp" /> 
+     <forward name="AccidentTotalLossCard" path="/DAA/print/DAAAccidentTotalLossCardNoneFormatPrint.jsp" /> 
+     <forward name="IndemnityNotice" path="/DAA/print/DAAIndemnityNoticeNoneFormatPrint.jsp" /> 
+     <forward name="PrepareIndemnityExamineCard" path="/DAA/print/DAAPrepareIndemnityExamineCardNoneFormatPrint.jsp" /> 
+     <forward name="AuthorizationTrustBook" path="/DAA/print/DAAAuthorizationTrustBookNoneFormatPrint.jsp" /> 
+     <forward name="AccidentPhotoCard" path="/DAA/print/DAAAccidentPhotoCardNoneFormatPrint.jsp" /> 
+     <forward name="OriginNoteCard" path="/DAA/print/DAAOriginNoteCardNoneFormatPrint.jsp" /> 
+     <forward name="ClaimDocumentHandinCredence" path="/common/print/AcciClaimDocumentHandinCredenceNoneFormatPrint.jsp"/>
+     <forward name="InvesReport" path="/common/print/AcciInvesReportNoneFormatPrint.jsp"/>
+     <forward name="CompensateAuditBook" path="/common/print/AcciCompensateAuditBookNoneFormatPrint.jsp"/>
+     <!-- add by caopeng end at 20051214 -->
+     <!--add by hanliang start at 20051209-->
+     <forward name="LiabLocaleCheck" path="/common/print/LiabLocaleCheckReportNoneFormatPrint.jsp"/>
+     <forward name="PropLocaleHeresy" path="/common/print/PropLocaleHeresyCheckSubmitNoneFormatPrint.jsp"/>
+
+	 <!--add by hanliang end at 20051209--> 
+
+     <!--modify by wangwei start 20050522-->
+     <forward name="FreightCompensate" path="/common/print/FreightCompensateNoneFormatPrint.jsp"/>
+     <forward name="FreightCompensateNotice" path="/common/print/FreightCompensateNoticeNoneFormatPrint.jsp"/>
+     <forward name="FreightDamageNotice" path="/common/print/FreightDamageNoticeNoneFormatPrint.jsp"/>
+     <forward name="FreightCheckReport" path="/common/print/FreightCheckReportNoneFormatPrint.jsp"/>
+     <!--add begin by zhuly 20051110-->
+     <forward name="FreightHeresyCheck" path="/common/print/FreightHeresyCheckSubmitNoneFormatPrint.jsp"/>
+     <forward name="FreightNationalCompensate" path="/common/print/FreightNationalCompensateNoneFormatPrint.jsp"/>
+     <forward name="FreightInportCompensate" path="/common/print/FreightInportCompensateNoneFormatPrint.jsp"/>
+     <forward name="FreightExportCompensate" path="/common/print/FreightExportCompensateNoneFormatPrint.jsp"/>     
+     <forward name="FreightRefuseCancel" path="/common/print/FreightRefuseCancelNoticeNoneFormatPrint.jsp"/>
+     <forward name="ClaimRefuse" path="/common/print/ClaimRefuseNoticeNoneFormatPrint.jsp"/>
+     <forward name="PropLocalCheck" path="/common/print/PropLocaleCheckReportNoneFormatPrint.jsp"/>
+     <forward name="LiabCompensate" path="/common/print/LiabCompensateNoneFormatPrint.jsp"/>
+     <!--add end   by zhuly 20051110-->
+     <forward name="ClaimDispose" path="/common/print/ClaimDisposeReportNoneFormatPrint.jsp"/>
+     <forward name="LocalCheck" path="/common/print/LocalCheckReportNoneFormatPrint.jsp"/>
+     <!--modify by wangwei end 20050522-->
+
+     <!--modify by wangwei start 20050527-->
+     <forward name="LogoutClaimEntrol" path="/DAA/print/DAALogoutClaimEntrolNoneFormatPrint.jsp"/>
+     <forward name="PrepayClaimKnow" path="/DAA/print/DAAPrepayClaimKnowNoneFormatPrint.jsp"/>
+     <forward name="HeresyCheckSubmit" path="/DAA/print/DAAHeresyCheckSubmitNoneFormatPrint.jsp"/>
+     <forward name="StopClaimEntrol" path="/DAA/print/DAAStopClaimEntrolNoneFormatPrint.jsp"/>
+     <forward name="NotClaimEntrol" path="/DAA/print/DAANotClaimEntrolNoneFormatPrint.jsp"/>
+     <forward name="LoseCallBackEntrol" path="/DAA/print/DAALossNoneFormatPrint.jsp"/>
+     <forward name="LawArbitrogeQuestion" path="/DAA/print/DAALawArbitrageQuestionNoneFormatPrint.jsp"/>
+     <forward name="CheckOrderLetter" path="/DAA/print/DAACheckOrderLetterNoneFormatPrint.jsp"/>
+     <forward name="EndCaseHurry" path="/DAA/print/DAAEndCaseHurryNoneFormatPrint.jsp"/>
+     <forward name="CallBackDispose" path="/DAA/print/DAACallbackLoseDisposeNoneFormatPrint.jsp"/>
+     <forward name="SubRogationEntrol" path="/DAA/print/DAASubRogationEntrolNoneFormatPrint.jsp"/>
+     <forward name="ReportRegistEntrol" path="/DAA/print/DAAReportRegistEntrolNoneFormatPrint.jsp"/>
+     <forward name="BothEraEntrol" path="/DAA/print/DAABothEraEntrolNoneFormatPrint.jsp"/>
+     <!--modify by wangwei end 20050527-->
+
+     <!--modify by wangwei start 20050528-->
+     <forward name="CopyPrint" path="/common/print/NotCarDangerCopyNoneFormatPrint.jsp"/>
+     <!--modify by wangwei end 20050528-->
+     <forward name="PropCancelNotice" path="/commonProp/print/PropCancelNoticeNoneFormatPrint.jsp"/>
+     <forward name="AgriCancelNotice" path="/commonAgri/print/PropCancelNoticeNoneFormatPrint.jsp"/>
+     <!--modify by hanliang start 20051213-->
+     <forward name="PropCompensate" path="/common/print/PropCompensateNoneFormatPrint.jsp"/>
+     <!--modify by hanliang end 20051213-->
+     <!--add by hanliang start 20051214-->
+     <forward name="FreightClaimApply" path="/common/print/FreightClaimApplyNoneFormatPrint.jsp"/>
+     <!--add by hanliang end 20051214-->
+
+     <!--modify by dongchengliang start 20050615-->
+     <forward name="AcciCheck" path="/common/print/AcciCheckNoneFormatPrint.jsp"/>
+     <forward name="ShipEndcase" path="/common/print/ShipEndcaseNoneFormatPrint.jsp"/>
+     <forward name="CargoEndcase" path="/common/print/CargoEndcaseNoneFormatPrint.jsp"/>
+     <forward name="PropCompensateNotice" path="/common/print/PropCompensateNoticeNoneFormatPrint.jsp"/>
+     <forward name="AcciNotClaim" path="/common/print/AcciNotClaimNoneFormatPrint.jsp"/>
+     <!--modify by dongchengliang end 20050615-->
+
+     <forward name="ReparationsList" path="/common/print/AcciReparationsListNoneFormatPrint.jsp"/>
+     <forward name="AcciReview" path="/common/print/AcciReviewNoneFormatPrint.jsp"/>
+     <forward name="AcciCancelNotice" path="/common/print/AcciCancelNoticeNoneFormatPrint.jsp"/>
+     <forward name="ShipCopyPrint" path="/common/print/ShipCopyNoneFormatPrint.jsp"/>
+     <forward name="CargoCopyPrint" path="/common/print/CargoCopyNoneFormatPrint.jsp"/>
+     <!--add by zhaolu start at 2006-06-12-->
+     <forward name="PromisesFeeForService" path="/DAA/print/DAAPromisesFeeForService.jsp"/>
+     <!--add by zhaolu end at 2006-06-12-->
+     <!--add by zhouliu start 2006-6-12-->		
+	    <forward name="Cancelcompel" path="/DAA/print/DAAcompelNoneFormatPrint.jsp"/>
+	   <!--add by zhouliu end 2006-6-12-->  
+	   	 <!-- add by LiYang 20140514 -->
+	 <forward name="CoverPrint" path="/commonAgri/print/AgriCompensateCoverPrint.jsp"/>
+     <forward name="false" path="/index.jsp"/>
+   </action>
+
+   <!--stat query end-->
+
+    <!--18.7 workFlowNodeTimeOut stat-->
+   <action path="/endor" type="com.sinosoft.claim.ui.control.facade.UILEndorFacade" validate="false" scope="request" >
+     <forward name="EDITENDORNOAGRI" path="/commonAgri/endcase/EndorEdit.jsp" />
+     <forward name="EDITENDORDAA" path="/DAA/endcase/DAAEndorEdit.jsp" />
+     <forward name="EDITENDORNODAA" path="/common/endcase/EndorEdit.jsp" />
+     <forward name="EDITADDPRE" path="/common/endcase/AddPreEndorEdit.jsp" />
+     <forward name="SAVEDAA" path="/DAA/regist/DAARegistEdit.jsp" />
+     <forward name="GENENDORSE" path="/DAA/endcase/DAAReduceAmount.jsp" />
+     <!--add by kangzhen 061124  start-->
+     <forward name="AGRIGENENDORSE" path="/commonAgri/endcase/AgriReduceAmount.jsp" />
+     <forward name="ADDPREENDORSE" path="/commonAgri/endcase/AgriAddPre.jsp" />
+     <!--add by kangzhen 061124  end -->
+     <forward name="SAVEENDORSE" path="/DAA/endcase/DAAReduceAmountSubmit.jsp" />
+   </action>
+   <!-- modify by liujianbo modify 20050314 start-->
+   <!-- welcome -->
+   <action path="/welcome" type="com.sinosoft.claim.ui.control.facade.UILWelcomeBeforeShowGetFacade" validate="false" scope="request" >
+     <forward name="success" path="/common/pub/Welcome.jsp" />
+   </action>
+   <!-- modify by liujianbo modify 20050314 start-->
+
+  <!--18.9 flow cancel save -->
+    <action path="/flowNodeCancel" type="com.sinosoft.claim.ui.control.facade.UILFlowNodeCancelPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+    <!--Modify by chenrenda  add 20050323 begin-->
+    <!--Reason:增加回访节点-->
+    <!--19.BackVisit begin-->
+    <!--19.1 BackVisit deal query list -->
+    <action path="/backVisitBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILBackVisitBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDDAA" path="/DAA/backVisit/DAABackVisitEdit.jsp" />
+      <forward name="ADDProp" path="/commonProp/backVisit/PropBackVisitEdit.jsp" />
+      <forward name="ADDAgri" path="/commonAgri/backVisit/PropBackVisitEdit.jsp" />
+      <forward name="EDITDAA" path="/DAA/backVisit/DAABackVisitEdit.jsp" />
+      <forward name="EDITProp" path="/commonProp/backVisit/PropBackVisitEdit.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/backVisit/PropBackVisitEdit.jsp" />
+      <forward name="beforesuccess" path="/common/backVisit/BackVisitBeforeQueryList.jsp" />
+    </action>
+
+    <!--19.2 BackVisit deal save -->
+    <action path="/backVisitSave" type="com.sinosoft.claim.ui.control.facade.UILBackVisitEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+
+    <!--19.3 BackVisit deal common query-->
+    <action type="com.sinosoft.claim.ui.control.facade.UIBackVisitQueryFacade" validate="false" scope="request" path="/BackVisitQuery">
+	  <forward name="result" path="/common/backVisit/BackVisitQueryList.jsp" />
+	  <forward name="result1" path="/common/pub/Blank.html" />
+	  <forward name="success" path="/common/backVisit/BackVisitQueryList.jsp" />
+	</action>
+    <!--BackVisit end  -->
+
+    <!--20.specailCase start -->
+    <!--20.1 scpecailCase deal show-->
+    <action type="com.sinosoft.claim.ui.control.facade.UILSpeicalCaseApplyBeforeEditGetFacade" validate="false" scope="request" path="/specailCaseQuery">
+	     <forward name="success" path="/common/specialCase/SpecialCaseApplyEdit.jsp" />
+	     <forward name="ApplySchedule" path="/common/check/CheckApplyEdit.jsp" />
+	  </action>
+	   <!--20.2 scpecailCase deal save-->
+    <action type="com.sinosoft.claim.ui.control.facade.UILSpeicalCaseEditPostFacade" validate="false" scope="request" path="/specailCaseSave">
+	     <forward name="false" path="/index.jsp"/>
+	  </action>
+    <action type="com.sinosoft.claim.ui.control.facade.UILApplyScheduleEditPostFacade" validate="false" scope="request" path="/applySchedule">
+	     <forward name="false" path="/index.jsp"/>
+	</action>
+    <!--specailCase end -->
+
+
+   <!--21 manageReport start-->
+    <action path="/ReportConfig" type="com.sinosoft.claim.ui.control.facade.UIReportConfigFacade" validate="false" scope="request" >
+      <forward name="success"  path="/DAA/manage/ManageStatQuery.jsp"/>
+    </action>
+    <action path="/ManageReport" type="com.sinosoft.claim.ui.control.facade.UIManageReportFacade" validate="false" scope="request" >
+      <forward name="success" path="/DAA/manage/ManageStatQuery.jsp"/>
+    </action>
+    <!--manageReport end -->
+
+    <!--Modify by chenrenda  add 20050323 end-->
+    <!--Modify by dongchengliang  add from platform 20050603 begin-->
+    <action path="/processPrpDcustomerIdv" type="com.sinosoft.claim.ui.control.facade.UIPrpDcustomerIdvFacade" name="fm" scope="request">
+	<forward name="view" path="/system/customer/ViewPrpDcustomerIdv.jsp"/>
+	<forward name="prepareInsert" path="/system/customer/EditPrpDcustomerIdv.jsp?actionType=insert"/>
+	<forward name="prepareUpdate" path="/system/customer/EditPrpDcustomerIdv.jsp?actionType=update"/>
+	<forward name="update" path="/system/customer/Success.jsp"/>
+    </action>
+    <action path="/processPrpDcustomerUnit" type="com.sinosoft.claim.ui.control.facade.UIPrpDcustomerUnitFacade" name="fm" scope="request">
+	<forward name="view" path="/system/customer/ViewPrpDcustomerUnit.jsp"/>
+	<forward name="prepareUpdate" path="/system/customer/EditPrpDcustomerUnit.jsp?actionType=update"/>
+	<forward name="update" path="/system/customer/Success.jsp"/>
+    </action>
+    <!--Modify by dongchengliang  add 20050603 end-->
+    <!--Modify by dongchengliang  add  20050624 begin-->
+    <action path="/processLinkRecord" type="com.sinosoft.claim.ui.control.facade.UILinkRecordFacade" name="fm" scope="request">
+	<forward name="view" path="/common/linkRecord/ViewLinkRecord.jsp"/>
+	<forward name="prepareInsert" path="/common/linkRecord/EditLinkRecord.jsp?editType=insert"/>
+	<forward name="prepareUpdate" path="/common/linkRecord/EditLinkRecord.jsp?editType=update"/>
+	<forward name="update" path="/system/customer/Success.jsp"/>
+	<forward name="preparePrint" path="/common/linkRecord/PrintLinkRecord.jsp?editType=print"/>
+	<forward name="query" path="/common/linkRecord/LinkRecordQueryEdit.jsp" />
+	<forward name="queryList" path="/common/linkRecord/LinkRecordQueryList.jsp" />
+    </action>
+    <!--Modify by dongchengliang  add 20050624 end-->
+
+    <action path="/lacciCheckBeforeQuery" type="com.sinosoft.claim.ui.control.facade.UIPrpLacciCheckQueryFacade" validate="false" scope="session">
+	    <forward name="target1" path="/common/check/QueryPrpLacciCheckOverviewResult.jsp" />
+    </action>
+
+    <action path="/perilInfoShow" type="com.sinosoft.claim.ui.control.facade.UIPerilInfoQueryFacade" validate="false" scope="request">
+    	<forward name="target1" path="/DAA/regist/DAAExistRegistInfoShow.jsp" />
+    	<forward name="target2" path="/common/pub/ExistRegistInfoShow.jsp" />
+    </action>
+
+    <action path="/processWorkflow" type="com.sinosoft.claim.ui.control.facade.UIWorkFlowProcessFacade" validate="false" scope="request" >
+    </action>
+
+     <action path="/beneInfoShow" type="com.sinosoft.claim.ui.control.facade.UIBeneInfoQueryFacade" validate="false" scope="request">
+    	<forward name="beneInfoShow" path="/common/regist/BeneInfoShow.jsp" />
+    	<forward name="riskInfoShow" path="/common/regist/BeneKindShow.jsp" />
+     </action>
+     <!--Modify by qinyongli  add 20050817 start  -->
+     <action path="/reinsTrialResult" type="com.sinosoft.claim.ui.control.facade.UIReinsTrialFacade" validate="false" scope="request">
+        <forward name="success" path="/common/claim/reinsTrialResult.jsp" />
+    	<forward name="false" path="/common/pub/UIErrorPage.jsp" />
+     </action>
+     <!--Modify by qinyongli  add 20050817  end-->
+      <!--Modify by qinyongli  add 20050919 start  -->
+     <action path="/modifySumClaim" type="com.sinosoft.claim.ui.control.facade.UIModifySumClaimFacade" validate="false" scope="request">
+        <forward name="modifyBeforeQuery" path="/common/modifySumClaim/ModifyBeforeQueryEdit.jsp" />
+        <forward name="modifyDetail" path="/common/modifySumClaim/ModifySumClaimDetailEdit.jsp" />
+        <forward name="modifySave" path="/common/modifySumClaim/ModifySaveSuccess.jsp" />
+    	<forward name="false" path="/common/pub/UIErrorPage.jsp" />
+     </action>
+     <!--Modify by qinyongli  add 20050919  end-->
+     <!--添加修改密码功能 2005-08-27-->
+     <action path="/UIUpdatePwd" type="com.sinosoft.claim.ui.control.facade.UIUpdatePwdFacade" validate="false" scope="request" >
+    </action>
+    
+    <!--添加意健险不予立案功能 2005-09-06-->
+     <action path="/notGrandClaim" type="com.sinosoft.claim.ui.control.facade.UINotGrandClaimFacade" validate="false" scope="request" >
+    </action>
+    <action path="/reCaseBefore" type="com.sinosoft.claim.ui.control.facade.UIReCaseBeforeEditFacade" validate="false" scope="request" >
+      <forward name="success" path="/common/recase/reCaseEdit.jsp" />
+      </action>  
+
+<!--modify by liyanjie 2005-11-03 add CertifyImgDel start-->
+    <action path="/processCertifyImg" type="com.sinosoft.claim.ui.control.facade.UIProcessCertifyImgFacade" name="fm" validate="false" scope="request" >
+      <forward name="success" path="/common/pub/MessagePage.jsp" />   
+    </action>
+    <!--modify by liyanjie 2005-11-03 add CertifyImgDel end-->
+     
+     <action path="/appRecase" type="com.sinosoft.claim.ui.control.facade.UIReCaseEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+     </action>
+     
+    <!--add by miaowenjun 2006-04-13 start -->
+    <action path="/giveupTask" type="com.sinosoft.claim.ui.control.facade.UILGiveupTaskFacade" validate="false" scope="request" >  
+    </action>
+    <!--add by mengdongdong 2006-04-13 end --> 
+
+
+    <!--add by mengdongdong 2006-2-9 start -->
+    <action path="/indemnityReceiptSave" type="com.sinosoft.claim.ui.control.facade.UIIndemnityReceiptEditPostFacade" validate="false" scope="request" >
+    </action>
+    <action path="/visa" type="com.sinosoft.claim.ui.control.facade.UIVisaFacade" validate="false" scope="request">
+    	<forward name="success" path="/DAA/print/printInfo.jsp" />   
+    </action>
+    <!--add by mengdongdong 2006-2-9 end -->
+
+    <action path="/openFittingsSystem" type="com.sinosoft.claim.ui.control.facade.UILClaimFittingsInterFaceFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp"/>
+    </action>
+    <!-- add by zhaolu 20060814 start -->
+    <action type="com.sinosoft.platform.ui.control.action.UIUtiMenuAction" name="fm" input="/system/menu/QueryUtiMenuOverviewResult.jsp" path="/processUtiMenu" scope="request">
+      <forward name="prepareQuery" path="/system/menu/QueryUtiMenuOverview.jsp"/>
+      <forward name="query" path="/system/menu/QueryUtiMenuOverviewResult.jsp"/>
+      <forward name="queryContinue" path="/system/menu/QueryUtiMenuOverviewResult.jsp"/>
+      <forward name="view" path="/system/menu/ViewUtiMenu.jsp"/>
+      <forward name="prepareInsert" path="/system/menu/EditUtiMenu.jsp?actionType=insert"/>
+      <forward name="insert" path="/processUtiMenu.do?actionType=configMenu&amp;taskCode=configMenu&amp;menuStyle=simple"/>
+      <forward name="delete" path="/processUtiMenu.do?actionType=configMenu&amp;taskCode=configMenu&amp;menuStyle=simple"/>
+      <forward name="prepareUpdate" path="/system/menu/EditUtiMenu.jsp?actionType=update"/>
+      <forward name="update" path="/processUtiMenu.do?actionType=configMenu&amp;taskCode=configMenu&amp;menuStyle=simple"/>
+      <forward name="prepareConfigMenu" path="/system/menu/PrepareConfigUtiMenu.jsp?actionType=configMenu"/>
+    </action>
+    <!-- add by zhaolu 20060814 end -->
+        
+ 		<!---add by guolei 20070124 start-->
+	 	<action path="/compelCrashImportInfo" type="com.sinosoft.claim.ui.control.facade.UILBeforeImportCompelCrashInfoFacade" validate="false" scope="request">
+			<forward name="success" path="/DAA/compelcrash/DAAClaimInfoRegist.jsp" />
+			<forward name="failde" path="/DAA/compelcrash/DAAClaimAccidentQuery.jsp" />
+			<forward name="query" path="/DAA/compelcrash/DAAClaimAccidentQuery.jsp" />
+		</action>
+		<action path="/compelCrashImportInfoUpload" type="com.sinosoft.claim.ui.control.facade.UILUploadImportCompelCrashInfoFacade" validate="false" scope="request">
+			<forward name="save" path="/DAA/compelcrash/" />
+			<forward name="success" path="/DAA/compelcrash/Message.jsp" />
+		</action>
+		<!-- 查询facade-->
+		<action path="/accidentInfoQuery" type="com.sinosoft.claim.ui.control.facade.UILAccidentInfoQueryFacade" validate="false" scope="request">
+			<forward name="edit" path="/DAA/compelcrash/DAAClaimInfoRegist.jsp" />
+			<forward name="query" path="/DAA/compelcrash/DAAClaimCarAccidentQuery.jsp" />
+		</action>
+        
+		<!---add by guolei 20070124 end-->
+  <!-- add by zhaolu 20060821 start -->
+    <action type="com.sinosoft.platform.ui.control.action.UICodeInputAction" name="fm" input="/common/pub/QueryCodeInputOverview.jsp" scope="request" path="/processCodeInput">
+    <forward name="query" path="/common/pub/QueryCodeInputOverviewResult.jsp" />
+    </action>
+  <!-- add by zhaolu 20060821 end-->
+  	<action path="/certifyUpload" type= "com.sinosoft.claim.ui.control.facade.UICertifyUploadFacade" scope="request">
+  		<forward name="message" path="/DAA/certify/DAACertifyUploadMessage.jsp" />
+  	</action>
+  <!-- 车险平台：定时任务上传-->
+    <action path="/ciClaimAutoUpload" type= "com.sinosoft.claim.ui.control.facade.UICIClaimAutoUploadFacade" scope="request">
+    </action>
+    <!-- 中央政策性种植险 理赔清单关联功能，由理赔清单关联号 带出总户数和总亩数 -->
+	<action path="/claimRelateListNo" type="com.sinosoft.claim.ui.control.facade.UIClaimRelateListNoFacade"   scope="request" >
+    </action>
+     <!-- 并案立案处理列表查询 -->
+     <action path="/claimBeforeEditCombine" type="com.gyic.claim.ui.control.facade.UILClaimBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDAgri" path="/combineAgri/claim/AgriClaimEditCombine.jsp" />
+      <forward name="EDITAgri" path="/commonAgri/claim/AgriClaimEditCombine.jsp" />
+      <forward name="ADDDAAFALSE" path="/common/pub/MessagePage.jsp" />
+    </action>
+    <!--并案处理的整体提交 -->
+    <action path="/claimCombineSave" type="com.gyic.claim.ui.control.facade.UILClaimEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+        <!--并案查勘处理的列表页面查询-->
+    <action path="/checkCombineBeforeEdit" type="com.gyic.claim.ui.control.facade.UILCheckBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDAgri" path="/combineAgri/check/AgriCheckEdit.jsp" />
+      <forward name="EDITAgri" path="/combineAgri/check/AgriCheckEdit.jsp" />
+    </action>
+     <action path="/combineCertainLossSave" type="com.gyic.claim.ui.control.facade.UILCertainLossEditPostFacade" validate="false" scope="request" >
+      <forward name="step1" path="/DAA/certainLoss/DAACertainLossEditSave.jsp" />
+      <forward name="step2" path="/DAA/certainLoss/DAACaseNoSave.jsp" />
+   </action>
+	<action path="/combineCheckSave" type="com.gyic.claim.ui.control.facade.UILCheckEditPostFacade" validate="false" scope="request" >
+      <forward name="false" path="/index.jsp" />
+    </action>
+<!-- 养殖险并案处理-合并案件 20110801 start qianxiantao -->
+    <action path="/wfLogUniteQuery" type="com.gyic.claim.ui.control.facade.UIWorkFlowLogQueryUniteEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/combineAgri/claimUnite/WfLogClaimUniteStatusList.jsp"/>          
+    </action>
+    <action path="/wfLogUniteQueryEdite" type="com.gyic.claim.ui.control.facade.UIClaimComBineEditeFacade" validate="false" scope="request" >
+      <forward name="success" path="/combineAgri/claimUnite/comBineEditeList.jsp"/>          
+    </action>
+    <action path="/claimComBine" type="com.gyic.claim.ui.control.facade.UIClaimComBineFacade" validate="false" scope="request" >         
+    </action>
+    <action path="/claimComBineEditeDelete" type="com.gyic.claim.ui.control.facade.UIClaimComBineEditeDeleteFacade" validate="false" scope="request" >         
+    </action>
+    <action path="/claimComBineEditeAdd" type="com.gyic.claim.ui.control.facade.UIClaimComBineEditeAddFacade" validate="false" scope="request" >         
+    </action>
+    <!-- 养殖险并案处理-合并案件 20110801 end qianxiantao -->
+    <!-- 养殖险并案处理-理算环节 20110812 start qianxiantao -->
+    <action path="/compensateQueryList" type="com.gyic.claim.ui.control.facade.UIClaimCompensateGetListFacade" validate="false" scope="request" >
+      <forward name="success" path="/combineAgri/compensate/CombineCompentQueryList.jsp"/>          
+    </action>
+    <action path="/combineCompensateBeforeEditeADD" type="com.gyic.claim.ui.control.facade.UILCombineCompensateBeforeEditGetFacade" validate="false" scope="request" >         
+      <forward name="ADDAgri" path="/combineAgri/compensate/AgriCombineCompensateCommonEdit.jsp" />
+    </action>
+        <action path="/combineCompensateBeforeEdite" type="com.gyic.claim.ui.control.facade.UILCombineCompensateBeforeEditGetFacade" validate="false" scope="request" >         
+      <forward name="EDITAgri" path="/combineAgri/compensate/AgriCombineCompensateCommonEdit.jsp" />
+    </action>
+    <action path="/compensateCombineFinishQueryList" type="com.gyic.claim.ui.control.facade.UILCombineCompensateBeforeEditGetFacade" validate="false" scope="request" >         
+      <forward name="EDITAgri" path="/combineAgri/compensate/AgriCombineCompensateCommonEdit.jsp" />
+    </action>
+    <action path="/combineCompensateEditeADD" type="com.gyic.claim.ui.control.facade.UILCombineCompensateBeforeEditGetFacade" validate="false" scope="request" >          
+      <forward name="ADDAgri" path="/combineAgri/compensate/AgriCombineCompensatePrivateEdit.jsp" />
+    </action>
+    <action path="/combineCompensateEdite" type="com.gyic.claim.ui.control.facade.UILCombineCompensateBeforeEditGetFacade" validate="false" scope="request" >          
+      <forward name="EDITAgri" path="/combineAgri/compensate/AgriCombineCompensatePrivateEdit.jsp" />
+    </action>
+    <action path="/combinecompensatePrivateSave" type="com.gyic.claim.ui.control.facade.UILCompensateEditPostFacade" validate="false" scope="request" >          
+    </action>  
+    <action path="/CombinecompensateSave" type="com.gyic.claim.ui.control.facade.UILCombineCompensateEditPostFacade" validate="false" scope="request" >          
+    </action>
+    <!-- 养殖险并案处理-理算环节 20110813 end qianxiantao -->
+ <!--12.1 并案定损详细页面 -->
+ <action path="/certainLossCombineBeforeEdit" type="com.gyic.claim.ui.control.facade.UILCertainLossBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="ADDAgri" path="/combineAgri/certainLoss/AgriPropEdit.jsp" /> 
+      <forward name="EDITAgri" path="/combineAgri/certainLoss/AgriPropEdit.jsp" /> 
+    </action>
+    <!--12.1 并案定损详细页面 -->
+ <action path="/certainLossCombineFinishQueryList" type="com.gyic.claim.ui.control.facade.UILCertainLossBeforeEditGetFacade" validate="false" scope="request" >
+      <forward name="EDITAgri" path="/combineAgri/certainLoss/AgriPropEdit.jsp" /> 
+      <forward name="ADDAgri" path="/combineAgri/certainLoss/AgriPropEdit.jsp" /> 
+      <forward name="success" path="/combineAgri/certainLoss/AgriPropEdit.jsp" /> 
+    </action>
+       <!-- add by 李杨 gyic 20110802 start 增加并案查询页面URL -->
+     <action path="/wfLogQueryCombine" type="com.gyic.claim.ui.control.facade.UIWorkFlowLogCombineQueryEditGetFacade" validate="false" scope="request" >
+      <forward name="success" path="/combineAgri/workFlow/task/WfLogCombineStatusList.jsp"/>      
+      <!-- forward name="specialQuery" path="/common/specialCase/SpecialCaseQueryList.jsp"/-->      
+     </action>
+     <action path="/SendMessage" type="com.sinosoft.claim.SMSService.SendSMS" validate="false" scope="request">
+     	<forward name="success" path="/common/schedule/returnMessage.jsp" />
+     </action>
+     <!--并案单证处理的列表页面查询 -->
+    <action path="/certifyCombineBeforeEdit" type="com.sinosoft.claim.ui.control.facade.UILCertifyBeforeEditCombineGetFacade" validate="false" scope="request" >
+      <forward name="ADDAgri" path="/common/certify/CertifyEditCombine.jsp" />
+      <forward name="EDITAgri" path="/common/certify/CertifyEditCombine.jsp" />
+      <forward name="ADDOtherCertifyDirect" path="/common/certify/CertifyDirectEdit.jsp" />
+      <forward name="ADDCertifyDirect" path="/DAA/certify/DAACertifyDirectEdit.jsp" />
+      <forward name="SELECTCAR" path="/common/certify/CertifyCarSelect.jsp" />
+      <forward name="SELECTFLAG" path="/common/certify/CertifyBeforeSelectFlag.jsp" />
+      <forward name="backOne" path="/common/pub/BackOneStep.jsp"/>
+      <forward name="backTwo" path="/common/pub/BackTwoStep.jsp"/>
+      <forward name="CertifyDirectPrint" path="/DAA/certify/DAACertifyRequiredList.jsp" />
+      <forward name="CertifyDirectPrintAdd" path="/DAA/certify/DAACertifyAddRequiredList.jsp" />
+      <forward name="OtherCertifyDirectPrint" path="/common/certify/CertifyRequiredList.jsp"/>
+    </action>
+     <!--并案单证处理的个案页面查询 -->
+    <action path="/certifyBeforeEditOne" type="com.sinosoft.claim.ui.control.facade.UILCertifyBeforeEditCombineGetFacade" validate="false" scope="request" >
+      <forward name="ADDAgri" path="/common/certify/CertifyEditOne.jsp" />
+      <forward name="ADDOtherCertifyDirect" path="/common/certify/CertifyDirectEdit.jsp" />
+      <forward name="ADDCertifyDirect" path="/DAA/certify/DAACertifyDirectEdit.jsp" />
+      <forward name="SELECTCAR" path="/common/certify/CertifyCarSelect.jsp" />
+      <forward name="SELECTFLAG" path="/common/certify/CertifyBeforeSelectFlag.jsp" />
+      <forward name="backOne" path="/common/pub/BackOneStep.jsp"/>
+      <forward name="backTwo" path="/common/pub/BackTwoStep.jsp"/>
+      <forward name="CertifyDirectPrint" path="/DAA/certify/DAACertifyRequiredList.jsp" />
+      <forward name="CertifyDirectPrintAdd" path="/DAA/certify/DAACertifyAddRequiredList.jsp" />
+      <forward name="OtherCertifyDirectPrint" path="/common/certify/CertifyRequiredList.jsp"/>
+    </action>
+    
+    <!--并案单证处理的整体提交 -->
+    <action path="/certifyCombineSave" type="com.sinosoft.claim.ui.control.facade.UILCertifyEditPostCombineFacade" validate="false" scope="request" >
+      <forward name="step1" path="/DAA/certify/DAACertifyEditSave.jsp" />
+      <forward name="step2" path="/DAA/certify/DAACaseNoSave.jsp" />
+    </action>
+    
+    <!--并案单证处理的个案暂存 -->
+    <action path="/certifyOneSave" type="com.sinosoft.claim.ui.control.facade.UILCertifyEditPostCombineOneFacade" validate="false" scope="request" >
+      <forward name="step1" path="/DAA/certify/DAACertifyEditSave.jsp" />
+      <forward name="step2" path="/DAA/certify/DAACaseNoSave.jsp" />
+    </action>
+    <!-- 工作转交 -->
+	 <action path="/workrove" type="com.sinosoft.workrove.ui.control.facade.UILCoincareOfWorkEditPostFacade" name="workRoveForm"  scope="request"  input="/common/workrove/TurnTask.jsp">
+	     <forward name="success" path="/common/workrove/TurnTask.jsp" redirect="false"/>
+	 </action>
+	 
+	     <!--中央政策性种植险理赔清单缮制查看页面 -->
+    <action path="/settleList" type="com.gyic.claim.ui.control.facade.UIClaimGetSettleListFacade" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/commonAgri/check/PlantingSettleList.jsp" />
+      <forward name="message" path="/commonAgri/check/PlantingSettleInfo.jsp" />
+    </action>
+    <!--中央政策性种植险理赔清单缮制页面清单数据的删除 -->
+    <action path="/deletePlantingSettleList" type="com.gyic.claim.ui.control.action.UIDeletePlantingSettleListAction" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/settleList.do" />
+      <forward name="message" path="/commonAgri/check/PlantingSettleInfo.jsp" />
+    </action>
+    <!--中央政策性种植险理赔清单缮制查看导出-->
+    <action path="/plantingSettleExport" type="com.gyic.claim.ui.control.action.UIPlantingSettleExportAction" name="loadForm" validate="false" scope="request" >
+    </action>
+    <!--中央政策性种植险理赔清单导入校验-->
+    <action path="/plantingSettleImport" type="com.gyic.claim.ui.control.action.UIPlantingSettleImportAction" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/settleList.do" />
+    	<forward name="message" path="/commonAgri/check/PlantingSettleInfo.jsp" />
+    </action>
+    <!--中央政策性种植险理赔清单导入保存-->
+    <action path="/plantingSettleSave" type="com.gyic.claim.ui.control.action.UIPlantingSettleSaveAction" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/commonAgri/check/PlantingSettleInfo.jsp" />
+    	<forward name="message" path="/commonAgri/check/PlantingSettleInfo.jsp" />
+    </action>
+     <!--大病医疗保险理赔清单缮制查看页面 -->
+    <action path="/medicalsettleList" type="com.gyic.claim.ui.control.facade.UIClaimGetMedicalSettleListFacade" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/commonAcci/check/MedicalSettleList.jsp" />
+      <forward name="message" path="/commonAcci/check/MedicalSettleInfo.jsp" />
+    </action>
+    <!--大病医疗保险理赔清单缮制页面清单数据的删除 -->
+    <action path="/deleteMedicalSettleList" type="com.gyic.claim.ui.control.action.UIDeleteMedicalSettleListAction" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/medicalsettleList.do" />
+      <forward name="message" path="/commonAcci/check/MedicalSettleInfo.jsp" />
+    </action>
+    <!--大病医疗保险理赔清单缮制查看导出-->
+    <action path="/medicalSettleExport" type="com.gyic.claim.ui.control.action.UIMedicalSettleExportAction" name="loadForm" validate="false" scope="request" >
+    </action>
+    <!--大病医疗保险理赔清单导入校验-->
+    <action path="/medicalSettleImport" type="com.gyic.claim.ui.control.action.UIMedicalSettleImportAction" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/medicalsettleList.do" />
+    	<forward name="message" path="/commonAcci/check/MedicalSettleInfo.jsp" />
+    </action>
+    <!--大病医疗保险理赔清单导入保存-->
+    <action path="/medicalSettleSave" type="com.gyic.claim.ui.control.action.UIMedicalSettleSaveAction" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/commonAcci/check/MedicalSettleInfo.jsp" />
+    	<forward name="message" path="/commonAcci/check/MedicalSettleInfo.jsp" />
+    </action>
+    
+    
+    <!-- 新增班表 初始化页面 -->
+	<action path="/jobManagerEdit" type="com.sinosoft.claim.ui.control.facade.UIADDJobManagerFacade" validate="false" scope="request">
+		<forward name="success" path="/common/jobManager/JobManagerAgency.jsp"></forward>
+		<forward name="choicePage" path="/common/jobManager/JobManagerChoicePage.jsp"></forward>
+		<forward name="DAAPage" path="/common/jobManager/JobManagerEdit.jsp"></forward>
+		<forward name="agency" path="/common/jobManager/JobManagerAgency.jsp"></forward>
+	</action>
+	
+	<!-- 班表添加 -->
+	<action path="/jobManagerSave" type="com.sinosoft.claim.ui.control.facade.UIADDJobManagerPostFacade" validate="false" scope="request">
+		<forward name="false" path="/index.jsp" />
+	</action>
+	
+	<!-- 班表查询 -->
+	<action path="/jobManagerQuery" type="com.sinosoft.claim.ui.control.facade.UIADDJobManagerQueryFacade" validate="false" scope="request">
+		<forward name="success" path="/common/jobManager/JobManagerQueryList.jsp"></forward>
+		<forward name="showlink" path="/common/jobManager/jobManagerPage.jsp"></forward>
+	</action>
+	
+	<!-- 区域设置 初始化页面 -->
+	<action path="/areaSettingEdit" type="com.sinosoft.claim.ui.control.facade.UIADDAreaSettingFacade" validate="false" scope="request">
+		<forward name="success" path="/common/areaSetting/AreaSettingEdit.jsp"></forward>
+	</action>
+	
+	<!-- 区域设置 添加 -->
+	<action path="/areaSettingSave" type="com.sinosoft.claim.ui.control.facade.UIADDAreaSettingPostFacade" validate="false" scope="request">
+		<forward name="false" path="/index.jsp" />
+	</action>
+	
+	<!-- 区域设置查询 -->
+	<action path="/areaSettingQuery" type="com.sinosoft.claim.ui.control.facade.UIADDAreaSettingQueryFacade" validate="false" scope="request">
+		<forward name="success" path="/common/areaSetting/AreaSettingQueryList.jsp"></forward>
+	</action>
+    
+    <!--种植险理赔清单缮制查看页面,适用需要清单的多标的险种，不含中央政策性农险 -->
+    <action path="/planting31SettleList" type="com.gyic.claim.ui.control.facade.UIClaimGet31SettleListFacade" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/commonAgri/claim/Planting31SettleList.jsp" />
+      <forward name="message" path="/commonAgri/claim/Planting31SettleInfo.jsp" />
+    </action>
+    
+     <!--3224理赔清单缮制查看页面,适用需要清单的多标的险种，不含中央政策性农险 -->
+    <action path="/planting3224SettleList" type="com.gyic.claim.ui.control.facade.UIClaimGetSettleListFacade3224" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/commonAgri/claim/Planting3224SettleList.jsp" />
+      <forward name="message" path="/commonAgri/claim/Planting3224SettleInfo.jsp" />
+    </action>
+    
+        <action path="/temblor0311SettleList" type="com.gyic.claim.ui.control.facade.UIClaimGetSettleListFacade0311" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/commonProp/claim/Temblor0311SettleList.jsp" />
+      <forward name="message" path="/commonProp/claim/Temblor0311SettleInfo.jsp" />
+    </action>
+    
+    
+       <!--理赔清单缮制页面清单数据的删除,适用需要清单的多标的险种，不含中央政策性农险 -->
+    <action path="/deletePlanting31SettleList" type="com.gyic.claim.ui.control.action.UIDeletePlanting31SettleListAction" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/planting31SettleList.do" />
+      <forward name="message" path="/commonAgri/claim/Planting31SettleInfo.jsp" /> 
+    </action>
+    
+      <!--3224理赔清单缮制页面清单数据的删除,适用需要清单的多标的险种，不含中央政策性农险 -->
+    <action path="/deletePlantingSettleList3224" type="com.gyic.claim.ui.control.action.UIDeletePlantingSettleListAction3224" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/planting3224SettleList.do" />
+      <forward name="message" path="/commonAgri/claim/Planting3224SettleInfo.jsp" /> 
+    </action>
+    
+     <action path="/deleteTemblorSettleList0311" type="com.gyic.claim.ui.control.action.UIDeleteTemblorSettleListAction0311" name="loadForm" validate="false" scope="request" >
+      <forward name="success" path="/temblor0311SettleList.do" />
+      <forward name="message" path="/commonProp/claim/Temblor0311SettleInfo.jsp" /> 
+    </action>
+    
+    
+    <!--理赔清单缮制查看导出,适用需要清单的多标的险种，不含中央政策性农险-->
+    <action path="/planting31SettleExport" type="com.gyic.claim.ui.control.action.UIPlanting31SettleExportAction" name="loadForm" validate="false" scope="request" >
+    </action>
+    
+     <!--3224理赔清单缮制查看导出,适用需要清单的多标的险种，不含中央政策性农险-->
+    <action path="/plantingSettleExport3224" type="com.gyic.claim.ui.control.action.UIPlantingSettleExportAction3224" name="loadForm" validate="false" scope="request" >
+    </action>
+    <action path="/temblorSettleExport0311" type="com.gyic.claim.ui.control.action.UITemblorSettleExportAction0311" name="loadForm" validate="false" scope="request" >
+    </action>
+    <!--理赔清单导入校验,适用需要清单的多标的险种，不含中央政策性农险-->
+    <action path="/planting31SettleImport" type="com.gyic.claim.ui.control.action.UIPlanting31SettleImportAction" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/planting31SettleList.do" />
+    	<forward name="message" path="/commonAgri/claim/Planting31SettleInfo.jsp" />
+    </action>
+    
+     <!--3224理赔清单导入校验,适用需要清单的多标的险种，不含中央政策性农险-->
+    <action path="/plantingSettleImport3224" type="com.gyic.claim.ui.control.action.UIPlantingSettleImportAction3224" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/planting3224SettleList.do" />
+    	<forward name="message" path="/commonAgri/claim/Planting3224SettleInfo.jsp" />
+    </action>
+    
+    <action path="/temblorSettleImport0311" type="com.gyic.claim.ui.control.action.UITemblorSettleImportAction0311" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/temblor0311SettleList.do" />
+    	<forward name="message" path="/commonProp/claim/Temblor0311SettleInfo.jsp" />
+    </action>
+    
+    
+    <!--理赔清单导入保存,适用需要清单的多标的险种，不含中央政策性农险-->
+    <action path="/planting31SettleSave" type="com.gyic.claim.ui.control.action.UIPlanting31SettleSaveAction" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/commonAgri/claim/Planting31SettleInfo.jsp" />
+    	<forward name="message" path="/commonAgri/claim/Planting31SettleInfo.jsp" />
+    </action>
+    
+    <!--3224理赔清单导入保存,适用需要清单的多标的险种，不含中央政策性农险-->
+    <action path="/plantingSettleSave3224" type="com.gyic.claim.ui.control.action.UIPlantingSettleSaveAction3224" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/commonAgri/claim/Planting3224SettleInfo.jsp" />
+    	<forward name="message" path="/commonAgri/claim/Planting3224SettleInfo.jsp" />
+    </action>
+    
+    <action path="/temblorSettleSave0311" type="com.gyic.claim.ui.control.action.UITemblorSettleSaveAction0311" name="loadForm" validate="false" scope="request" >
+    	<forward name="success" path="/commonProp/claim/Temblor0311SettleInfo.jsp" />
+    	<forward name="message" path="/commonProp/claim/Temblor0311SettleInfo.jsp" />
+    </action>
+    
+    <!-- 种植险（不含中央政策性农险） -->
+        <!--newLoss start-->
+    <action path="/CompensatePlanting31Loss" type="com.sinosoft.claim.ui.control.facade.UILCompensate31LlossFacade" validate="false" scope="request" >
+      <forward name="success" path="/commonAgri/compensate/flashCompensate31Lloss.jsp" />
+      <forward name="error" path="/commonAgri/pub/UIErrorPage.jsp" />
+    </action>
+    <action path="/compensateAgriPlanting31Generate" type="com.sinosoft.claim.ui.control.facade.UILCompensateAgriPlanting31GeneratePostFacade" validate="false" scope="request" >
+      <forward name="generate" path="/commonAgri/compensate/AgriCompensateGenerate.jsp" />
+    </action>
+    
+    <action path="/CompensatePlanting3224Loss" type="com.sinosoft.claim.ui.control.facade.UILCompensate3224LlossFacade" validate="false" scope="request" >
+      <forward name="success" path="/commonAgri/compensate/flashCompensate3224Lloss.jsp" />
+      <forward name="error" path="/commonAgri/pub/UIErrorPage.jsp" />
+    </action>
+
+    <action path="/CompensateTemblor0311Loss" type="com.sinosoft.claim.ui.control.facade.UILCompensate0311LlossFacade" validate="false" scope="request" >
+      <forward name="success" path="/commonProp/compensate/flashCompensate0311Lloss.jsp" />
+      <forward name="error" path="/commonProp/pub/UIErrorPage.jsp" />
+    </action>
+      
+     <!--newLoss end-->
+     <!-- added by xia for支付处理 begin
+     <action path="/prplpaysearch"
+		  name="payform"
+		  type="com.sinosoft.claim.ui.control.facade.UIPrprlpaySearchFacade"
+		  scope="request">
+		  <forward name="true" path="/common/payment/Paymentlist.jsp" redirect="false"/>
+	  </action> -->
+	  <action path="/prplpayadd"
+		  name="payform"
+		  type="com.sinosoft.claim.ui.control.facade.UIPrprlpayAddFacade"
+		  scope="request">
+		  <forward name="s" path="/common/payment/Paymentfromtree.jsp" redirect="false"/>
+	  </action>
+	  <action path="/prplpaysave"
+		  name="payform"
+		  type="com.sinosoft.claim.ui.control.facade.UIPrprlpaySaveFacade"
+		  scope="request">
+		  <forward name="s" path="/common/pub/MessagePage.jsp" />
+	  </action>
+	  
+	  <!-- 回访管理 查询 -->
+		<action path="/returnVisitQueryEdit" type="com.sinosoft.claim.ui.control.facade.UILReturnVisitQueryFacade" validate="false" scope="request">
+			<forward name="showPage" path="/DAA/returnVisit/DAAReturnVisitQueryEdit.jsp"></forward>
+			<forward name="success" path="/DAA/returnVisit/DAAReturnVisitQueryList.jsp"></forward>
+			<forward name="exp" path="/DAA/returnVisit/DAAReturnExportXLS.jsp"></forward>
+		</action>
+		<!-- 回访管理 初始化页面 -->
+		<action path="/returnVisitEdit" type="com.sinosoft.claim.ui.control.facade.UILReturnVisitGetFacade" validate="false" scope="request">
+			<forward name="showPage" path="/DAA/returnVisit/DAAReturnVisitQueryAddEdit.jsp"></forward>
+			<forward name="success" path="/DAA/returnVisit/DAAReturnVisitQueryList.jsp"></forward>
+			<forward name="addPage" path="/DAA/returnVisit/DAAReturnVisitEdit.jsp"></forward>
+			<forward name="dealWith" path="/DAA/returnVisit/DAADealWithQueryList.jsp"></forward>
+			<forward name="dealWithADD" path="/DAA/returnVisit/DAAComplaintEdit.jsp"></forward>
+		</action>
+		
+		<!-- 回访管理   明细查询 -->
+		<action path="/returnDetailEdit" type="com.sinosoft.claim.ui.control.facade.UIReturnDetailGetFacade" validate="false" scope="request">
+			<forward name="success" path="/DAA/returnVisit/DAAReturnVisitDetailList.jsp"></forward>
+			<forward name="payTool" path="/DAA/returnVisit/DAAReturnVisitPayDetailList.jsp"></forward>
+		</action>	
+		<!-- 回访管理   支付明细查询 -->
+		<action path="/returnPayDetailEdit" type="com.sinosoft.claim.ui.control.facade.UIReturnPayDetailGetFacade" validate="false" scope="request">
+			<forward name="success" path="/DAA/returnVisit/DAAQueryPayDetailList.jsp"></forward>
+		</action>
+		<!-- 回访管理 保存功能 -->
+		<action path="/returnVisitSaveEdit" type="com.sinosoft.claim.ui.control.facade.UILReturnVisitPostFacade" validate="false" scope="request">
+			<forward name="false" path="/index.jsp" />
+		</action>
+		
+		<!-- 回访管理 新增投诉初始化 -->
+		<action path="/complaintEdit" type="com.sinosoft.claim.ui.control.facade.UILComplaintGetFacade" validate="false" scope="request">
+			<forward name="success" path="/DAA/returnVisit/DAAComplaintEdit.jsp" />
+		</action>
+		
+		<!-- 回访管理 投诉保存功能 -->
+		<action path="/complaintSaveEdit" type="com.sinosoft.claim.ui.control.facade.UILComplaintPostFacade" validate="false" scope="request">
+			<forward name="false" path="/index.jsp" />
+		</action>
+		
+		<!-- 回访管理 投诉投诉跟踪查询 -->
+		<action path="/complaintAddEdit" type="com.sinosoft.claim.ui.control.facade.UILComplaintQueryFacade" validate="false" scope="request">
+			<forward name="showPage" path="/DAA/returnVisit/DAAReturnVisitQueryAddEdit.jsp"></forward>
+			<forward name="dealWith" path="/DAA/returnVisit/DAADealWithQueryList.jsp"></forward>
+			<forward name="dealWithADD" path="/DAA/returnVisit/DAAComplaintEdit.jsp"></forward>
+		</action>
+	  
+     <!-- added by xia for支付处理 end -->
+     <!-- 大病接口补传功能 -->
+     	
+		<action path="/medicalReupload" type="com.sinosoft.claim.ui.control.facade.UILMedicalReuploadPostFacade" validate="false" scope="request">
+			<forward name="success" path="/common/medical/reuploadResult.jsp" />
+		</action>
+     
+     <!-- 支付信息 begin zf -->
+     	<!-- 新增支付菜单新增支付查询 -->
+		<action path="/prplpaynew" type="com.sinosoft.claim.ui.control.facade.UILpaymainNewBeforeFacade"  validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAApaymentNewList.jsp" redirect="false"/>
+		</action>
+		<!-- 预赔理算环节收付信息新增页面 -->
+		<action path="/paymainEdit" type="com.sinosoft.claim.ui.control.facade.UILpaymainEditPostfacade"  validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAApaymainEdit.jsp"></forward>
+		</action>
+		<!-- 预赔理算环节收付合并时的验证 -->
+		<action path="/payMergeCheck"  type="com.sinosoft.claim.ui.control.facade.UILpayMergeCheckfacade"  validate="false" scope="request">
+		</action>
+		<!-- 查询支付信息 -->
+	  <action path="/prplpaysearch"
+		  name="payform"
+		  type="com.sinosoft.claim.ui.control.facade.UIPrprlpaySearchFacade"
+		  scope="request">
+		  <forward name="true" path="/DAA/payment/DAApaymentlist.jsp" redirect="false"/>
+		  <forward name="success" path="/DAA/payment/DAApaymentQuerylist.jsp" redirect="false"/>
+	  </action>
+	  <!--预赔理算环节收付信息保存  -->
+		<action path="/payMainSave" type="com.sinosoft.claim.ui.control.facade.UILpayMainFacade"  validate="false" scope="request">
+		</action>
+	  <!-- 预赔理算环节收付信息删除 -->
+		<action path="/paymainRemove" type="com.sinosoft.claim.ui.control.facade.UILpaymainRemoveFacade"  validate="false" scope="request">
+		</action>
+	 <!--支付录入保存提交时校验是否为第三方支付上线前数据  -->
+		<action path="/thirdPayQuery" type="com.sinosoft.claim.ui.control.facade.UILpayThirdQueryFacade"  validate="false" scope="request"></action>
+		<!-- 多个案件合并时页面增加理算书控制-->
+		<action path="/paymainMergeAddBefor" type="com.sinosoft.claim.ui.control.facade.UILpaymainMergeBeforAddFacade"  validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAAPaymainNewAddPay.jsp"></forward>
+		</action>
+		<!-- 多个案件合并时页面增加理算书查询-->
+		<action path="/paymainMergeAddQuery" type="com.sinosoft.claim.ui.control.facade.UILpaymainMergeAddQueryFacade"  validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAAPaymainMergeAddList.jsp"></forward>
+		</action>
+		<!-- 多个案件合并支付录入-->
+		<action path="/paymainEditFromUndwrt" type="com.sinosoft.claim.ui.control.facade.UILpaymainEditFromUndwrtFacade"  validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAApaymainEdit.jsp"></forward>
+		</action>
+		<!-- 支付主动撤回 -->
+		<action path="/paymainRevoke" type="com.sinosoft.claim.ui.control.facade.UILpaymainRevokeFacade"  validate="false" scope="request">
+		</action>
+		<!-- 付款通知书打印 add by zhongfen -->
+		<action path="/paymainPrint" type="com.sinosoft.claim.ui.control.facade.UILpayNoticePrintEditFacade" validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAApayNoticeTablePrint.jsp"></forward>
+		</action>
+		<!-- 机构列表查询 -->
+		<action path="/receveAccount" type="com.sinosoft.claim.ui.control.facade.UILgetReceveAccount" validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAAReceveAccount.jsp"></forward>
+		</action>
+		<action path="/paymainRegist" type="com.sinosoft.claim.ui.control.facade.UILpaymentRegistFacade" validate="false" scope="request">
+			<forward name="success" path="/common/payment/PaymentRegist.jsp"></forward>
+		</action>
+		<action path="/compensateList" type="com.sinosoft.claim.ui.control.facade.UILpaymentCompensateFacade" validate="false" scope="request">
+			<forward name="success" path="/common/payment/PaymentCompensateList.jsp"></forward>
+			<forward name="true" path="/common/payment/BillPaymentCompensateList.jsp"></forward>
+		</action>
+		<action path="/prplpaybill" type="com.sinosoft.claim.ui.control.facade.UILpaymentCompensateBillFacade" validate="false" scope="request">
+			<forward name="success" path="/common/payment/DAApaymainEdit.jsp"></forward>
+		</action>
+		<action path="/prplBIllExcel" type="com.sinosoft.claim.ui.control.facade.UILpaymentBillExcelFacade" validate="false" scope="request">
+			<forward name="success" path="/common/payment/BillPaymentCompensateList.jsp"></forward>
+		</action>
+		<action path="/prplBIllExcelSave" type="com.sinosoft.claim.ui.control.facade.UILpaymentBillEditPostFacade" validate="false" scope="request">
+		</action>
+		<action path="/prplBilElementCheck" type="com.sinosoft.claim.ui.control.facade.UILpaymentBillCheckEditPostFacade" validate="false" scope="request">
+		</action>
+     <!-- 支付信息 end zf -->
+     <!-- 银行支行查询 -->
+		<action scope="request"
+			type="com.sinosoft.claim.ui.control.facade.UISaBankBranchFacade"
+			path="/SaBankSelectCode" name="fm">
+		</action>
+     <!-- 财政代打卡支付管理 begin -->
+	     <action path="/paymainFiscalRegist" type="com.sinosoft.claim.ui.control.facade.UILfiscalpaymentRegistFacade" validate="false" scope="request">
+		 	<forward name="success" path="/DAA/payment/PaymentFiscalRegist.jsp"></forward>
+		 </action>
+		 <action path="/prplpayfiscalnew" type="com.sinosoft.claim.ui.control.facade.UILpaymainNewBeforeFacade"  validate="false" scope="request">
+		 	<forward name="success" path="/DAA/payment/DAApaymentfiscalNewList.jsp" redirect="false"/>
+		 </action>
+		 <!-- 多个计算书合并支付录入-->
+		 <action path="/paymainfiscalEdit" type="com.sinosoft.claim.ui.control.facade.UILfiscalpaymainEditPostfacade"  validate="false" scope="request">
+		 	<forward name="success" path="/DAA/payment/DAApaymainfiscalEdit.jsp"></forward>
+		 </action>
+		 <!-- 添加计算书 -->
+		 <action path="/paymainfiscalAddBefor" type="com.sinosoft.claim.ui.control.facade.UILfiscalpaymainBeforAddFacade"  validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAApaymainfiscalAddPay.jsp"></forward>
+		</action>
+		<action path="/paymainFiscalAddQuery" type="com.sinosoft.claim.ui.control.facade.UILfiscalpaymainAddQueryFacade"  validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAApaymainfiscalAddList.jsp"></forward>
+		</action>
+		<action path="/paymainfiscalSave" type="com.sinosoft.claim.ui.control.facade.UILfiscalpaymainFacade"  validate="false" scope="request">
+		</action>
+		<!--财政代打卡查询  -->
+		<action path="/prplfiscalpaysearch"
+			  name="fiscalpayForm"
+			  type="com.sinosoft.claim.ui.control.facade.UIPrprlfiscalpaySearchFacade"
+			  scope="request">
+			<forward name="true" path="/DAA/payment/DAApaymentfiscallist.jsp" redirect="false"/>
+			<forward name="success" path="/DAA/payment/DAApaymentfiscalQuerylist.jsp" redirect="false"/>
+		</action>
+		<!-- 财政审核调理赔jsp-->
+		<action path="/fiscalpaymainEditFromUndwrt" type="com.sinosoft.claim.ui.control.facade.UILfiscalpaymainEditFromUndwrtFacade"  validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAApaymainfiscalEdit.jsp"></forward>
+		</action>
+		<!-- 财政信息删除 -->
+		<action path="/fiscalpaymainRemove" type="com.sinosoft.claim.ui.control.facade.UILfiscalpaymainRemoveFacade"  validate="false" scope="request">
+		</action>
+		<!--财政代打卡退回查询  -->
+		<action path="/prplfiscalbacksearch"
+			  name="fiscalpayForm"
+			  type="com.sinosoft.claim.ui.control.facade.UIPrprlfiscalpaybackSearchFacade"
+			  scope="request">
+			<forward name="success" path="/DAA/payment/DAApaymentfiscalbackQuerylist.jsp" redirect="false"/>
+		</action>
+		<!-- 财政退回编辑页面 -->
+		<action path="/paymainfiscalbackEdit" type="com.sinosoft.claim.ui.control.facade.UILfiscalpaymainbackEditfacade" scope="request">
+			<forward name="success" path="/DAA/payment/DAAFiscalpaymainBackEdit.jsp" redirect="false"/>
+		</action>
+     <!-- 财政代打卡支付管理 end -->
+
+		<!-- 支付信息保存或提交前校验当前录入的计算书金额和该计算书的已支付金额之和是否超出计算书的实际赔付金额 -->
+		<action path="/checkCompensateNoMoney" type="com.sinosoft.claim.ui.control.facade.UILcheckCompensateNoMoneyFacade"  validate="false" scope="request"></action>
+		<action path="/perilInfoShow0310" type="com.sinosoft.claim.ui.control.facade.UIPerilInfoQueryFacade0310" validate="false" scope="request">
+    	<forward name="target1" path="/common/pub/ExistRegistInfoShow0310.jsp" />
+        </action>
+	<!-- 查询第三方支付信息 -->
+	<action path="/prplthirdpayquery" name="payform" type="com.sinosoft.claim.ui.control.facade.UIPrprlThirdPayQueryFacade" scope="request">
+		  <forward name="query" path="/common/regist/RegistQueryThirdPaymentList.jsp" redirect="false"/>
+		  <forward name="detail" path="/common/regist/UIThirdPayQueryDetail.jsp" redirect="false"/>
+	</action>
+	
+	<!-- 核赔工作流补传 -->
+		<action path="/undwrtCaseStatus" type="com.sinosoft.claim.ui.control.facade.UIUndwrtCaseStatusFacade" scope="request">
+			<forward name="resultList" path="/common/undwrtCaseStatus/reusltList.jsp" redirect="false"/>
+		</action>
+	<!-- 电子回执单下载查询 -->
+	<action path="/bankelect" type="com.sinosoft.claim.ui.control.facade.UIThirdPayBankElectFacade" scope="request">
+		<forward name="success" path="/DAA/payment/backElectQuery/DAAThirdPayBackElectQueryList.jsp" redirect="false"/>
+	</action>
+	<!--检查是否含有电子回执单-->
+    <action path="/checkIfhaveElect" type="com.sinosoft.claim.ui.control.facade.UIThirdPayDownAndCheckBankElectFacade" validate="false" scope="request">
+    </action>
+    <!--检查是否含有电子回执单-->
+    <action path="/downBankElect" type="com.sinosoft.claim.ui.control.facade.UIThirdPayDownAndCheckBankElectFacade" validate="false" scope="request">
+    </action>
+    <!-- 支付情况统计表 -->
+  	<action path="/prplpaystatistics"
+	  name="payform"
+	  type="com.sinosoft.claim.ui.control.facade.UIPrprlpayStatisticsFacade"
+	  scope="request">
+	  <forward name="export" path="/DAA/payment/DAAPayStatisticsExport.jsp" redirect="false"/>
+	  <forward name="success" path="/DAA/payment/DAApaymentStatisticslist.jsp" redirect="false"/>
+  	</action>
+  	<!-- 同步理算账户信息 -->
+	<action path="/syncyAccount" type="com.sinosoft.claim.ui.control.facade.UILgetCompeSynchAccount" validate="false" scope="request">
+		<forward name="success" path="/DAA/payment/DAASynchAccount.jsp"></forward>
+	</action>
+  	<!-- 清单支付退回管理新增 删除按钮 -->
+  	<action path="/prplBilDelete" type="com.sinosoft.claim.ui.control.facade.UILpaymentBillDeletePostFacade" validate="false" scope="request">
+	</action> 
+	<!-- 校验恐怖分子 -->
+        <action path="/uiCheckTerrorist" scope="request" type="com.sinosoft.claim.ui.control.action.UICheckTerroristAction" >
+	</action>  
+	
+	<!-- add by ykf读写分离用  开始 -->
+	<!-- 理赔管理-流程查询-流程查询 -->
+	 <action path="/swfFlowQueryDxfl" type="com.sinosoft.claim.query.ui.control.facade.UIWorkFlowFlowQueryFacadeRead" validate="false" scope="request" >
+      <forward name="success" path="/workflow/flow/WorkFlowFlowQueryRegistList.jsp"/>
+    </action>
+    
+    <!-- 点击报案号、案件互查中点击查看 -->
+    <action path="/swfFlowBeforeQueryDxfl" type="com.sinosoft.claim.query.ui.control.facade.UIWorkFlowFlowBeforeQueryFacadeRead" validate="false" scope="request" >
+      <forward name="success" path="/workflow/flow/WorkFlowFlowQueryList.jsp"/>
+    </action>
+    
+     <!-- 理赔管理-流程查询-案件号互查 -->
+    <action path="/caseNoQueryDxfl" type="com.sinosoft.claim.query.ui.control.facade.UICaseNoQueryFacadeRead" validate="false" scope="request" >
+      <forward name="success" path="/workflow/caseNo/caseNoQueryRegistList.jsp"/>
+    </action>
+    
+    <!-- add by ykf读写分离用  结束 -->
+    
+    <!--add 清单支付查询调整 begin-->                                                                                                                            
+   		<action path="/prplpaynewadd" type="com.sinosoft.claim.ui.control.facade.UILpaymainNewBeforeFacade_new"  validate="false" scope="request">                
+   			<forward name="success" path="/DAA/payment/DAApaymentNewList_new.jsp" redirect="false"/>                                                                
+   		</action>                                                                                                                                                 
+   		<action path="/compensateListNew" type="com.sinosoft.claim.ui.control.facade.UILpaymentCompensateFacade_new" validate="false" scope="request">            
+   			<!-- <forward name="success" path="/common/payment/PaymentCompensateList_new.jsp"></forward> -->                                                        
+   			<forward name="true" path="/common/payment/BillPaymentCompensateList_new.jsp"></forward>                                                                
+   		</action>                                                                                                                                                 
+   		<action path="/prplBIllExcelNew" type="com.sinosoft.claim.ui.control.facade.UILpaymentBillExcelFacade_new" validate="false" scope="request">              
+   			<!--  <forward name="success" path="/common/payment/BillPaymentCompensateList_new.jsp"></forward>-->                                                    
+   		</action>                                                                                                                                                 
+   		                                                                                                                               
+   	<!--add 清单支付查询调整 end-->    
+    <!-- 根据支行名称查询支行联行号 -->
+		<action path="/SearchBankNumber" type="com.sinosoft.claim.util.UISearchBankNumberFacade" validate="false" scope="request">
+		</action>
+    
+    <!--支付录入暂存回退提交校验支付编号  -->
+		<action path="/checkPaymentNo" type="com.sinosoft.claim.ui.control.facade.UILpayThirdCheckPaymentNoFacade"  validate="false" scope="request"></action>
+	<!--支付录入校验省市是否正确  -->
+		<action path="/checkCityAndPro" type="com.sinosoft.claim.util.UICheckInputProOrCity"  validate="false" scope="request"></action>	
+    
+    <!--山东意外险风险信息查询 -->
+    <action path="/queryAcciPerson" type="com.sinosoft.claim.ui.control.facade.UIQueryAcciPersonFacade" validate="false" scope="request" >
+      <forward name="PersonList" path="/commonAcci/compensate/AcciPersonList.jsp" />
+      <forward name="DangerList" path="/commonAcci/compensate/AcciDangerList.jsp" />
+    </action>
+    <!-- 山东意外险风险信息接口补传 -->
+	<action path="/claimSDAcciPlat" type="com.sinosoft.common_claim.bl.action.custom.UISDAcciClaimToPlatFacade" scope="request">
+	  <forward name="input" path="/common/undwrtCaseStatus/ciSDacciClaimMessage.jsp"></forward>
+	</action>
+    <!--add 清单支付校验计算书本次赔付金额是否大于0-->    
+		<action path="/CheckSumthispaid" type="com.sinosoft.claim.util.UICheckSumthispaid" validate="false" scope="request">
+		</action>
+	<!-- 领款人信息查询 -->
+		<action path="/getPayeeInfo" type="com.sinosoft.claim.ui.control.facade.UIgetPayeeInfo" validate="false" scope="request">
+			<forward name="success" path="/DAA/payment/DAAgetPayeeInfo.jsp"></forward>
+		</action>
+	<!-- 删除后保存领款人信息 -->
+		<action path="/deleteSavePayeeInfo" type="com.sinosoft.claim.util.UIDeleteSavePayeeInfo" validate="false" scope="request">
+		</action>
+  </action-mappings>
+  <message-resources parameter="resources.ClaimsResources" />
+</struts-config>
+    
+    
+   

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<!--此版本针对项目路径为src\main\webapp及对应java文件夹使用-->
+<project default="backup" basedir="." name="sinosoft">
+	
+<!--定义各项目名称-->
+<property name="appname" value="src" />
+<property name="src" value="src" />
+<property name="build" value="${appname}/main/webapp/WEB-INF/classes" />
+<property name="myclasspath" value="${appname}/main/webapp/WEB-INF/lib" />
+
+<!--取文件判断classes及及路径是否存在，调用property.xml-->
+<condition property="classes.exist">
+        <and>
+            <available file="${build}" type="dir"/>
+        </and>
+    </condition>
+<import file="../property.xml"/>
+
+<!--建立了Ant构建要使用的classpath-->
+<path id="classpath">
+<fileset dir="${myclasspath}">   
+         <include name="**/*.jar"/>   
+    </fileset>   
+</path> 
+
+<!-- clean -->
+<!--判断文件夹classes是否存在,存在则删除，不存在则跳过-->
+<target name="clean" if="classes.exist">
+<delete includeEmptyDirs="true">
+<fileset dir="${build}" />
+</delete>
+<echo message="clean success"/> 
+</target>
+
+<!-- complice -->
+<!--build时unless当classes不存在才执行，依赖clean-->
+<target name="build" unless="classes.exit" depends="clean">
+<mkdir dir="${build}" />
+<javac classpath="${myclasspath}" srcdir="${src}" fork="true" memorymaximumsize="800M" destdir="${build}" debug="on" executable="D:\bea\jdk160_05\bin\javac">
+<classpath refid="classpath"/>
+<include name="**/*.java" />
+</javac>
+<echo message="build success"/> 
+</target>
+
+<!--打包jar依赖build创建成功-->
+<target name="jar" depends="build">
+<exec executable="cmd.exe">
+<arg line="/c jar -cvf ${appname}.rar @list.txt"/>
+</exec>
+<echo message="jar success"/>
+</target>
+
+<!--backup取文件解压，依赖jar成功-->
+<target name="backup" depends="jar">
+	<unzip src="${appname}.rar" dest="${deploy.dir}"/>
+		<delete dir="${deploy.dir}/META-INF"/>				
+		<delete file="${appname}.rar"/>
+		<echo message="backup Success"/>
+		
+<!--复制并更改路径放在backup.dir即版本测试区，注意此处需要修改todir对应的项目名称
+<copy todir="${backup.dir}/claim">
+    <fileset dir="${deploy.dir}/${appname}/main/webapp"/>
+</copy>-->
+
+<!--复制并更改路径放在deploy.dir即property.xml文件下指定路径，注意此处需要修改todir对应的项目名称-->
+<copy todir="${deploy.dir}/claim">
+		<fileset dir="${deploy.dir}/${appname}/main/webapp"/>
+</copy>
+<delete dir="${deploy.dir}/${appname}"/>
+
+
+<!--复制清单更名然后更改清单取文件
+<copy file="list.txt" tofile="list1.txt" />
+<replace file="list1.txt" >
+<replacefilter token="claim\WEB-INF\classes\" value="component/"/>
+<replacefilter token="claim/WEB-INF/classes/" value="component/"/>
+<replacefilter token=".class" value=".java" />
+</replace>
+<exec executable="cmd.exe">
+<arg line="/c jar -cvf ${appname}.rar @list1.txt"/>
+</exec>
+<unzip src="${appname}.rar" dest="${backup.dir}/${appname}"/>
+		<delete dir="${backup.dir}/${appname}/META-INF"/>	
+		<delete dir="${backup.dir}/${appname}/${appname}"/>				
+		<delete file="${appname}.rar"/>
+		<delete file="list1.txt"/>
+		<echo message="backup Success"/>
+<echo>code copy success</echo>-->
+
+</target>
+
+<!--不编译直接取文件-->
+<target name="nobuild">
+<exec executable="cmd.exe">
+<arg line="/c jar -cvf ${appname}.rar @list.txt"/>
+</exec>
+<echo message="jar success"/>
+	<unzip src="${appname}.rar" dest="${deploy.dir}"/>
+		<delete dir="${deploy.dir}/META-INF"/>				
+		<delete file="${appname}.rar"/>
+		<echo message="backup Success"/>
+ 
+<!--复制并更改路径放在backup.dir即版本测试区	
+<copy todir="${backup.dir}/claim">
+    <fileset dir="${deploy.dir}/${appname}/main/webapp"/>
+</copy>-->
+
+<!--复制并更改路径放在deploy.dir即property.xml文件下view201012.9-->
+<copy todir="${deploy.dir}/claim">
+		<fileset dir="${deploy.dir}/${appname}/main/webapp"/>
+</copy>
+<delete dir="${deploy.dir}/${appname}"/>
+    
+</target>
+
+
+
+
+</project>

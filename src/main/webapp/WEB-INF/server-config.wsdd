@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+ <globalConfiguration>
+  <parameter name="sendMultiRefs" value="true"/>
+  <parameter name="disablePrettyXML" value="true"/>
+  <parameter name="adminPassword" value="admin"/>
+  <parameter name="attachments.Directory" value="E:\guoYuanWordPlace\claim\src\main\webapp\WEB-INF\attachments"/>
+  <parameter name="dotNetSoapEncFix" value="true"/>
+  <parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <parameter name="sendXMLDeclaration" value="true"/>
+  <parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <parameter name="sendXsiTypes" value="true"/>
+  <requestFlow>
+   <handler type="java:org.apache.axis.handlers.JWSHandler">
+    <parameter name="scope" value="session"/>
+   </handler>
+   <handler type="java:org.apache.axis.handlers.JWSHandler">
+    <parameter name="scope" value="request"/>
+    <parameter name="extension" value=".jwr"/>
+   </handler>
+  </requestFlow>
+ </globalConfiguration>
+ <handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <service name="WorkFlowQueryService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.WorkFlowQueryService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns1:ArrayOfSwfFlowDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.SwfFlowDto[]" xmlns:ns1="urn:SwfFlowDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.SwfFlowDtoReqInfo" qname="ns2:SwfFlowDtoReqInfo" xmlns:ns2="urn:SwfFlowDtoReqInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.SwfFlowDtoInfo" qname="ns3:SwfFlowDtoInfo" xmlns:ns3="urn:SwfFlowDtoInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.SwfFlowDto" qname="ns4:SwfFlowDto" xmlns:ns4="urn:SwfFlowDtoListService"/>
+ </service>
+ <service name="LIstPayInformationService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.paymentinformatino.LIstPayInformationService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns5:ArrayOfPaymentInfoBackList" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.paymentinformatino.PaymentInfoBackList[]" xmlns:ns5="urn:PaymentInfoBackListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.paymentinformatino.PaymentInfoBackList" qname="ns6:PaymentInfoBackList" xmlns:ns6="urn:PaymentInfoBackListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.paymentinformatino.PayListMainInfo" qname="ns7:PayListMainInfo" xmlns:ns7="urn:PayListMainInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.paymentinformatino.ReturnVisitInfomation" qname="ns8:ReturnVisitInfomation" xmlns:ns8="urn:ReturnVisitInfomationService"/>
+ </service>
+ <service name="AutoPayDeleteService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.ui.control.facade.UIMedicalAutoPayDeleteInterFaceFacade"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.DetelePayRequestInfo" qname="ns9:DetelePayRequestInfo" xmlns:ns9="urn:DetelePayRequestService"/>
+ </service>
+ <service name="ResidentAppInformationService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.ResidentAppInformationService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns10:ArrayOfResidentAppInforList" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ResidentAppInforList[]" xmlns:ns10="urn:ResidentAppInforListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ResidentAppInforList" qname="ns11:ResidentAppInforList" xmlns:ns11="urn:ResidentAppInforListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ResidentAppInfor" qname="ns12:ResidentAppInfor" xmlns:ns12="urn:ResidentAppInforService"/>
+ </service>
+ <service name="ClaimHistoryService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.ClaimHistoryService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns13:ArrayOfClaimHistoryPMainInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimHistoryPMainInfo[]" xmlns:ns13="urn:ClaimHistoryPMainInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns14:ArrayOfClaimHistoryRegistInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimHistoryRegistInfo[]" xmlns:ns14="urn:ClaimHistoryRegistInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimHistoryInfo" qname="ns15:ClaimHistoryInfo" xmlns:ns15="urn:ClaimHistoryInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimHistoryListInfo" qname="ns16:ClaimHistoryListInfo" xmlns:ns16="urn:ClaimHistoryListInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimHistoryPMainInfo" qname="ns17:ClaimHistoryPMainInfo" xmlns:ns17="urn:ClaimHistoryPMainInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimHistoryRegistInfo" qname="ns18:ClaimHistoryRegistInfo" xmlns:ns18="urn:ClaimHistoryRegistInfoListService"/>
+ </service>
+ <service name="AutoCompeService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.ui.control.facade.UIMedicalAutoCompeInterFaceFacade"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns19:ArrayOfClaimAppInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimAppDto[]" xmlns:ns19="urn:ClaimAppListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns20:ArrayOfClaimKindInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimKindDto[]" xmlns:ns20="urn:ClaimKindListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns21:ArrayOfSchedExtInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.SchedExtInfoDto[]" xmlns:ns21="urn:SchedExtListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimRequestInfo" qname="ns22:ClaimRequestInfo" xmlns:ns22="urn:ClaimRequestService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimAppDto" qname="ns23:ClaimAppDto" xmlns:ns23="urn:ClaimAppListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimKindDto" qname="ns24:ClaimKindDto" xmlns:ns24="urn:ClaimKindListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.SchedExtInfoDto" qname="ns25:SchedExtInfoDto" xmlns:ns25="urn:SchedExtListService"/>
+ </service>
+ <service name="PayInfoQueryService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.PayInfoQueryService"/>
+ </service>
+ <service name="FindAppHerdCaseInfoService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.FindAppHerdCaseInfoService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns26:ArrayOfResidentAppRegistInforList" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ResidentAppRegistInforList[]" xmlns:ns26="urn:ResidentAppRegistInforListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ResidentAppRegistInforList" qname="ns27:ResidentAppRegistInforList" xmlns:ns27="urn:ResidentAppRegistInforListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ResidentAppRegistInfor" qname="ns28:ResidentAppRegistInfor" xmlns:ns28="urn:ResidentAppRegistInforService"/>
+ </service>
+ <service name="MessageCenter" provider="java:RPC">
+  <parameter name="allowedMethods" value="receive"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.SMSService.feedback.MessageCenter"/>
+ </service>
+ <service name="AutoPayBigSeriousService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.ui.control.facade.UIMedicalAutoPayBySeriousInInterFaceFacade"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns29:ArrayOfPaymentInfoBySeriousIn" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PaymentInfoBySeriousInDto[]" xmlns:ns29="urn:PaymentInfoBySeriousInListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns30:ArrayOfPayExtInfoBySeriousIn" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PayExtBySeriousInDto[]" xmlns:ns30="urn:PayExtBySeriousInListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PayRequestBySeriousInInfo" qname="ns31:PayRequestBySeriousInInfo" xmlns:ns31="urn:PayRequestBySeriousInService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PaymentInfoBySeriousInDto" qname="ns32:PaymentInfoBySeriousInDto" xmlns:ns32="urn:PaymentInfoBySeriousInListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PayExtBySeriousInDto" qname="ns33:PayExtBySeriousInDto" xmlns:ns33="urn:PayExtBySeriousInListService"/>
+ </service>
+ <service name="PolicyListQueryService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.PolicyListQueryService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns38:ArrayOfPolicyListInfoDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.custom.PolicyListInfoDto[]" xmlns:ns38="urn:PolicyListInfoDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns39:ArrayOfKindCodeDetailDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.KindCodeDetailDtoInfo[]" xmlns:ns39="urn:KindCodeDetailDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.PolicyListInfoDto" qname="ns40:PolicyListInfoDto" xmlns:ns40="urn:PolicyListInfoDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PolicyListRequestInfo" qname="ns41:PolicyListRequestInfo" xmlns:ns41="urn:PolicyListRequestInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PolicyListResponseInfo" qname="ns42:PolicyListResponseInfo" xmlns:ns42="urn:PolicyListResponseInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.KindCodeDetailDtoInfo" qname="ns43:KindCodeDetailDtoInfo" xmlns:ns43="urn:KindCodeDetailDtoInfoListService"/>
+ </service>
+ <service name="NewMobileSurvey" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.NewMobileSurvey"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns44:ArrayOfCheckCertaPersonInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CheckCertaPersonInfo[]" xmlns:ns44="urn:CheckCertaPersonListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns45:ArrayOfCheckCertaCompanyInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CheckCertaCompanyInfo[]" xmlns:ns45="urn:CheckCertaCompanyListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns46:ArrayOfEDamageTypeCodeInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.EDamageTypeCodeInfo[]" xmlns:ns46="urn:EDamageTypeCodeListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns47:ArrayOfCatastropheCodeInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CatastropheCodeInfo[]" xmlns:ns47="urn:CatastropheCodeListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PolicyInfo" qname="ns48:PolicyInfo" xmlns:ns48="urn:BeanService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CheckCertaPersonInfo" qname="ns49:CheckCertaPersonInfo" xmlns:ns49="urn:CheckCertaPersonListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CheckCertaCompanyInfo" qname="ns50:CheckCertaCompanyInfo" xmlns:ns50="urn:CheckCertaCompanyListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.EDamageTypeCodeInfo" qname="ns51:EDamageTypeCodeInfo" xmlns:ns51="urn:EDamageTypeCodeListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CatastropheCodeInfo" qname="ns52:CatastropheCodeInfo" xmlns:ns52="urn:CatastropheCodeListService"/>
+ </service>
+ <service name="NewMoleSurvey" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.NewMoleSurvey"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns53:ArrayOfPrpDcurrencyDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.custom.PrpDcurrencyDtoInfo[]" xmlns:ns53="urn:PrpDcurrencyDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns54:ArrayOfPrpDcodeDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.custom.PrpDcodeDtoInfo[]" xmlns:ns54="urn:PrpDcodeDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns55:ArrayOfPrpCinsuredDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PrpCinsuredDtoInfo[]" xmlns:ns55="urn:PrpCinsuredDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns56:ArrayOfPrpCvirturlItemSchemaInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PrpCvirturlItemSchemaInfo[]" xmlns:ns56="urn:PrpCvirturlItemSchemaInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns57:ArrayOfHerdpolicylistDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.HerdpolicylistDtoInfo[]" xmlns:ns57="urn:HerdpolicylistDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns58:ArrayOfHouseIndecCodeDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.HouseIndecCodeDtoInfo[]" xmlns:ns58="urn:HouseIndecCodeDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns59:ArrayOfHousepolicyDetailDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.HousepolicyDetailDtoInfo[]" xmlns:ns59="urn:HousepolicyDetailDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns60:ArrayOfHouseKindCodeDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.HouseKindCodeDtoInfo[]" xmlns:ns60="urn:HouseKindCodeDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns61:ArrayOfCvirturlItemKindDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CvirturlItemKindDtoInfo[]" xmlns:ns61="urn:CvirturlItemKindDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.PrpDcurrencyDtoInfo" qname="ns62:PrpDcurrencyDtoInfo" xmlns:ns62="urn:PrpDcurrencyDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.PrpDcodeDtoInfo" qname="ns63:PrpDcodeDtoInfo" xmlns:ns63="urn:PrpDcodeDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PrpCinsuredDtoInfo" qname="ns64:PrpCinsuredDtoInfo" xmlns:ns64="urn:PrpCinsuredDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PrpCvirturlItemSchemaInfo" qname="ns65:PrpCvirturlItemSchemaInfo" xmlns:ns65="urn:PrpCvirturlItemSchemaInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.HerdpolicylistDtoInfo" qname="ns66:HerdpolicylistDtoInfo" xmlns:ns66="urn:HerdpolicylistDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.HouseIndecCodeDtoInfo" qname="ns67:HouseIndecCodeDtoInfo" xmlns:ns67="urn:HouseIndecCodeDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.HousepolicyDtoInfo" qname="ns68:HousepolicyDtoInfo" xmlns:ns68="urn:HousepolicyDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.HousepolicyDetailDtoInfo" qname="ns69:HousepolicyDetailDtoInfo" xmlns:ns69="urn:HousepolicyDetailDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.HouseKindCodeDtoInfo" qname="ns70:HouseKindCodeDtoInfo" xmlns:ns70="urn:HouseKindCodeDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CvirturlItemDtoInfo" qname="ns71:CvirturlItemDtoInfo" xmlns:ns71="urn:CvirturlItemDtoInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CvirturlItemKindDtoInfo" qname="ns72:CvirturlItemKindDtoInfo" xmlns:ns72="urn:CvirturlItemKindDtoInfoListService"/>
+ </service>
+ <service name="PayAllInfoQueryService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.PayAllInfoQueryService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns73:ArrayOfPayInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.custom.PayInfo[]" xmlns:ns73="urn:PayInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.PayInfo" qname="ns74:PayInfo" xmlns:ns74="urn:PayInfoListService"/>
+ </service>
+ <service name="AutoClaimService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.ui.control.facade.UIMedicalAutoClaimInterFaceFacade"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns75:ArrayOfAccidentPersonInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.AccidentPersonInfoDto[]" xmlns:ns75="urn:AccidentPersonListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns76:ArrayOfCertifyInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CertifyInfoDto[]" xmlns:ns76="urn:CertifyListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns77:ArrayOfClaimAppInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimAppDto[]" xmlns:ns77="urn:ClaimAppListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns78:ArrayOfClaimKindInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimKindDto[]" xmlns:ns78="urn:ClaimKindListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns79:ArrayOfCompeFeeInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompeFeeInfoDto[]" xmlns:ns79="urn:CompeFeeListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns80:ArrayOfCompePayFeeInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompePayFeeInfoDto[]" xmlns:ns80="urn:CompePayFeeListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns81:ArrayOfPrepayFeeInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PrepayFeeInfoDto[]" xmlns:ns81="urn:PrepayFeeListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns82:ArrayOfSchedExtInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.SchedExtInfoDto[]" xmlns:ns82="urn:SchedExtListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns83:ArrayOfCompeInvMainInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompeInvMainInfo[]" xmlns:ns83="urn:CompeInvMainListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns84:ArrayOfCompeInvDetailInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompeInvDetailInfo[]" xmlns:ns84="urn:CompeInvDetailListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimRequestInfo" qname="ns85:ClaimRequestInfo" xmlns:ns85="urn:ClaimRequestService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.InjuryPersonInfoDto" qname="ns86:InjuryPersonInfoDto" xmlns:ns86="urn:InjuryPersonListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.AccidentPersonInfoDto" qname="ns87:AccidentPersonInfoDto" xmlns:ns87="urn:AccidentPersonListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CertifyInfoDto" qname="ns88:CertifyInfoDto" xmlns:ns88="urn:CertifyListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimAppDto" qname="ns89:ClaimAppDto" xmlns:ns89="urn:ClaimAppListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimKindDto" qname="ns90:ClaimKindDto" xmlns:ns90="urn:ClaimKindListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompeFeeInfoDto" qname="ns91:CompeFeeInfoDto" xmlns:ns91="urn:CompeFeeListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompePayFeeInfoDto" qname="ns92:CompePayFeeInfoDto" xmlns:ns92="urn:CompePayFeeListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PrepayFeeInfoDto" qname="ns93:PrepayFeeInfoDto" xmlns:ns93="urn:PrepayFeeListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.SchedExtInfoDto" qname="ns94:SchedExtInfoDto" xmlns:ns94="urn:SchedExtListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompeInvMainInfo" qname="ns95:CompeInvMainInfo" xmlns:ns95="urn:CompeInvMainListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompeInvDetailInfo" qname="ns96:CompeInvDetailInfo" xmlns:ns96="urn:CompeInvDetailListService"/>
+ </service>
+ <service name="RegistCaseInfoQueryService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.RegistCaseInfoQueryService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns97:ArrayOfRegistCaseDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.RegistCaseDto[]" xmlns:ns97="urn:RegistCaseDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns98:ArrayOfAcciPersonDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.AcciPersonDto[]" xmlns:ns98="urn:AcciPersonDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns99:ArrayOfEarLabelDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.EarLabelDto[]" xmlns:ns99="urn:EarLabelDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns100:ArrayOfRelatePersonDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.RelatePersonDto[]" xmlns:ns100="urn:RelatePersonDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.RegistCaseQuery" qname="ns101:RegistCaseQuery" xmlns:ns101="urn:RegistCaseQueryService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.RegistCaseDtoInfo" qname="ns102:RegistCaseDtoInfo" xmlns:ns102="urn:RegistCaseDtoInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.RegistCaseDto" qname="ns103:RegistCaseDto" xmlns:ns103="urn:RegistCaseDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.AgriRegistCaseDetailInfo" qname="ns104:AgriRegistCaseDetailInfo" xmlns:ns104="urn:AgriRegistCaseDetailInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.AcciPersonDto" qname="ns105:AcciPersonDto" xmlns:ns105="urn:AcciPersonDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.EarLabelDto" qname="ns106:EarLabelDto" xmlns:ns106="urn:EarLabelDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.TransportRegistCaseDetailInfo" qname="ns107:TransportRegistCaseDetailInfo" xmlns:ns107="urn:TransportRegistCaseDetailInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.RelatePersonDto" qname="ns108:RelatePersonDto" xmlns:ns108="urn:RelatePersonDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.PropRegistCaseDetailInfo" qname="ns109:PropRegistCaseDetailInfo" xmlns:ns109="urn:PropRegistCaseDetailInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.HealthRegistCaseDetailInfo" qname="ns110:HealthRegistCaseDetailInfo" xmlns:ns110="urn:HealthRegistCaseDetailInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.RespRegistCaseDetailInfo" qname="ns111:RespRegistCaseDetailInfo" xmlns:ns111="urn:RespRegistCaseDetailInfoService"/>
+ </service>
+ <service name="ResidentAppRegistInformationService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.ResidentAppRegistInformationService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns112:ArrayOfResidentAppRegistInforList" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ResidentAppRegistInforList[]" xmlns:ns112="urn:ResidentAppRegistInforListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ResidentAppRegistInforList" qname="ns113:ResidentAppRegistInforList" xmlns:ns113="urn:ResidentAppRegistInforListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ResidentAppRegistInfor" qname="ns114:ResidentAppRegistInfor" xmlns:ns114="urn:ResidentAppRegistInforService"/>
+ </service>
+ <service name="RegistEditPostService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.RegistEditPostService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns115:ArrayOfAcciPersonDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.custom.AcciPersonDto[]" xmlns:ns115="urn:AcciPersonDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns116:ArrayOfEarNoDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.custom.EarNoDto[]" xmlns:ns116="urn:EarNoDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns117:ArrayOfRelatePersonDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.custom.RelatePersonDto[]" xmlns:ns117="urn:RelatePersonDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns118:ArrayOfRegistInsuredDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.RegistInsuredDtoInfo[]" xmlns:ns118="urn:RegistInsuredDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.AcciPersonDto" qname="ns119:AcciPersonDto" xmlns:ns119="urn:AcciPersonDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.EarNoDto" qname="ns120:EarNoDto" xmlns:ns120="urn:EarNoDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.RelatePersonDto" qname="ns121:RelatePersonDto" xmlns:ns121="urn:RelatePersonDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.AgriRegistDto" qname="ns122:AgriRegistDto" xmlns:ns122="urn:AgriRegistDtoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.CargoRegistDto" qname="ns123:CargoRegistDto" xmlns:ns123="urn:CargoRegistDtoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.PropRegistDto" qname="ns124:PropRegistDto" xmlns:ns124="urn:PropRegistDtoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.AcciRegistDto" qname="ns125:AcciRegistDto" xmlns:ns125="urn:AcciRegistDtoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.LiabRegistDto" qname="ns126:LiabRegistDto" xmlns:ns126="urn:LiabRegistDtoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.RegistInsuredDtoInfo" qname="ns127:RegistInsuredDtoInfo" xmlns:ns127="urn:RegistInsuredDtoInfoListService"/>
+ </service>
+ <service name="AdminService" provider="java:MSG">
+  <parameter name="allowedMethods" value="AdminService"/>
+  <parameter name="enableRemoteAdmin" value="false"/>
+  <parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <namespace>http://xml.apache.org/axis/wsdd/</namespace>
+  <namespace>http://xml.apache.org/axis/wsdd/</namespace>
+ </service>
+ <service name="UIScheduleDealEditPostWebservice" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.UIScheduleDealEditPostWebservice"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns128:ArrayOfRegistExtDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.custom.RegistExtDto[]" xmlns:ns128="urn:RegistExtDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.RegistExtDto" qname="ns129:RegistExtDto" xmlns:ns129="urn:RegistExtDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.AgriScheduleDto" qname="ns130:AgriScheduleDto" xmlns:ns130="urn:AgriScheduleDtoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.custom.PropScheduleDto" qname="ns131:PropScheduleDto" xmlns:ns131="urn:PropScheduleDtoService"/>
+ </service>
+ <service name="AutoPayService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.ui.control.facade.UIMedicalAutoPayInterFaceFacade"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns132:ArrayOfPaymentInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PaymentInfoDto[]" xmlns:ns132="urn:PaymentListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns133:ArrayOfPayExtInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PayExtDto[]" xmlns:ns133="urn:PayExtListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PayRequestInfo" qname="ns134:PayRequestInfo" xmlns:ns134="urn:PayRequestService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PaymentInfoDto" qname="ns135:PaymentInfoDto" xmlns:ns135="urn:PaymentListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PayExtDto" qname="ns136:PayExtDto" xmlns:ns136="urn:PayExtListService"/>
+ </service>
+ <service name="ListInformationService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.ListInformationService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns137:ArrayOfReturnListDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.ReturnListDtoInfo[]" xmlns:ns137="urn:ReturnListDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns138:ArrayOfHouseCaseListInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.HouseCaseListInfo[]" xmlns:ns138="urn:HouseCaseListInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns139:ArrayOfPlantingCaseListInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.PlantingCaseListInfo[]" xmlns:ns139="urn:PlantingCaseListInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns140:ArrayOfZH03CaseListInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.ZH03CaseListInfo[]" xmlns:ns140="urn:ZH03CaseListInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns141:ArrayOfPaymentListInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.dto.PaymentListInfo[]" xmlns:ns141="urn:PaymentListInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.ReturnListDtoQuery" qname="ns142:ReturnListDtoQuery" xmlns:ns142="urn:ReturnListDtoQueryService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.ReturnListDtoMainInfo" qname="ns143:ReturnListDtoMainInfo" xmlns:ns143="urn:ReturnListDtoMainInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.ReturnListDtoInfo" qname="ns144:ReturnListDtoInfo" xmlns:ns144="urn:ReturnListDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.HouseCaseListMainInfo" qname="ns145:HouseCaseListMainInfo" xmlns:ns145="urn:HouseCaseListMainInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.HouseCaseListInfo" qname="ns146:HouseCaseListInfo" xmlns:ns146="urn:HouseCaseListInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.PlantingCaseListMainInfo" qname="ns147:PlantingCaseListMainInfo" xmlns:ns147="urn:PlantingCaseListMainInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.PlantingCaseListInfo" qname="ns148:PlantingCaseListInfo" xmlns:ns148="urn:PlantingCaseListInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.ZH03CaseListMainInfo" qname="ns149:ZH03CaseListMainInfo" xmlns:ns149="urn:ZH03CaseListMainInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.ZH03CaseListInfo" qname="ns150:ZH03CaseListInfo" xmlns:ns150="urn:ZH03CaseListInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.PaymentListMainInfo" qname="ns151:PaymentListMainInfo" xmlns:ns151="urn:PaymentListMainInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.PaymentListInfo" qname="ns152:PaymentListInfo" xmlns:ns152="urn:PaymentListInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.CaseClaimListMainInfo" qname="ns153:CaseClaimListMainInfo" xmlns:ns153="urn:CaseClaimListMainInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.LinkmanListMainInfo" qname="ns154:LinkmanListMainInfo" xmlns:ns154="urn:LinkmanListMainInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.dto.ReturnVisitInfo" qname="ns155:ReturnVisitInfo" xmlns:ns155="urn:ReturnVisitInfoService"/>
+ </service>
+ <service name="Version" provider="java:RPC">
+  <parameter name="allowedMethods" value="getVersion"/>
+  <parameter name="className" value="org.apache.axis.Version"/>
+ </service>
+ <service name="ReCaseService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.ui.control.facade.UIMedicalClaimRecaseInterFaceFacade"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns156:ArrayOfAccidentPersonInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.AccidentPersonInfoDto[]" xmlns:ns156="urn:AccidentPersonListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns157:ArrayOfCertifyInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CertifyInfoDto[]" xmlns:ns157="urn:CertifyListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns158:ArrayOfClaimAppInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimAppDto[]" xmlns:ns158="urn:ClaimAppListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns159:ArrayOfCompeFeeInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompeFeeInfoDto[]" xmlns:ns159="urn:CompeFeeListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns160:ArrayOfCompePayFeeInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompePayFeeInfoDto[]" xmlns:ns160="urn:CompePayFeeListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns161:ArrayOfSchedExtInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.SchedExtInfoDto[]" xmlns:ns161="urn:SchedExtListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns162:ArrayOfCompeInvMainInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompeInvMainInfo[]" xmlns:ns162="urn:CompeInvMainListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns163:ArrayOfCompeInvDetailInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompeInvDetailInfo[]" xmlns:ns163="urn:CompeInvDetailListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ReCaseRequestInfo" qname="ns164:ReCaseRequestInfo" xmlns:ns164="urn:ReCaseRequestService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.InjuryPersonInfoDto" qname="ns165:InjuryPersonInfoDto" xmlns:ns165="urn:InjuryPersonListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.AccidentPersonInfoDto" qname="ns166:AccidentPersonInfoDto" xmlns:ns166="urn:AccidentPersonListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CertifyInfoDto" qname="ns167:CertifyInfoDto" xmlns:ns167="urn:CertifyListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimAppDto" qname="ns168:ClaimAppDto" xmlns:ns168="urn:ClaimAppListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompeFeeInfoDto" qname="ns169:CompeFeeInfoDto" xmlns:ns169="urn:CompeFeeListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompePayFeeInfoDto" qname="ns170:CompePayFeeInfoDto" xmlns:ns170="urn:CompePayFeeListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.SchedExtInfoDto" qname="ns171:SchedExtInfoDto" xmlns:ns171="urn:SchedExtListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompeInvMainInfo" qname="ns172:CompeInvMainInfo" xmlns:ns172="urn:CompeInvMainListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompeInvDetailInfo" qname="ns173:CompeInvDetailInfo" xmlns:ns173="urn:CompeInvDetailListService"/>
+ </service>
+ <service name="JobManagerQueryService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.JobManagerQueryService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns174:ArrayOfClaimJobManagerLinkDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.domain.ClaimJobManagerLinkDto[]" xmlns:ns174="urn:ClaimJobManagerLinkDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns175:ArrayOfClaimJobManagerQueryDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.domain.ClaimJobManagerQueryDto[]" xmlns:ns175="urn:ClaimJobManagerQueryDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns176:ArrayOfClaimJobManagerDetailDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.domain.ClaimJobManagerDetailDto[]" xmlns:ns176="urn:ClaimJobManagerDetailDtoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns177:ArrayOfClaimJobLinkDto" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.dto.domain.ClaimJobLinkDto[]" xmlns:ns177="urn:ClaimJobLinkDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.domain.ClaimJobManagerLinkDto" qname="ns178:ClaimJobManagerLinkDto" xmlns:ns178="urn:ClaimJobManagerLinkDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.domain.ClaimJobManagerQueryMainDto" qname="ns179:ClaimJobManagerQueryMainDto" xmlns:ns179="urn:ClaimJobManagerQueryMainDtoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.domain.ClaimJobManagerQueryDto" qname="ns180:ClaimJobManagerQueryDto" xmlns:ns180="urn:ClaimJobManagerQueryDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.domain.ClaimJobManagerDetailMainDto" qname="ns181:ClaimJobManagerDetailMainDto" xmlns:ns181="urn:ClaimJobManagerDetailMainDtoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.domain.ClaimJobManagerDetailDto" qname="ns182:ClaimJobManagerDetailDto" xmlns:ns182="urn:ClaimJobManagerDetailDtoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.dto.domain.ClaimJobLinkDto" qname="ns183:ClaimJobLinkDto" xmlns:ns183="urn:ClaimJobLinkDtoListService"/>
+ </service>
+ <service name="UIScheduleGetBackService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.UIScheduleGetBackService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns184:ArrayOfScheduleGetBackQueryDetailDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ScheduleGetBackQueryDetailDtoInfo[]" xmlns:ns184="urn:ScheduleGetBackQueryDetailDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ScheduleGetBackQueryReqInfo" qname="ns185:ScheduleGetBackQueryReqInfo" xmlns:ns185="urn:ScheduleGetBackQueryReqInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ScheduleGetBackQueryMainDtoInfo" qname="ns186:ScheduleGetBackQueryMainDtoInfo" xmlns:ns186="urn:ScheduleGetBackQueryMainDtoInfo"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ScheduleGetBackQueryDetailDtoInfo" qname="ns187:ScheduleGetBackQueryDetailDtoInfo" xmlns:ns187="urn:ScheduleGetBackQueryDetailDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ScheduleGetBackDetailReqInfo" qname="ns188:ScheduleGetBackDetailReqInfo" xmlns:ns188="urn:ScheduleGetBackDetailReqInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ScheduleGetBackDetailDtoInfo" qname="ns189:ScheduleGetBackDetailDtoInfo" xmlns:ns189="urn:ScheduleGetBackDetailDtoInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ScheduleGetBackReqInfo" qname="ns190:ScheduleGetBackReqInfo" xmlns:ns190="urn:ScheduleGetBackReqInfoService"/>
+ </service>
+ <service name="AutoRegistService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.ui.control.facade.UIMedicalAutoRegistInterFaceFacade"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns191:ArrayOfAccidentPersonInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.AccidentPersonInfoDto[]" xmlns:ns191="urn:AccidentPersonListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimRequestInfo" qname="ns192:ClaimRequestInfo" xmlns:ns192="urn:ClaimRequestService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.AccidentPersonInfoDto" qname="ns193:AccidentPersonInfoDto" xmlns:ns193="urn:AccidentPersonListService"/>
+ </service>
+ <service name="RegistCancelService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.ui.control.facade.UIMedicalAutoCancelClaimInterFaceFacade"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns194:ArrayOfAccidentPersonInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.AccidentPersonInfoDto[]" xmlns:ns194="urn:AccidentPersonListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.RegistCancelRequestInfo" qname="ns195:RegistCancelRequestInfo" xmlns:ns195="urn:RegistCancelRequestService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.AccidentPersonInfoDto" qname="ns196:AccidentPersonInfoDto" xmlns:ns196="urn:AccidentPersonListService"/>
+ </service>
+ <service name="MobileSurvey" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.MobileSurvey"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns197:CompanyInfo" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:com.sinosoft.claim.webservice.CompanyInfo" xmlns:ns197="urn:LogonService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns198:ArrayOfCompanyInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompanyInfo[]" xmlns:ns198="urn:LogonService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns199:ArrayOfTaskInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.TaskInfo[]" xmlns:ns199="urn:TaskListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns200:ArrayOfCompanyInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CompanyInfo[]" xmlns:ns200="urn:CompanyListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns201:ArrayOfUserInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.UserInfo[]" xmlns:ns201="urn:UserListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns202:ArrayOfVehicleInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.VehicleInfo[]" xmlns:ns202="urn:CompanyListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns203:ArrayOfPersonInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PersonInfo[]" xmlns:ns203="urn:PersonListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns204:ArrayOfPropInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PropInfo[]" xmlns:ns204="urn:PropListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns205:ArrayOfGisRegistInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.GisRegistInfo[]" xmlns:ns205="urn:GisRegistListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns206:ArrayOfGisUserInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.GisUserInfo[]" xmlns:ns206="urn:GisUserListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PolicyInfo" qname="ns207:PolicyInfo" xmlns:ns207="urn:BeanService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.TaskInfo" qname="ns208:TaskInfo" xmlns:ns208="urn:TaskListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.DispatchInfo" qname="ns209:DispatchInfo" xmlns:ns209="urn:DispatchInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.RegistDetailInfo" qname="ns210:RegistDetailInfo" xmlns:ns210="urn:RegistDetailInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CustomerNumber" qname="ns211:CustomerNumber" xmlns:ns211="urn:CustomerNumberService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.StoredCheckInfo" qname="ns212:StoredCheckInfo" xmlns:ns212="urn:StoredCheckInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.SurveyViewInfo" qname="ns213:SurveyViewInfo" xmlns:ns213="urn:SurveyViewInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CompanyInfo" qname="ns214:CompanyInfo" xmlns:ns214="urn:CompanyListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.UserInfo" qname="ns215:UserInfo" xmlns:ns215="urn:UserListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.VehicleInfo" qname="ns216:VehicleInfo" xmlns:ns216="urn:CompanyListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PersonInfo" qname="ns217:PersonInfo" xmlns:ns217="urn:PersonListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PropInfo" qname="ns218:PropInfo" xmlns:ns218="urn:PropListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.GisRegistDetailInfo" qname="ns219:GisRegistDetailInfo" xmlns:ns219="urn:GisRegistDetailInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.GisRegistInfo" qname="ns220:GisRegistInfo" xmlns:ns220="urn:GisRegistListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.GisPolicyInfo" qname="ns221:GisPolicyInfo" xmlns:ns221="urn:GisPolicyInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.GisUserInfo" qname="ns222:GisUserInfo" xmlns:ns222="urn:GisUserListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.GisUserCompanyInfo" qname="ns223:GisUserCompanyInfo" xmlns:ns223="urn:GisUserCompanyInfoService"/>
+ </service>
+ <service name="FindAppHerdFarmerInfoService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.FindAppHerdFarmerInfoService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns224:ArrayOfFindAppFarmerInfoList" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.FindAppFarmerInfoList[]" xmlns:ns224="urn:FindAppFarmerInfoListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.FindAppFarmerInfoList" qname="ns225:FindAppFarmerInfoList" xmlns:ns225="urn:FindAppFarmerInfoListListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.FindAppFarmerInfo" qname="ns226:FindAppFarmerInfo" xmlns:ns226="urn:FindAppFarmerInfoService"/>
+ </service>
+ <service name="PolicyQueryService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="scope" value="request"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.PolicyQueryService"/>
+ </service>
+ <service name="SendPersonMessageService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.SendPersonMessageService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns227:ArrayOfSendUserMessageDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.SendUserMessageDtoInfo[]" xmlns:ns227="urn:SendUserMessageDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.SendUserMessageDtoInfo" qname="ns228:SendUserMessageDtoInfo" xmlns:ns228="urn:SendUserMessageDtoInfoListService"/>
+ </service>
+ <service name="ClaimPolicyDetailInfoService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.ClaimPolicyDetailInfoService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns229:ArrayOfClaimPolicyAppliInsuredInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyAppliInsuredInfo[]" xmlns:ns229="urn:ClaimPolicyAppliInsuredInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns230:ArrayOfClaimPolicyInsuredInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyInsuredInfo[]" xmlns:ns230="urn:ClaimPolicyInsuredInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns231:ArrayOfClaimPolicyInsuredAddressInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyInsuredAddressInfo[]" xmlns:ns231="urn:ClaimPolicyInsuredAddressInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns232:ArrayOfClaimPolicyItemDeviceInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyItemDeviceInfo[]" xmlns:ns232="urn:ClaimPolicyItemDeviceInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns233:ArrayOfClaimPolicyItemKindMainInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyItemKindMainInfo[]" xmlns:ns233="urn:ClaimPolicyItemKindMainInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns234:ArrayOfClaimPolicyItemKindSubInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyItemKindSubInfo[]" xmlns:ns234="urn:ClaimPolicyItemKindSubInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns235:ArrayOfClaimPolicyDcurrencyInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyDcurrencyInfo[]" xmlns:ns235="urn:ClaimPolicyDcurrencyInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns236:ArrayOfClaimPolicyPlanFeeInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyPlanFeeInfo[]" xmlns:ns236="urn:ClaimPolicyPlanFeeInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns237:ArrayOfClaimPolicyEngageInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyEngageInfo[]" xmlns:ns237="urn:ClaimPolicyEngageInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns238:ArrayOfClaimPolicyItemKindZHMainInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyItemKindZHMainInfo[]" xmlns:ns238="urn:ClaimPolicyItemKindZHMainInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns239:ArrayOfClaimPolicyItemKindZHSubInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.ClaimPolicyItemKindZHSubInfo[]" xmlns:ns239="urn:ClaimPolicyItemKindZHSubInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyDetailInfo" qname="ns240:ClaimPolicyDetailInfo" xmlns:ns240="urn:ClaimPolicyDetailService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyAppliInsuredInfo" qname="ns241:ClaimPolicyAppliInsuredInfo" xmlns:ns241="urn:ClaimPolicyAppliInsuredInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyInsuredInfo" qname="ns242:ClaimPolicyInsuredInfo" xmlns:ns242="urn:ClaimPolicyInsuredInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyInsuredAddressInfo" qname="ns243:ClaimPolicyInsuredAddressInfo" xmlns:ns243="urn:ClaimPolicyInsuredAddressInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyItemDeviceInfo" qname="ns244:ClaimPolicyItemDeviceInfo" xmlns:ns244="urn:ClaimPolicyItemDeviceInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyItemKindMainInfo" qname="ns245:ClaimPolicyItemKindMainInfo" xmlns:ns245="urn:ClaimPolicyItemKindMainInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyItemKindSubInfo" qname="ns246:ClaimPolicyItemKindSubInfo" xmlns:ns246="urn:ClaimPolicyItemKindSubInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyDcurrencyInfo" qname="ns247:ClaimPolicyDcurrencyInfo" xmlns:ns247="urn:ClaimPolicyDcurrencyInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyPlanFeeInfo" qname="ns248:ClaimPolicyPlanFeeInfo" xmlns:ns248="urn:ClaimPolicyPlanFeeInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyEngageInfo" qname="ns249:ClaimPolicyEngageInfo" xmlns:ns249="urn:ClaimPolicyEngageInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyMainLiabInfo" qname="ns250:ClaimPolicyMainLiabInfo" xmlns:ns250="urn:ClaimPolicyMainLiabService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyItemKindZHMainInfo" qname="ns251:ClaimPolicyItemKindZHMainInfo" xmlns:ns251="urn:ClaimPolicyItemKindZHMainInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyItemKindZHSubInfo" qname="ns252:ClaimPolicyItemKindZHSubInfo" xmlns:ns252="urn:ClaimPolicyItemKindZHSubInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.ClaimPolicyMainCargoInfo" qname="ns253:ClaimPolicyMainCargoInfo" xmlns:ns253="urn:ClaimPolicyMainCargoService"/>
+ </service>
+ <service name="UICommunicationService" provider="java:RPC">
+  <parameter name="allowedMethods" value="*"/>
+  <parameter name="className" value="com.sinosoft.claim.webservice.UICommunicationService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns254:ArrayOfCommunicationDetailDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.CommunicationDetailDtoInfo[]" xmlns:ns254="urn:CommunicationDetailDtoInfoListService"/>
+  <typeMapping deserializer="org.apache.axis.encoding.ser.ArrayDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" qname="ns255:ArrayOfPrpLmessageDtoInfo" serializer="org.apache.axis.encoding.ser.ArraySerializerFactory" type="java:com.sinosoft.claim.webservice.PrpLmessageDtoInfo[]" xmlns:ns255="urn:PrpLmessageDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CommunicationDetailDtoInfo" qname="ns256:CommunicationDetailDtoInfo" xmlns:ns256="urn:CommunicationDetailDtoInfoListService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.CommunicationReqInfo" qname="ns257:CommunicationReqInfo" xmlns:ns257="urn:CommunicationReqInfoService"/>
+  <beanMapping languageSpecificType="java:com.sinosoft.claim.webservice.PrpLmessageDtoInfo" qname="ns258:PrpLmessageDtoInfo" xmlns:ns258="urn:PrpLmessageDtoInfoListService"/>
+ </service>
+ <transport name="http">
+  <requestFlow>
+   <handler type="URLMapper"/>
+   <handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </requestFlow>
+  <parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </transport>
+ <transport name="local">
+  <responseFlow>
+   <handler type="LocalResponder"/>
+  </responseFlow>
+ </transport>
+</deployment>

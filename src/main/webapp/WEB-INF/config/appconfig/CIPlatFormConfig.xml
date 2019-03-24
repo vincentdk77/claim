@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="GB2312" standalone="yes" ?>
+<ciplatform>
+    <implClass>com.sinosoft.claimciplatform.bl.action.custom.BLCIClaimPlatFormInterfaceActionImplDubang</implClass>
+    <TimeInterval>10000</TimeInterval>
+    <RunHour>19</RunHour>
+
+       <!--北京-->
+        <BJURL>http://219.239.36.40:7007/sinoiaci/CommServer</BJURL> 
+	<BJUser>DBICtest</BJUser>
+	<BJPwd>217512</BJPwd>
+
+        <!-- 浙江-->
+        <ZJURL>http://21.33.0.5/sinoiaci/CommServer</ZJURL>
+	<ZJUser>DBICtest</ZJUser>
+	<ZJPwd>217512</ZJPwd>
+	<!-- 上海-->
+        <ciplatform.URL>http://192.168.154.180/circauto/servlet/insurance/interface</ciplatform.URL>
+	<ciplatform.User>axicsh_test</ciplatform.User>
+	<ciplatform.Pwd>111111</ciplatform.Pwd>
+	
+        <!-- 安徽-->
+        <AHUrl>http://172.20.241.1:7002/sinoiacav80/caserver</AHUrl>
+        <AHUser>GYICtest</AHUser>
+        <AHPwd>123456</AHPwd>
+	<AHVersion>V1.4.0</AHVersion>
+	<AHComCode>34</AHComCode>
+	<AHRiskcode>0506</AHRiskcode>
+</ciplatform>

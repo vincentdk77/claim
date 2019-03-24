@@ -1,0 +1,76 @@
+package com.sinosoft.claim.bl.action.domain;
+
+import java.sql.*;
+import java.util.*;
+
+import com.sinosoft.sysframework.log.*;
+import com.sinosoft.sysframework.common.util.*;
+import com.sinosoft.sysframework.common.datatype.*;
+import com.sinosoft.sysframework.reference.DBManager;
+import com.sinosoft.claim.dto.domain.PrpDpersonFeeCodeDto;
+import com.sinosoft.claim.resource.dtofactory.domain.DBPrpDpersonFeeCode;
+
+/**
+ * 这是PrpDpersonFeeCode-人伤费用代码表的业务对象扩展类<br>
+ * 创建于 JToolpad(1.5.1) Vendor:zhouxianli1978@msn.com
+ */
+public class BLPrpDpersonFeeCodeAction extends BLPrpDpersonFeeCodeActionBase{
+    private static Logger logger = Logger.getLogger(BLPrpDpersonFeeCodeAction.class);
+    private static final BLPrpDpersonFeeCodeAction blPrpDpersonFeeCodeAction= new BLPrpDpersonFeeCodeAction();
+    
+    public static BLPrpDpersonFeeCodeAction getInstance(){
+    	return blPrpDpersonFeeCodeAction;
+    }
+
+    /**
+     * 构造函数
+     */
+    public BLPrpDpersonFeeCodeAction(){
+        super();
+    }
+
+    /**
+     * 转换Dto
+     * @param dbManager dbManager
+     * @param prpDpersonFeeCodeDto prpDpersonFeeCodeDto
+     * @param mode 模式
+     * @throws Exception
+     */
+    public void convertDto(DBManager dbManager,PrpDpersonFeeCodeDto prpDpersonFeeCodeDto,String mode)
+            throws Exception{
+    }
+    /**
+     * 返回所有有效的费用
+     * @param dbManager
+     * @return
+     * @throws Exception
+     */
+    public List findValidPersonFeeCode(DBManager dbManager) throws Exception{
+    	String sql = "validstatus=1 order by compelcategory,compelpriority";
+    	List personCodeList = (List)findByConditions(dbManager,sql);
+    	return personCodeList;
+    }
+    
+    public List findCompelMedicalCodeList(DBManager dbManager) throws Exception{
+    	String sql = "validstatus=1 And compelcategory='M' Order By compelpriority";
+    	List personCodeList = (List)findByConditions(dbManager,sql);
+    	return personCodeList;
+    }
+    public List findCompelDeathCodeList(DBManager dbManager) throws Exception{
+    	String sql = "validstatus=1 And compelcategory='D' Order By compelpriority";
+    	List personCodeList = (List)findByConditions(dbManager,sql);
+    	return personCodeList;
+    }  
+    public List findBusinessMedicalCodeList(DBManager dbManager) throws Exception{
+    	String sql = "validstatus=1 And businesscategory='M'";
+    	List personCodeList = (List)findByConditions(dbManager,sql);
+    	return personCodeList;
+    }
+    public List findBusinessDeathCodeList(DBManager dbManager) throws Exception{
+    	String sql = "validstatus=1 And businesscategory='D'";
+    	List personCodeList = (List)findByConditions(dbManager,sql);
+    	return personCodeList;
+    }
+
+    
+}

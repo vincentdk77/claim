@@ -1,0 +1,122 @@
+<html>
+<LINK href="/claim/css/Standard.css" type=text/css rel=stylesheet>
+<head>
+ <script language="javascript">
+  function msubmit(submittype)
+  {
+  
+  if (submittype=='registWFMake') 
+  {
+  
+  alert("创建流程");
+  fm.action="/claim/test/WFTestRegist.jsp?DealType=registWFMake";
+ 
+  }
+  
+  if (submittype=='registWFDeal') 
+  {
+  alert("处理流程");
+  fm.action="/claim/test/WFTestRegist.jsp?DealType=registWFDeal";
+  
+  }
+  
+  if (submittype=='registWFQuery') 
+  {
+ 
+  fm.action="/claim/test/WFTestRegist.jsp?DealType=registWFQuery";
+  
+  }
+  
+  
+  if (submittype=='registWFQueryProccessKey') 
+  {
+ 
+  fm.action="/claim/test/WFTestRegist.jsp?DealType=registWFQueryProccessKey";
+  
+  }
+  
+  if (submittype=='registWFQueryActivitiesKey') 
+   {
+ 
+  fm.action="/claim/test/WFTestRegist.jsp?DealType=registWFQueryActivitiesKey";
+  
+  }
+  
+   if (submittype=='backWF') 
+   {
+ 
+  fm.action="/claim/test/WFTestback.jsp?DealType=backWf&flowID="+fm.flowId.value+"&logID="+fm.logId.value;
+  
+  }
+  
+  
+  //fm.target="fraInterface";
+  fm.submit();
+  
+  return true;
+  }
+  
+  </script>
+
+</head> 
+        
+<body class=interface > 
+    
+</body>
+<body>
+    <form name="fm"  method="post" >
+         工作流客户端 
+         <table class="common" align="center" style="width:100%" cellpadding="0" cellspacing="1">
+         <tr class ="title">
+         <td colspan=3>
+         报案工作流测试
+         <td>
+         </tr>
+         <tr>
+         <td class="input">
+             <input type="button"  name=cmdCreateWorkFlow value="创建新流程" onclick="return msubmit('registWFMake');">
+             <input type="button"  name=cmddealWorkFlow value="处理流程" onclick="return msubmit('registWFDeal');">
+             <input type="button"  name=cmdqueryWorkFlow value="查询流程当前状况" onclick="return msubmit('registWFQuery');">
+             <input type="text" class="input" style="width:40px" name=flowId value="">
+             <input type="text" class="input" style="width:40px" name=logId value="">
+             <input type="button"  name=cmdbackWorkFlow value="工作流程回退" onclick="return msubmit('backWF');">
+             
+             
+         </td>
+         
+         </tr>
+        </table>
+          
+         <table class="common" align="center" style="width:50%" cellspacing="10">
+         <tr>
+         <td >
+         包定义ID
+         </td>
+         <td>
+         <input type="text" class="input" style="width:40px" name=txtpkgId value="">
+         </td>
+         <td>
+         流程定义ID
+         </td>
+         <td>
+         <input type="text" class="input" style="width:40px" name=txtpDefId value="">
+         </td>
+         <td>
+         流程条件
+         </td>
+         <td>
+         <input type="text" class="input" style="width:40px" name=txtquery value="">
+         </td>
+         
+         <td>
+         <input type="button"  name=cmdqueryWorkFlow value="查询流程号" onclick="return msubmit('registWFQueryProccessKey');">
+         </td>
+         
+         <td>
+         <input type="button"  name=cmdquerynode value="查询节点号" onclick="return msubmit('registWFQueryActivitiesKey');">
+         </td>
+         
+         </table>
+    </form>
+</body>
+</html>

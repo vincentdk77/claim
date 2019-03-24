@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.sinosoft:prpall:0.02-old">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sinosoft/prpall/0.02-old/prpall-0.02-old.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sinosoft/prpall/0.02-old/prpall-0.02-old-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/sinosoft/prpall/0.02-old/prpall-0.02-old-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

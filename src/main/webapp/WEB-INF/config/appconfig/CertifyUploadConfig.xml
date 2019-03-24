@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="GB2312" standalone="yes" ?>
+
+<sysconst>
+	<CURRENTDIRECTORY>C:\\Documents and Settings\\Administrator\\My Documents\\pic</CURRENTDIRECTORY>
+
+	<JRE_DOWNLOAD_URL>http://9.0.1.10:7001/claim/product/jre-1_5_0_06-windows-i586-p.exe</JRE_DOWNLOAD_URL>
+	<WRITEDIR>/image/gynxpic/claim</WRITEDIR>
+	<FILESERVERUNL>http://9.0.1.10:7001/claim</FILESERVERUNL>
+	<FILESERVLET>http://9.0.1.10:7001/claim/uploadshow</FILESERVLET>
+	<ROOTPATH>dubang</ROOTPATH>
+	<IMAGEBRE>Prefix</IMAGEBRE>
+	<IMAGE_HOST>9.0.1.10:7001</IMAGE_HOST>
+	<IMGURL>http://9.0.1.10:7001/claim/images/splash.gif</IMGURL>	
+	
+	<!-- 单证的文件存放路径-->
+	<CertifyPath>\</CertifyPath>
+	<!-- 单证的文件虚拟路径-->
+	<CertifyVirtualPath>\claim\dbpic\</CertifyVirtualPath>
+		<!--上传的一些参数-->
+	<MaxImageWidth>600</MaxImageWidth>
+	<MaxImageHeight>400</MaxImageHeight>
+	<CompressionQuality>0.75</CompressionQuality>
+	<UP_URL>http://9.0.1.10:7001/claim/certify</UP_URL>
+
+  <FTP_URL>9.0.2.23</FTP_URL>
+  <FTP_USER>weblogic</FTP_USER>
+  <FTP_PASS>weblogic</FTP_PASS>
+  <MinSize>0</MinSize>
+  <MaxSize>1536</MaxSize>	
+
+     <FTP_PORT>21</FTP_PORT> <!--电子回执单内网ftp登录端口号-->	
+     <BACKELECT_WRITEDIR>/home/weblogic/intraTestApplications/gynxpic/allinpay</BACKELECT_WRITEDIR><!--电子回执单内网ftp图片放置路径-->
+
+</sysconst>

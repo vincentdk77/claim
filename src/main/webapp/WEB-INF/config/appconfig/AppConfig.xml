@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="GB2312" standalone="yes" ?>
+
+<sysconst>
+	<!-- 应用数据库连接 -->
+	<DBJNDI description="理赔应用系统引用的数据源">ddccDataSource</DBJNDI>
+	<WorkFlowJNDI description="工作流系统引用的数据源">workFlowDataSource</WorkFlowJNDI>
+	<REINS_JNDI description="再保系统引用的数据源">ddccDataSource</REINS_JNDI>
+	<UNDWRTDATASOURCE description="双核系统引用的数据源" modify="2">ddccDataSource</UNDWRTDATASOURCE>
+	
+	<ROWS_PERPAGE>20</ROWS_PERPAGE>
+	<!-- 每页显示的行数 -->
+	<CountPerPage>15</CountPerPage>
+	<QUERY_ROWS>50</QUERY_ROWS>
+	<SESSION_EXPIRED_SECONDS>3600</SESSION_EXPIRED_SECONDS>
+
+	<FIELD_SEPARATOR>_FIELD_SEPARATOR_</FIELD_SEPARATOR>
+	<GROUP_SEPARATOR>_GROUP_SEPARATOR_</GROUP_SEPARATOR>
+
+	<MESSAGE_RESOURCES>resources.ReinsResources</MESSAGE_RESOURCES>
+
+	<!-- 预赔金额占估损金额的百分数 -->
+	<PrepayPercent>50</PrepayPercent>
+	<!-- 定损金额为某一值时，算核损通过-->
+	<UnderWritePreDef>5000</UnderWritePreDef>
+	<!-- 理赔立案时限 7日 -->
+	<ClaimLimitHour>168</ClaimLimitHour>
+	
+	<!-- 险种在保单号码中的位置－1-->
+	<RiskCodeLocate>9</RiskCodeLocate>
+	<!-- 系统处理的险类，生成forward时候用 -->
+	<RiskCodeForward>D</RiskCodeForward>
+
+	<ROOTCOMCODE>1100</ROOTCOMCODE>
+	<ROOTCOMCNAME>财产保险股份有限公司</ROOTCOMCNAME>
+	<ROOTCOMENAME>SUNNY</ROOTCOMENAME>
+
+	<!-- 系统处理的险类，处理forward的时候用 -->
+	<RiskCodeForward>D,C,Z,E,Y</RiskCodeForward>
+
+	<!-- 公司代码 -->
+	<CompanyCode>SUNSHINE</CompanyCode>
+
+	<!-- 理赔状态所代表的颜色 -->
+	<ClaimStatus0>#FFBBBB</ClaimStatus0>
+	<ClaimStatus1>#65B1B1</ClaimStatus1>
+	<ClaimStatus2>#cfcf9e</ClaimStatus2>
+	<ClaimStatus3>#b0ffb0</ClaimStatus3>
+	<ClaimStatus4>#acc7ff</ClaimStatus4>
+	<ClaimStatus5>#e4caff</ClaimStatus5>
+	<ClaimStatus6>#ffdf9d</ClaimStatus6>
+	<ClaimStatus7>#dbb7b7</ClaimStatus7>
+
+	<!-- 以下权限中参数 -->
+	<SYSTEMNAME>CLAIM</SYSTEMNAME>
+	<CLAIM_DATE_LIMIT>7</CLAIM_DATE_LIMIT>
+
+	<!--加入权限所能的常量-->
+	<TASKCODE_TB>tb</TASKCODE_TB>
+	<TASKCODE_CB>cb</TASKCODE_CB>
+	<TASKCODE_PG>pg</TASKCODE_PG>
+	<TASKCODE_LP>lp</TASKCODE_LP>
+	<TASKCODE_SF>sf</TASKCODE_SF>
+	<TASKCODE_HB>hb</TASKCODE_HB>
+	<TASKCODE_HP>hp</TASKCODE_HP>
+
+	<TASKCODE_CW>cw</TASKCODE_CW>
+	<TASKCODE_TJ>tj</TASKCODE_TJ>
+	<TASKCODE_DM>dm</TASKCODE_DM>
+	<TASKCODE_FF>ff</TASKCODE_FF>
+	<TASKCODE_PRT>prt</TASKCODE_PRT>
+	<TASKCODE_QRY>qry</TASKCODE_QRY>
+	<TASKCODE_SYS>sys</TASKCODE_SYS>
+	<TASKCODE_DLR>dlr</TASKCODE_DLR>
+	<TASKCODE_KHGL>khgl</TASKCODE_KHGL>
+
+	<TASKCODE_LPBA>lpba</TASKCODE_LPBA>
+	<TASKCODE_LPLA>lpla</TASKCODE_LPLA>
+	<TASKCODE_LPCK>lpck</TASKCODE_LPCK>
+	<TASKCODE_LPPA>lppa</TASKCODE_LPPA>
+	<TASKCODE_LPDD>lpdd</TASKCODE_LPDD>
+	<TASKCODE_LPDS>lpds</TASKCODE_LPDS>
+	<TASKCODE_LPHJ>lphj</TASKCODE_LPHJ>
+
+	<GROUPCODE_QRY>01</GROUPCODE_QRY><!--90-->
+	<GROUPCODE_SYS>01</GROUPCODE_SYS><!--91-->
+	<GROUPCODE_DM>01</GROUPCODE_DM><!--01-->
+	<GROUPCODE_VISA>01</GROUPCODE_VISA><!--93-->
+	<GROUPCODE_UW>01</GROUPCODE_UW><!--94-->
+	<CHECKCODE_READ>r</CHECKCODE_READ>
+	<CHECKCODE_WRITE>w</CHECKCODE_WRITE>
+	<CHECKCODE_EXE>x</CHECKCODE_EXE>
+	<CHECKCODE_CHECK>k</CHECKCODE_CHECK>
+	<CHECKCODE_UNDWT>h</CHECKCODE_UNDWT>
+
+	<DBTYPE>ORACLE</DBTYPE>
+	<VSLIMIT_COUNT>5000</VSLIMIT_COUNT>
+
+	<!--加入POWER_CONFIG_FLAG用于使用权限方式-->
+	<POWER_CONFIG_FLAG>0</POWER_CONFIG_FLAG>
+
+	<!--能自动提交的地区代码-->
+	<SCHEDULE_AUTOCOMMIT>99999999999999999</SCHEDULE_AUTOCOMMIT>
+
+	<!--能自动查勘->定损提交的地区代码-->
+	<CHECK_AUTOCOMMIT>99999999999999</CHECK_AUTOCOMMIT>
+
+	<!-- 出险报案次数增加在N天内的出险次数 -->
+	<RegistViewLimitDay>5</RegistViewLimitDay>
+
+	<!--是否自动结案-->
+	<AutoEndCase>1</AutoEndCase>
+	<URL>http://192.168.154.180/circauto/servlet/insurance/interface</URL>
+	<!--核心业务系统的url参数--> 
+    <Core_URL>http://9.0.2.151:9001/prpall</Core_URL>
+	<User>axicsh_test</User>
+	<Pwd>111111</Pwd>
+    <implClasssyx>com.sinosoft.ciplatform.bl.action.custom.BLCIClaimPlatFormInterfaceActionImplGuoyuan</implClasssyx>
+    <!--商业险平台交互日志路径-->
+    <SYXLOGPATH>/home/weblogic/intraTestApplications/build/SYXLogs</SYXLOGPATH>
+    <!-- 调度发送短信  -->
+    <!--  <ENDPOINT_URL>http://9.0.3.233/services/RemoteSendSMS</ENDPOINT_URL> -->
+    <ENDPOINT_URL>http://9.0.1.10:9099/gymas/services/RemoteSendSMS</ENDPOINT_URL>
+    <SMS_ENDPOINT_URL>http://9.0.1.10:9099/gymas/pub_mas.action</SMS_ENDPOINT_URL>
+    <Claim_NoReceive_ModuleCode>02</Claim_NoReceive_ModuleCode>
+ 
+    <CHECKCODE_CHECKPERSON>claim.check</CHECKCODE_CHECKPERSON>
+    <CHECKCODE_CHECK1>claim.car.check</CHECKCODE_CHECK1>
+ 
+    <!-- GIS大户田块地图信息 -->
+    <GIS_RFFeildView_URL>http://9.0.0.9:7001/RFQuery/index.html</GIS_RFFeildView_URL>
+    <!-- GIS对接所需要的险种 -->
+    <GIS_FAMILY_RISKCODE>3101,3107,3108,3114,3122,3126</GIS_FAMILY_RISKCODE>
+  <!--进入审批平台时案件挂起时的状态 -->
+	<NODESTATUS>8</NODESTATUS>
+	<!--进入审批平台时案件挂起时的状态 -->
+	<NODESTATUS_BACK>9</NODESTATUS_BACK>
+	<!--进入审批平台时案件挂起时的状态 -->
+	<NODESTATUS_SAVE>10</NODESTATUS_SAVE>
+  <BILLUpDATE>2015-03-08</BILLUpDATE> 
+  
+  <!-- 20141031 信雅达影像系统 -->
+  <ECM_URL>http://9.0.2.11:9200/SunECM/servlet/RouterServlet</ECM_URL>
+  <!-- 影像资料上传地址20180718  -->
+  <ECM_URL_NEW>http://9.0.2.15:9103/SunECM/servlet/RouterServlet</ECM_URL_NEW>
+  <!-- 影像资料JS -->
+  <ECM_JS_URL>http://9.0.2.15:9103/SunECM/ecm-view/public/js/EncodeUrl.min.js</ECM_JS_URL>
+  <!-- 影像资料密钥 -->
+  <ECM_KEY>TbJeaZIOzqzq4QCiSA1db46D</ECM_KEY>
+
+<!-- 农险平台CLientInfo参数配置 -->
+	<COMCODE>000126</COMCODE>
+	<USER>GYICtest</USER>
+	<PASSWORD>123456</PASSWORD>
+	<REQUESTTYPE>1</REQUESTTYPE>
+	<ASYNC>0</ASYNC>
+	<RISKCODE>3101,3107,3108,3114,3122,3126</RISKCODE>
+	<STARTDATE>2015-09-01</STARTDATE>
+   <!-- 农险平台地址 -->
+	<AGRI_ADDRESS>http://172.20.241.77:7101/aiip/services/datacollection</AGRI_ADDRESS>
+   <!--河南车船税改造时间点add by shenshiwei 20150722-->
+        <HNOPENDATE>2015-09-16</HNOPENDATE>
+   <!-- 驻点员App推送案件地址 -->
+   <APP_ADDRESS>http://9.0.2.15:9300/assistant/services/acceptPushCaseService</APP_ADDRESS>
+
+   <!-- 车险平台子系统接口连接-->
+   <ServiceClient>http://9.0.2.151:9009/daaplatform/services/</ServiceClient>
+
+
+   <!-- 发送到新收付数据 -->
+   <GY_NEWPAYMENT_URL>http://9.0.2.157:7001/payment-service/services/SavePaymentInfo?wsdl</GY_NEWPAYMENT_URL>
+   <!-- 账号，密码 -->
+   <PAYMENTPLATFORMUSERCODE>test</PAYMENTPLATFORMUSERCODE>
+   <PAYMENTPLATFORMPASSWORD>test123</PAYMENTPLATFORMPASSWORD>
+   <NEWPAYMENT>1</NEWPAYMENT>
+
+   <!-- 支付信息同步日志文件路径 -->
+   <PAYMENTPLATFORMLOGPATH>/home/weblogic/intraTestApplications/build/paymentplatformlog</PAYMENTPLATFORMLOGPATH>
+   <!-- 精准扶贫单点登录 -->
+   <SSO_PUBLICKEY>MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCr0xQKYIyoiBtJ5a4HXoV92WpLQJFwcyswUK9waSlPw8NrEcOh69e7/NWUJ8mJ/TmSAGSMwDsHXN4XnjgNrTG6qq6DQJpcgvLGKR8v3R2Hq4DEDVi+XLwzHXXF/H5NG4dCSyemLI9/HgC6mLWczfBhUavMo7HvYhXtgloQ9tOAHQIDAQAB</SSO_PUBLICKEY>
+   <!-- 高拍仪银行卡识别地址 -->
+   <BANK_ADDRESS>http://9.0.2.15:36012/icr/recognize_bank_card</BANK_ADDRESS>
+   <!-- 高拍仪扫描上传地址 -->
+   <OCR_URL>/home/weblogic/bea/ocrlist</OCR_URL>
+   <!-- 高拍仪上传图片地址 -->
+   <UPLOADSEVISE_ADDRESS>http://9.0.2.151:9002/claim/servlet/FileSteamUpload?</UPLOADSEVISE_ADDRESS>
+	<!-- 新农险报案信息保存接口-->
+        <NEWAGRI_REGISTSAVE>http://9.0.2.32:9012/services/ClaimForRegistService?wsdl</NEWAGRI_REGISTSAVE>
+        <!-- 新农险调度信息保存接口-->
+        <NEWAGRI_SCHEDULESAVE>http://9.0.2.32:9012/services/ClaimForDispatchService?wsdl</NEWAGRI_SCHEDULESAVE>
+	<!-- 山东意外险风险预警系统对接险种 -->
+        <SDACCI_RISKCODE>2703,2706,2707,2714,2725,2728,2731,2733,2742,2743,2745,2746</SDACCI_RISKCODE>
+        <!-- 平台调用山东意外险风险信息测试接口地址 -->
+        <ACCIDANGERSD>http://9.0.2.151:9009/daaplatform/CIClaimAcciQueryServlet</ACCIDANGERSD>
+        <!--山东意外险风险预警平台测试环境,用户名,密码-->
+        <SDACCIRISK_USER>GYIC</SDACCIRISK_USER>
+        <SDACCIRISK_PASSWORD>123456</SDACCIRISK_PASSWORD>
+        <!-- 走89号理赔流程模板的险类   (若新增险类 分隔符用逗号隔开即可) -->
+	<PROP_VERIFY_CLASS>01</PROP_VERIFY_CLASS>
+    </sysconst>
